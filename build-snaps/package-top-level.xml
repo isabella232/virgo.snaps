@@ -25,8 +25,8 @@
 				<exclude name="**/target/**"/>
 				<exclude name="**/integration-repo/**"/>
 				<exclude name="**/ivy-cache/**"/>
-				<exclude name="**/spring-build/lib/docbook/**" />
-				<exclude name="**/spring-build/lib/findbugs/**" />
+				<exclude name="**/virgo-build/lib/docbook/**" />
+				<exclude name="**/virgo-build/lib/findbugs/**" />
 			</fileset>
 		</copy>
 
