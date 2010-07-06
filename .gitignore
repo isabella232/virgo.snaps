@@ -1,0 +1,6 @@
+ivy-cache
+integration-repo
+work
+target
+spring-build/lib/findbugs
+.DS_Store

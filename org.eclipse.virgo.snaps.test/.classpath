@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.junit/com.springsource.org.junit/4.5.0/com.springsource.org.junit-4.5.0.jar" sourcepath="/SLICES_IVY_CACHE/org.junit/com.springsource.org.junit/4.5.0/com.springsource.org.junit-sources-4.5.0.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.osgi.test/com.springsource.osgi.test.framework/2.0.0.RC1/com.springsource.osgi.test.framework-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.osgi.test/com.springsource.osgi.test.framework/2.0.0.RC1/com.springsource.osgi.test.framework-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.osgi/com.springsource.osgi.launcher/2.0.0.RC1/com.springsource.osgi.launcher-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.osgi/com.springsource.osgi.launcher/2.0.0.D-20091110173422/com.springsource.osgi.launcher-sources-2.0.0.D-20091110173422.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-3.5.1.R35x_v20091005.jar" sourcepath="/SLICES_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-sources-3.5.1.R35x_v20091005.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.util/com.springsource.util.common/2.0.0.RC1/com.springsource.util.common-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.util/com.springsource.util.osgi/2.0.0.RC1/com.springsource.util.osgi-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.util/com.springsource.util.osgi/2.0.0.RC1/com.springsource.util.osgi-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.osgi/com.springsource.osgi.extensions.equinox/2.0.0.RC1/com.springsource.osgi.extensions.equinox-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.osgi/com.springsource.osgi.extensions.equinox/2.0.0.RC1/com.springsource.osgi.extensions.equinox-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.kernel/com.springsource.kernel.core/2.0.0.RC1/com.springsource.kernel.core-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.kernel/com.springsource.kernel.core/2.0.0.RC1/com.springsource.kernel.core-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.kernel/com.springsource.kernel.deployer/2.0.0.RC1/com.springsource.kernel.deployer-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.kernel/com.springsource.kernel.deployer.core/2.0.0.RC1/com.springsource.kernel.deployer.core-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.util/com.springsource.util.io/2.0.0.RC1/com.springsource.util.io-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.server/com.springsource.server.web.core/2.0.0.RC1/com.springsource.server.web.core-2.0.0.RC1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.server/com.springsource.server.web.core/2.0.0.RC1/com.springsource.server.web.core-sources-2.0.0.RC1.jar"/>
+	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.apache.felix/org.apache.felix.eventadmin/1.0.0/org.apache.felix.eventadmin-1.0.0.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

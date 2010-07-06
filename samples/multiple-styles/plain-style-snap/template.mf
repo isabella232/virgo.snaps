@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: plain.style.snap
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Styling Snap
+Snap-Host: multi.style.host;version="[1.0, 2.0)"
+Snap-ContextPath: /plain-style

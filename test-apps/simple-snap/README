@@ -1,0 +1,6 @@
+A simple snap that can serve the following patterns:
+
+/test1
+
+Note: it was necessary to modify the generated bundle to add org.osgi.framework to the
+list of imported packages to prevent a class cast exception.

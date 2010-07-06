@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.virgo.snaps.core
+Bundle-Version: 1.0
+Bundle-Name: Snaps Core
+Import-Template: 
+ com.springsource.kernel.*;version="[2.0, 2.1)",
+ com.springsource.util.*;version="[2.0, 2.1)",
+ com.springsource.osgi.webcontainer.*;version="[1.0, 1.1)",
+ com.springsource.osgi.medic.*;version="[1.0, 1.1)", 
+ javax.servlet.*;version="2.5",
+ javax.servlet.jsp.*;version="2.1",
+ javax.xml.parsers.*;version="0",
+ org.apache.catalina.*;version="[6.0,6.1)",
+ org.slf4j.*;version="[1.5.6, 1.6)",
+ org.osgi.framework.*;version="[1.5, 2.0)",
+ org.osgi.util.tracker;version="[1.4.2, 1.5)",
+ org.w3c.dom.*;version="0",
+ org.xml.sax.*;version="0"
+Excluded-Exports: 
+ org.eclipse.virgo.snaps.core.internal.*

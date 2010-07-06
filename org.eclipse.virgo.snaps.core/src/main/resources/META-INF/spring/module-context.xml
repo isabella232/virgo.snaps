@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="lifecycleListener" class="org.eclipse.virgo.snaps.core.internal.deployer.SnapLifecycleListener">
+		<constructor-arg ref="webBundleClassLoaderFactory"/>
+		<constructor-arg ref="eventLogger"/>
+	</bean>
+	
+	<bean id="transformer" class="org.eclipse.virgo.snaps.core.internal.deployer.SnapTransformer">
+		<constructor-arg ref="webBundleManifestTransformer"/>
+	</bean>
+		
+	<bean id="snapRegistry" class="org.eclipse.virgo.snaps.core.OsgiSnapRegistry">
+		<constructor-arg ref="bundleContext"/>
+	</bean>
+
+	<bean id="snapFactoryMonitor" class="org.eclipse.virgo.snaps.core.internal.SnapFactoryMonitor" init-method="start" destroy-method="stop">
+		<constructor-arg ref="bundleContext"/>
+		<constructor-arg ref="eventLogger"/>
+		<constructor-arg ref="snapRegistry"/>
+	</bean>
+</beans>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Import-Bundle: com.springsource.javax.servlet.jsp.jstl;version="0",com
+ .springsource.org.apache.taglibs.standard;version="0",org.eclipse.vir
+ go.snaps.api;version="1.0"
+Bundle-Version: 1.0
+Tool: Bundlor 1.0.0.M6
+Bundle-Name: Simple Host
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.virgo.snaps.core;version="1.0"
+Bundle-SymbolicName: taglib.host
+

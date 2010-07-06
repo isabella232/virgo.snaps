@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: org.eclipse.virgo.snaps.test
+Bundle-Name: Snaps Test Bundle
+Bundle-Version: 1
+Bundle-ManifestVersion: 2
+Excluded-Imports: com.springsource,
+ com.springsource.osgi.extensions.*,
+ com.springsource.osgi.test.*,
+ com.springsource.osgi.webcontainer.tomcat.config
+Excluded-Exports: *
+Import-Package: org.osgi.framework;version="0"
+Import-Template: 
+ *;version="0"

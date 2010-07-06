@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Export-Package: org.eclipse.virgo.snaps.core;version="1.0";uses:="com.
+ springsource.osgi.medic.eventlog,javax.servlet,javax.servlet.http,org
+ .eclipse.virgo.snaps.core.internal,org.osgi.framework,org.osgi.util.t
+ racker,org.slf4j"
+Bundle-Version: 1.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: Snaps Core
+Bundle-ManifestVersion: 2
+Import-Package: com.springsource.kernel.artifact.fs;version="[2.0, 2.1
+ )",com.springsource.kernel.deployer.core;version="[2.0, 2.1)",com.spr
+ ingsource.kernel.install.artifact;version="[2.0, 2.1)",com.springsour
+ ce.kernel.install.environment;version="[2.0, 2.1)",com.springsource.k
+ ernel.install.pipeline.stage.transform;version="[2.0, 2.1)",com.sprin
+ gsource.kernel.serviceability;version="[2.0, 2.1)",com.springsource.o
+ sgi.medic.eventlog;version="[1.0, 1.1)",com.springsource.osgi.webcont
+ ainer.core;version="[1.0, 1.1)",com.springsource.osgi.webcontainer.to
+ mcat.spi;version="[1.0, 1.1)",com.springsource.util.common;version="[
+ 2.0, 2.1)",com.springsource.util.io;version="[2.0, 2.1)",com.springso
+ urce.util.osgi;version="[2.0, 2.1)",com.springsource.util.osgi.manife
+ st;version="[2.0, 2.1)",com.springsource.util.osgi.manifest.parse;ver
+ sion="[2.0, 2.1)",javax.servlet;version="2.5",javax.servlet.http;vers
+ ion="2.5",javax.xml.parsers;version="0",org.apache.catalina;version="
+ [6.0,6.1)",org.osgi.framework;version="[1.5, 2.0)",org.osgi.util.trac
+ ker;version="[1.4.2, 1.5)",org.slf4j;version="[1.5.6, 1.6)",org.w3c.d
+ om;version="0",org.xml.sax;version="0"
+Bundle-SymbolicName: org.eclipse.virgo.snaps.core
+

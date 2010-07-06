@@ -1,0 +1,7 @@
+Manifest-Version: 1
+Bundle-SymbolicName: styled.host
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Pluggable Styling Host
+Web-ContextPath: /styling
+Import-Package: org.eclipse.virgo.snaps.core;version="[1.0,2.0)"

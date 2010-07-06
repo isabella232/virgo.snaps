@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Import-Package: com.springsource.osgi.medic.test.eventlog;version="[1.
+ 0, 1.1)",com.springsource.osgi.teststubs.framework,com.springsource.u
+ til.osgi.manifest.internal;version="[2.0, 2.1)",org.easymock,org.ecli
+ pse.osgi.launch,org.junit,org.osgi.framework.launch;version="[1.5, 2.
+ 0)",org.springframework.mock.web
+

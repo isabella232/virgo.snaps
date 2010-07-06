@@ -1,0 +1,17 @@
+clean
+clean-integration
+clean-ivy
+clover
+copy-dist-jar
+copy-ext-jars
+copy-provided-jars
+copy-provided-libs
+findbugs
+jar
+javadoc-all
+javadoc-api
+osgi-validate
+package
+publish
+resolve
+test

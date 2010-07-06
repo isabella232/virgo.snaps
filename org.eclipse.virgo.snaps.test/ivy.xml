@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://ivyrep.jayasoft.org/ivy-doc.xsl"?>
+<ivy-module
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="http://incubator.apache.org/ivy/schemas/ivy.xsd"
+		version="1.3">
+
+	<info organisation="org.eclipse.virgo.snaps" module="${ant.project.name}"/>
+
+	<configurations>
+		<include file="${spring.build.dir}/common/default-ivy-configurations.xml"/>
+	</configurations>
+
+	<publications>
+		<artifact name="${ant.project.name}"/>
+		<artifact name="${ant.project.name}-sources" type="src" ext="jar"/>
+	</publications>
+
+	<dependencies>
+		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.api" rev="latest.integration"/>
+		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.core" rev="latest.integration"/>
+
+		<dependency org="com.springsource.kernel" name="com.springsource.kernel" rev="${com.springsource.kernel}" conf="test->compile"/>
+		<dependency org="com.springsource.server" name="com.springsource.server.web" rev="${com.springsource.server.web}" conf="test->compile"/>
+		<dependency org="com.springsource.osgi.test" name="com.springsource.osgi.test.framework" rev="${com.springsource.osgi.test}" conf="test->runtime"/>
+
+		<dependency org="org.springframework" name="org.springframework.test" rev="${org.springframework}" conf="test->runtime"/>
+		<dependency org="org.springframework" name="org.springframework.spring-library" rev="${org.springframework}" conf="test->runtime"/>
+		<dependency org="org.springframework" name="org.springframework.aspects" rev="${org.springframework}" conf="test->runtime"/>
+
+		<dependency org="org.slf4j" name="com.springsource.slf4j.org.apache.commons.logging" rev="${org.slf4j}" conf="test->runtime"/>
+		<dependency org="org.slf4j" name="com.springsource.slf4j.bridge" rev="${org.slf4j}" conf="test->runtime"/>
+		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
+		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic.core" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
+		<dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp.jstl" rev="${javax.servlet.jsp.jstl}" conf="test->runtime"/>
+		<dependency org="org.apache.taglibs" name="com.springsource.org.apache.taglibs.standard" rev="${org.apache.taglibs}" conf="test->runtime" />
+		<dependency name='org.apache.felix.eventadmin' rev='${org.apache.felix.eventadmin}' conf='test->runtime' org='org.apache.felix'/>
+
+		<dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
+		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="${org.easymock}" conf="test->runtime"/>
+		
+		<dependency org="org.aspectj" name="com.springsource.org.aspectj.weaver" rev="${org.aspectj}" conf="test->runtime"/>
+
+		<!-- Prevent Xerces and Xalan from being on the classpath to work around Java bug 6723276 during integration testing -->
+		<exclude org="org.apache.xerces"/>
+		<exclude org="org.apache.xalan"/>
+
+		<!--  Prevent Derby coming down until we move to a Spring version when its JDCB bundle's Derby dependency is optional -->
+		<exclude org="org.apache.derby"/>
+
+		<override org="com.springsource.util" rev="${com.springsource.util}"/>
+		<override org="com.springsource.repository" rev="${com.springsource.repository}"/>
+		<override org="com.springsource.kernel" rev="${com.springsource.kernel}"/>
+		<override org="com.springsource.osgi.webcontainer" rev="${com.springsource.osgi.webcontainer}"/>
+	</dependencies>
+
+</ivy-module>

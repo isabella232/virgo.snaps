@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Export-Package: spring;version="1.0";uses:="org.springframework.stereo
+ type,org.springframework.web.bind.annotation,org.springframework.web.
+ servlet"
+Snap-Host: simple.host;version="[1.0, 2.0)"
+Import-Bundle: org.springframework.beans;version="[3.0.0,4.0.0)",org.s
+ pringframework.context;version="[3.0.0,4.0.0)",org.springframework.we
+ b;version="[3.0.0,4.0.0)",org.springframework.web.servlet;version="[3
+ .0.0,4.0.0)"
+Bundle-Version: 1.0
+Tool: Bundlor 1.0.0.M6
+Bundle-Name: Spring Snap
+Bundle-ManifestVersion: 2
+Snap-ContextPath: /spring
+Bundle-SymbolicName: spring.snap
+

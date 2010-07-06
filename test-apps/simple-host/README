@@ -1,0 +1,4 @@
+A simple snap host that can serve the following host URLs:
+
+* /exact
+* /path/*

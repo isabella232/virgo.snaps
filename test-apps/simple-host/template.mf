@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: simple.host
+Bundle-Name: Simple Host
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.virgo.snaps.core;version="1.0"
+Import-Template: javax.servlet.*;version="2.5"
+Excluded-Imports: org.slf4j.impl
+Excluded-Exports: javax.*,org.slf4j.*

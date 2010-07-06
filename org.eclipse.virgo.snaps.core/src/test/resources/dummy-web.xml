@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<servlet>
+		<servlet-name>one</servlet-name>
+		<servlet-class>test.One</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/*.xml
+			</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>two</servlet-name>
+		<servlet-class>test.Two</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>one</servlet-name>
+		<url-pattern>/one</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>two</servlet-name>
+		<url-pattern>/two</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>one</filter-name>
+		<filter-class>filter.One</filter-class>
+		<init-param>
+			<param-name>cacheSize</param-name>
+			<param-value>10</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+		<filter-name>two</filter-name>
+		<filter-class>filter.Two</filter-class>
+	</filter>
+	
+	<filter-mapping> 
+		<filter-name>one</filter-name> 
+		<url-pattern>/foo/*</url-pattern> 
+		<servlet-name>Servlet1</servlet-name> 
+		<servlet-name>Servlet2</servlet-name> 
+		<url-pattern>/bar/*</url-pattern> 
+	</filter-mapping>
+	
+	<filter-mapping> 
+		<filter-name>two</filter-name> 
+		<url-pattern>*.jsp</url-pattern>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping> 
+		<filter-name>two</filter-name>
+		<servlet-name>one</servlet-name>		
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher> 		 
+	</filter-mapping>		
+	
+</web-app>
