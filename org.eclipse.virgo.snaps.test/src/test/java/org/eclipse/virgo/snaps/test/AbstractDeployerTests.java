@@ -29,10 +29,10 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
-import com.springsource.kernel.deployer.core.ApplicationDeployer;
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
-import com.springsource.osgi.test.framework.dmkernel.DmKernelTestRunner;
+import org.eclipse.virgo.kernel.deployer.core.ApplicationDeployer;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.test.framework.dmkernel.DmKernelTestRunner;
 
 @RunWith(DmKernelTestRunner.class)
 public abstract class AbstractDeployerTests {

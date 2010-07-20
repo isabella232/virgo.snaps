@@ -21,22 +21,22 @@
         <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${javax.servlet}" conf="compile->runtime"/>
         <dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.api" rev="latest.integration"/>
            
-        <dependency org="com.springsource.kernel" name="com.springsource.kernel.deployer" rev="${com.springsource.kernel}" conf="compile->compile"/>
+        <dependency org="org.eclipse.virgo.kernel" name="org.eclipse.virgo.kernel.deployer" rev="${org.eclipse.virgo.kernel}" conf="compile->compile"/>
            
-        <dependency org="com.springsource.osgi.webcontainer" name="com.springsource.osgi.webcontainer.core" rev="${com.springsource.osgi.webcontainer}" conf="compile->compile"/>
-        <dependency org="com.springsource.osgi.webcontainer" name="com.springsource.osgi.webcontainer.tomcat" rev="${com.springsource.osgi.webcontainer}" conf="compile->compile"/>
+        <dependency org="org.eclipse.gemini.web" name="org.eclipse.gemini.web.core" rev="${org.eclipse.gemini.web}" conf="compile->compile"/>
+        <dependency org="org.eclipse.gemini.web" name="org.eclipse.gemini.web.tomcat" rev="${org.eclipse.gemini.web}" conf="compile->compile"/>
         
         <dependency org="org.slf4j" name="com.springsource.slf4j.api" rev="${org.slf4j}" conf="compile->runtime"/>
         <dependency org="org.slf4j" name="com.springsource.slf4j.nop" rev="${org.slf4j}" conf="test->runtime"/>
-		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic" rev="${com.springsource.osgi.medic}" conf="compile->runtime"/>
-		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic.core" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
-		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic.test" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic" rev="${org.eclipse.virgo.medic}" conf="compile->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.core" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.test" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
            
         <dependency org="org.springframework" name="org.springframework.test" rev="${org.springframework}" conf="test->compile"/>
         <dependency org="org.springframework" name="org.springframework.core" rev="${org.springframework}" conf="test->compile"/>
  		<dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
  		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="${org.easymock}" conf="test->runtime"/>
-	   	<dependency org="com.springsource.osgi.test" name="com.springsource.osgi.test.stubs" rev="${com.springsource.osgi.test.stubs}" conf="test->runtime"/>
+	   	<dependency org="org.eclipse.virgo.teststubs" name="org.eclipse.virgo.teststubs.osgi" rev="${org.eclipse.virgo.teststubs.osgi}" conf="test->runtime"/>
     </dependencies>
 
 </ivy-module>

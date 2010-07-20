@@ -29,7 +29,7 @@ import org.eclipse.virgo.snaps.core.internal.webapp.SnapServletContext;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 
-import com.springsource.util.common.IterableEnumeration;
+import org.eclipse.virgo.util.common.IterableEnumeration;
 
 public class SnapServletContextTests {
     

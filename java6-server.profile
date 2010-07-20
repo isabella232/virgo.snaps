@@ -191,9 +191,9 @@ org.osgi.framework.bootdelegation = \
  com_cenqua_clover,\
  com.cenqua.*,\
  com.yourkit.*,\
- com.springsource.osgi.extensions.*,\
- com.springsource.osgi.launcher.*,\
- com.springsource.kernel.authentication,\
+ org.eclipse.virgo.osgi.extensions.*,\
+ org.eclipse.virgo.osgi.launcher.*,\
+ org.eclipse.virgo.kernel.authentication,\
  com.sun.*,\
  javax.xml.*,\
  org.apache.xerces.jaxp.*,\

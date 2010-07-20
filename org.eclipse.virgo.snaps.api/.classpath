@@ -2,34 +2,34 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java">
 		<attributes>
-			<attribute name="com.springsource.server.ide.jdt.core.test.classpathentry" value="false"/>
+			<attribute name="org.eclipse.virgo.ide.jdt.core.test.classpathentry" value="false"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/resources">
 		<attributes>
-			<attribute name="com.springsource.server.ide.jdt.core.test.classpathentry" value="false"/>
+			<attribute name="org.eclipse.virgo.ide.jdt.core.test.classpathentry" value="false"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
-			<attribute name="com.springsource.server.ide.jdt.core.test.classpathentry" value="true"/>
+			<attribute name="org.eclipse.virgo.ide.jdt.core.test.classpathentry" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/resources">
 		<attributes>
-			<attribute name="com.springsource.server.ide.jdt.core.test.classpathentry" value="true"/>
+			<attribute name="org.eclipse.virgo.ide.jdt.core.test.classpathentry" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-3.5.1.R35x_v20091005.jar" sourcepath="/SLICES_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-sources-3.5.1.R35x_v20091005.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/javax.servlet/com.springsource.javax.servlet/2.5.0/com.springsource.javax.servlet-2.5.0.jar" sourcepath="/SLICES_IVY_CACHE/javax.servlet/com.springsource.javax.servlet/2.5.0/com.springsource.javax.servlet-sources-2.5.0.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/javax.servlet/com.springsource.javax.servlet.jsp/2.1.0/com.springsource.javax.servlet.jsp-2.1.0.jar" sourcepath="/SLICES_IVY_CACHE/javax.servlet/com.springsource.javax.servlet.jsp/2.1.0/com.springsource.javax.servlet.jsp-sources-2.1.0.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.osgi.webcontainer/com.springsource.osgi.webcontainer.core/1.0.0.M1/com.springsource.osgi.webcontainer.core-1.0.0.M1.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.osgi.webcontainer/com.springsource.osgi.webcontainer.core/1.0.0.M1/com.springsource.osgi.webcontainer.core-sources-1.0.0.M1.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.junit/com.springsource.org.junit/4.5.0/com.springsource.org.junit-4.5.0.jar" sourcepath="/SLICES_IVY_CACHE/org.junit/com.springsource.org.junit/4.5.0/com.springsource.org.junit-sources-4.5.0.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.springframework/org.springframework.test/3.0.0.RELEASE/org.springframework.test-3.0.0.RELEASE.jar" sourcepath="/SLICES_IVY_CACHE/org.springframework/org.springframework.test/3.0.0.RELEASE/org.springframework.test-sources-3.0.0.RELEASE.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.easymock/com.springsource.org.easymock/2.3.0/com.springsource.org.easymock-2.3.0.jar" sourcepath="/SLICES_IVY_CACHE/org.easymock/com.springsource.org.easymock/2.3.0/com.springsource.org.easymock-sources-2.3.0.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.springframework/org.springframework.core/3.0.0.RELEASE/org.springframework.core-3.0.0.RELEASE.jar" sourcepath="/SLICES_IVY_CACHE/org.springframework/org.springframework.core/3.0.0.RELEASE/org.springframework.core-sources-3.0.0.RELEASE.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.aspectj/com.springsource.org.aspectj.runtime/1.6.5.RELEASE/com.springsource.org.aspectj.runtime-1.6.5.RELEASE.jar" sourcepath="/SLICES_IVY_CACHE/org.aspectj/com.springsource.org.aspectj.runtime/1.6.5.RELEASE/com.springsource.org.aspectj.runtime-sources-1.6.5.RELEASE.jar"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/com.springsource.osgi.test/com.springsource.osgi.test.stubs/1.0.0.CI-B40/com.springsource.osgi.test.stubs-1.0.0.CI-B40.jar" sourcepath="/SLICES_IVY_CACHE/com.springsource.osgi.test/com.springsource.osgi.test.stubs/1.0.0.CI-B40/com.springsource.osgi.test.stubs-sources-1.0.0.CI-B40.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-3.5.1.R35x_v20091005.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.5.1.R35x_v20091005/org.eclipse.osgi-sources-3.5.1.R35x_v20091005.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/javax.servlet/com.springsource.javax.servlet/2.5.0/com.springsource.javax.servlet-2.5.0.jar" sourcepath="/SNAPS_IVY_CACHE/javax.servlet/com.springsource.javax.servlet/2.5.0/com.springsource.javax.servlet-sources-2.5.0.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/javax.servlet/com.springsource.javax.servlet.jsp/2.1.0/com.springsource.javax.servlet.jsp-2.1.0.jar" sourcepath="/SNAPS_IVY_CACHE/javax.servlet/com.springsource.javax.servlet.jsp/2.1.0/com.springsource.javax.servlet.jsp-sources-2.1.0.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.gemini.web/org.eclipse.gemini.web.core/1.1.0.M01/org.eclipse.gemini.web.core-1.1.0.M01.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.gemini.web/org.eclipse.gemini.web.core/1.1.0.M01/org.eclipse.gemini.web.core-sources-1.1.0.M01.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.junit/com.springsource.org.junit/4.7.0/com.springsource.org.junit-4.7.0.jar" sourcepath="/SNAPS_IVY_CACHE/org.junit/com.springsource.org.junit/4.7.0/com.springsource.org.junit-sources-4.7.0.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.springframework/org.springframework.test/3.0.0.RELEASE/org.springframework.test-3.0.0.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.springframework/org.springframework.test/3.0.0.RELEASE/org.springframework.test-sources-3.0.0.RELEASE.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.easymock/com.springsource.org.easymock/2.3.0/com.springsource.org.easymock-2.3.0.jar" sourcepath="/SNAPS_IVY_CACHE/org.easymock/com.springsource.org.easymock/2.3.0/com.springsource.org.easymock-sources-2.3.0.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.springframework/org.springframework.core/3.0.0.RELEASE/org.springframework.core-3.0.0.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.springframework/org.springframework.core/3.0.0.RELEASE/org.springframework.core-sources-3.0.0.RELEASE.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.aspectj/com.springsource.org.aspectj.runtime/1.6.6.RELEASE/com.springsource.org.aspectj.runtime-1.6.6.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.aspectj/com.springsource.org.aspectj.runtime/1.6.6.RELEASE/com.springsource.org.aspectj.runtime-sources-1.6.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.test/org.eclipse.virgo.teststubs.osgi/2.1.0.M01/org.eclipse.virgo.teststubs.osgi-2.1.0.M01.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.virgo.test/org.eclipse.virgo.teststubs.osgi/2.1.0.M01/org.eclipse.virgo.teststubs.osgi-sources-2.1.0.M01.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

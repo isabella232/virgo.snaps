@@ -13,11 +13,11 @@
         <dependency name='org.eclipse.osgi' rev='${org.eclipse.osgi}' org='org.eclipse.osgi' conf='compile->compile'/>
         <dependency name='com.springsource.javax.servlet' rev='${javax.servlet}' org='javax.servlet' conf='compile->runtime'/>
         <dependency name='com.springsource.javax.servlet.jsp' rev='${javax.servlet.jsp}' conf='compile->compile' org='javax.servlet'/>
-        <dependency name='com.springsource.osgi.webcontainer.core' rev='${com.springsource.osgi.webcontainer}' conf='compile->compile' org='com.springsource.osgi.webcontainer'/>
+        <dependency name='org.eclipse.gemini.web.core' rev='${org.eclipse.gemini.web}' conf='compile->compile' org='org.eclipse.gemini.web'/>
         <dependency name='com.springsource.org.junit' rev='${org.junit}' conf='test->runtime' org='org.junit'/>
         <dependency name='org.springframework.test' rev='${org.springframework}' conf='test->runtime' org='org.springframework'/>
         <dependency name='org.springframework.core' rev='${org.springframework}' conf='test->runtime' org='org.springframework'/>
         <dependency name='com.springsource.org.easymock' rev='${org.easymock}' conf='test->runtime' org='org.easymock'/>
-        <dependency name='com.springsource.osgi.test.stubs' rev='${com.springsource.osgi.test.stubs}' conf='test->runtime' org='com.springsource.osgi.test'/>
+        <dependency name='org.eclipse.virgo.teststubs.osgi' rev='${org.eclipse.virgo.teststubs.osgi}' conf='test->runtime' org='org.eclipse.virgo.teststubs'/>
     </dependencies>
 </ivy-module>

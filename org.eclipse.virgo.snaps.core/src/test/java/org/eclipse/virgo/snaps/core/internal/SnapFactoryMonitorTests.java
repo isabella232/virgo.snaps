@@ -38,7 +38,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.springframework.mock.web.MockServletContext;
 
-import com.springsource.osgi.medic.test.eventlog.MockEventLogger;
+import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
 
 public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 

@@ -38,7 +38,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.springframework.mock.web.MockPageContext;
 
-import com.springsource.osgi.webcontainer.core.WebContainer;
+import org.eclipse.gemini.web.core.WebContainer;
 
 
 /**
@@ -80,7 +80,7 @@ public class SnapsTagTests {
         
         verify(servletContext, bundleContext, bundle);
         
-        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SLICES_ATTRIBUTE_NAME);
+        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
         assertNotNull(snaps);
         assertEquals(0, snaps.size());
     }
@@ -116,7 +116,7 @@ public class SnapsTagTests {
         
         verify(servletContext, bundleContext, serviceReference1, serviceReference2, bundle);
         
-        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SLICES_ATTRIBUTE_NAME);
+        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
         assertNotNull(snaps);
         assertEquals(2, snaps.size());
         

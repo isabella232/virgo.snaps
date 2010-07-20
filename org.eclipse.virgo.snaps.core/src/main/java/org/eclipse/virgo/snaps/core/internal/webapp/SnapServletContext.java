@@ -30,7 +30,7 @@ import javax.servlet.ServletException;
 import org.eclipse.virgo.snaps.core.internal.SnapException;
 import org.osgi.framework.Bundle;
 
-import com.springsource.util.common.IterableEnumeration;
+import org.eclipse.virgo.util.common.IterableEnumeration;
 
 /**
  * TODO Document SnapServletContext

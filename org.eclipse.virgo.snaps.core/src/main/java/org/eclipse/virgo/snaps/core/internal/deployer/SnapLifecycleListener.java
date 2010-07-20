@@ -24,14 +24,14 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.install.artifact.BundleInstallArtifact;
-import com.springsource.kernel.install.artifact.InstallArtifact;
-import com.springsource.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
-import com.springsource.osgi.medic.eventlog.EventLogger;
-import com.springsource.osgi.webcontainer.tomcat.spi.WebBundleClassLoaderFactory;
-import com.springsource.util.osgi.ServiceRegistrationTracker;
-import com.springsource.util.osgi.manifest.BundleManifest;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
+import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
+import org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
+import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 
 /**
  * <strong>Concurrent Semantics</strong><br />

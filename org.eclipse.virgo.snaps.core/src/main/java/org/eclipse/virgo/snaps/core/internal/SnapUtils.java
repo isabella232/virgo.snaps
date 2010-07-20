@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.framework.Bundle;
 
-import com.springsource.util.osgi.manifest.BundleManifest;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 
 public final class SnapUtils {
 
-    public static final String HEADER_SLICE_HOST = "Snap-Host";
+    public static final String HEADER_SNAP_HOST = "Snap-Host";
     
-    public static final String HEADER_SLICE_CONTEXT_PATH = "Snap-ContextPath";
+    public static final String HEADER_SNAP_CONTEXT_PATH = "Snap-ContextPath";
 
     private static final String PATH_ELEMENT_SEPARATOR = "/";
 
@@ -45,16 +45,16 @@ public final class SnapUtils {
     }
 
     public static boolean hasSnapHostHeader(BundleManifest manifest) {
-        return manifest.getHeader(HEADER_SLICE_HOST) != null;
+        return manifest.getHeader(HEADER_SNAP_HOST) != null;
     }
 
     public static SnapHostDefinition getSnapHostHeader(BundleManifest manifest) {
-        String header = manifest.getHeader(HEADER_SLICE_HOST);
+        String header = manifest.getHeader(HEADER_SNAP_HOST);
         return (header == null ? null : SnapHostDefinition.parse(header));
     }
 
     public static String getSnapContextPath(Bundle bundle) {
-        String contextPath = (String) bundle.getHeaders().get(HEADER_SLICE_CONTEXT_PATH);
+        String contextPath = (String) bundle.getHeaders().get(HEADER_SNAP_CONTEXT_PATH);
         if(contextPath == null) {
             contextPath = generateDefaultContextPath(bundle);
         }

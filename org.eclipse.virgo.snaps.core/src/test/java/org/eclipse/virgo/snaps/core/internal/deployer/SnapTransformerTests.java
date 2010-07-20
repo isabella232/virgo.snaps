@@ -29,16 +29,16 @@ import java.net.URL;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapTransformer;
 import org.junit.Test;
 
-import com.springsource.kernel.artifact.fs.ArtifactFS;
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.install.artifact.BundleInstallArtifact;
-import com.springsource.kernel.install.artifact.InstallArtifact;
-import com.springsource.osgi.webcontainer.core.InstallationOptions;
-import com.springsource.osgi.webcontainer.core.WebBundleManifestTransformer;
-import com.springsource.util.common.ThreadSafeArrayListTree;
-import com.springsource.util.common.Tree;
-import com.springsource.util.osgi.manifest.BundleManifest;
-import com.springsource.util.osgi.manifest.internal.StandardBundleManifest;
+import org.eclipse.virgo.kernel.artifact.fs.ArtifactFS;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
+import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
+import org.eclipse.gemini.web.core.InstallationOptions;
+import org.eclipse.gemini.web.core.WebBundleManifestTransformer;
+import org.eclipse.virgo.util.common.ThreadSafeArrayListTree;
+import org.eclipse.virgo.util.common.Tree;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
+import org.eclipse.virgo.util.osgi.manifest.internal.StandardBundleManifest;
 
 public class SnapTransformerTests {
     
@@ -51,7 +51,7 @@ public class SnapTransformerTests {
     @Test(expected = DeploymentException.class)
     public void testInvalidTransformation() throws Exception {
 
-        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull());
+        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull(), eq(false));
         expectLastCall().andThrow(new IOException());
         replayAll();
         snapTransformer.doTransform(bundleManifest, URI.create("file:bar").toURL());
@@ -60,7 +60,7 @@ public class SnapTransformerTests {
 
     @Test
     public void testValidTransformation() throws Exception {
-        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull());        
+        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull(), eq(false));        
         replayAll();
         snapTransformer.doTransform(bundleManifest, URI.create("file:bar").toURL());
         verifyAll();
@@ -86,8 +86,8 @@ public class SnapTransformerTests {
         File f2 = new File("/bar2");
         expect(artifactFS2.getFile()).andReturn(f2);
         
-        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null);
-        this.manifestTransformer.transform(bundleManifest2, f2.toURI().toURL(), null);
+        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null, false);
+        this.manifestTransformer.transform(bundleManifest2, f2.toURI().toURL(), null, false);
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
         
@@ -118,7 +118,7 @@ public class SnapTransformerTests {
         expect(installArtifact2.getArtifactFS()).andReturn(artifactFS2).anyTimes();        
         expect(artifactFS2.getFile()).andReturn(null);
         
-        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null);
+        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null, false);
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
         

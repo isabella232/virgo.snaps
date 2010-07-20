@@ -37,7 +37,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockServletContext;
 
-import com.springsource.osgi.medic.test.eventlog.MockEventLogger;
+import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
 
 public class SnapHostFilterTests {
 

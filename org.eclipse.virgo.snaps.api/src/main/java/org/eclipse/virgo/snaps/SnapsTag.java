@@ -24,7 +24,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
-import com.springsource.osgi.webcontainer.core.WebContainer;
+import org.eclipse.gemini.web.core.WebContainer;
 
 /**
  * TODO Document SnapsTag
@@ -39,11 +39,11 @@ public final class SnapsTag extends BodyTagSupport {
 
     private static final long serialVersionUID = 4715961747733658692L;
 
-    private static final String SLICE_SERVICE_CLASS = "org.eclipse.virgo.snaps.core.internal.Snap";
+    private static final String SNAP_SERVICE_CLASS = "org.eclipse.virgo.snaps.core.internal.Snap";
 
-    public static final String SLICES_ATTRIBUTE_NAME = "snaps";
+    public static final String SNAPS_ATTRIBUTE_NAME = "snaps";
 
-    private volatile String attributeName = SLICES_ATTRIBUTE_NAME;
+    private volatile String attributeName = SNAPS_ATTRIBUTE_NAME;
 
     public void setVar(String attributeName) {
         this.attributeName = attributeName;
@@ -61,7 +61,7 @@ public final class SnapsTag extends BodyTagSupport {
         BundleContext bundleContext = (BundleContext) this.pageContext.getServletContext().getAttribute(WebContainer.ATTRIBUTE_BUNDLE_CONTEXT);
         long hostId = bundleContext.getBundle().getBundleId();
         try {
-            ServiceReference[] serviceReferences = bundleContext.getServiceReferences(SLICE_SERVICE_CLASS, "(snap.host.id=" + hostId + ")");
+            ServiceReference[] serviceReferences = bundleContext.getServiceReferences(SNAP_SERVICE_CLASS, "(snap.host.id=" + hostId + ")");
 
             List<Snap> snaps = new ArrayList<Snap>();
 

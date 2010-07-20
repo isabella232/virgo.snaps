@@ -20,7 +20,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.util.io.IOUtils;
+import org.eclipse.virgo.util.io.IOUtils;
 
 public final class BundleWebXmlLoader {
 

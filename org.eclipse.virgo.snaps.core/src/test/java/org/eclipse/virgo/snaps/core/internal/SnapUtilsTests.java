@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.osgi.framework.Bundle;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import com.springsource.util.osgi.manifest.BundleManifest;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 
 public class SnapUtilsTests {
 
@@ -60,7 +60,7 @@ public class SnapUtilsTests {
     @Test
     public void hasSnapHostHeaderTrue() {
         BundleManifest manifest = createMock(BundleManifest.class);
-        expect(manifest.getHeader(SnapUtils.HEADER_SLICE_HOST)).andReturn("foo");
+        expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn("foo");
         
         replay(manifest);
         assertTrue(SnapUtils.hasSnapHostHeader(manifest));
@@ -70,7 +70,7 @@ public class SnapUtilsTests {
     @Test
     public void hasSnapHostHeaderFalse() {
         BundleManifest manifest = createMock(BundleManifest.class);
-        expect(manifest.getHeader(SnapUtils.HEADER_SLICE_HOST)).andReturn(null);
+        expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn(null);
         
         replay(manifest);
         assertFalse(SnapUtils.hasSnapHostHeader(manifest));
@@ -80,7 +80,7 @@ public class SnapUtilsTests {
     @Test
     public void getSnapHostHeader() {
         BundleManifest manifest = createMock(BundleManifest.class);
-        expect(manifest.getHeader(SnapUtils.HEADER_SLICE_HOST)).andReturn("travel;version=\"[1.2, 1.3)\"");
+        expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn("travel;version=\"[1.2, 1.3)\"");
         
         replay(manifest);
         SnapHostDefinition header = SnapUtils.getSnapHostHeader(manifest);
@@ -92,7 +92,7 @@ public class SnapUtilsTests {
     @Test
     public void getSnapHostHeaderNull() {
         BundleManifest manifest = createMock(BundleManifest.class);
-        expect(manifest.getHeader(SnapUtils.HEADER_SLICE_HOST)).andReturn(null);
+        expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn(null);
         
         replay(manifest);
         SnapHostDefinition header = SnapUtils.getSnapHostHeader(manifest);
@@ -103,7 +103,7 @@ public class SnapUtilsTests {
     @Test
     public void getSnapContextPath() {
         Properties p = new Properties();
-        p.setProperty(SnapUtils.HEADER_SLICE_CONTEXT_PATH, "snap");
+        p.setProperty(SnapUtils.HEADER_SNAP_CONTEXT_PATH, "snap");
         
         Bundle bundle = createMock(Bundle.class);
         expect(bundle.getHeaders()).andReturn(p);

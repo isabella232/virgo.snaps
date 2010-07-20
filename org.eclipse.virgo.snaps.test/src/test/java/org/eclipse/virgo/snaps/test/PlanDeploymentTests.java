@@ -15,7 +15,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 
 /**

@@ -11,17 +11,17 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
-import com.springsource.kernel.serviceability.LogEventDelegate;
-import com.springsource.osgi.medic.eventlog.Level;
-import com.springsource.osgi.medic.eventlog.LogEvent;
+import org.eclipse.virgo.kernel.serviceability.LogEventDelegate;
+import org.eclipse.virgo.medic.eventlog.Level;
+import org.eclipse.virgo.medic.eventlog.LogEvent;
 
 public enum SnapsLogEvents implements LogEvent {
     HOST_CREATED(0, Level.INFO), //
     HOST_DESTROYED(1, Level.INFO), //
 
-    SLICE_BOUND(10, Level.INFO), //
-    SLICE_UNBOUND(11, Level.INFO), //
-    SLICE_INIT_FAILURE(12, Level.ERROR);
+    SNAP_BOUND(10, Level.INFO), //
+    SNAP_UNBOUND(11, Level.INFO), //
+    SNAP_INIT_FAILURE(12, Level.ERROR);
 
     private static final String PREFIX = "SL";
 

@@ -19,11 +19,11 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.util.osgi.VersionRange;
-import com.springsource.util.osgi.manifest.parse.HeaderDeclaration;
-import com.springsource.util.osgi.manifest.parse.HeaderParser;
-import com.springsource.util.osgi.manifest.parse.HeaderParserFactory;
-import com.springsource.util.osgi.manifest.parse.ParserLogger;
+import org.eclipse.virgo.util.osgi.VersionRange;
+import org.eclipse.virgo.util.osgi.manifest.parse.HeaderDeclaration;
+import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParser;
+import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParserFactory;
+import org.eclipse.virgo.util.osgi.manifest.parse.ParserLogger;
 
 public final class SnapHostDefinition {
 

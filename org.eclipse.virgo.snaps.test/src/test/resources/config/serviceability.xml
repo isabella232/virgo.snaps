@@ -42,7 +42,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.springsource.osgi.medic.eventlog.localized" level="INFO">
+	<logger name="org.eclipse.virgo.medic.eventlog.localized" level="INFO">
 		<appender-ref ref="EVENT_LOG_STDOUT" />
 		<appender-ref ref="EVENT_LOG_FILE" />
 	</logger>

@@ -16,7 +16,7 @@
 	</publications>
 
 	<dependencies>
-		<dependency org="com.springsource.kernel" name="com.springsource.kernel" rev="${com.springsource.kernel}" conf="provided->compile"/>
+		<dependency org="org.eclipse.virgo.kernel" name="org.eclipse.virgo.kernel" rev="${org.eclipse.virgo.kernel}" conf="provided->compile"/>
 		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.core" rev="latest.integration"/>
 		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.api" rev="latest.integration"/>
 	</dependencies>

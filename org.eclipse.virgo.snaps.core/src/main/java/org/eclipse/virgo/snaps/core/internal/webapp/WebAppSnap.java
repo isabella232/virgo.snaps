@@ -36,10 +36,10 @@ import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.osgi.medic.eventlog.EventLogger;
-import com.springsource.osgi.webcontainer.core.WebContainer;
-import com.springsource.osgi.webcontainer.tomcat.spi.WebBundleClassLoaderFactory;
-import com.springsource.util.io.IOUtils;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
+import org.eclipse.gemini.web.core.WebContainer;
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
+import org.eclipse.virgo.util.io.IOUtils;
 
 /**
  * TODO Document WebAppSnap
@@ -106,7 +106,7 @@ class WebAppSnap implements Snap {
         virtualContainer.init();
 
         this.virtualContainer = virtualContainer;
-        this.eventLogger.log(SnapsLogEvents.SLICE_BOUND, SnapUtils.boundContextPath(this.host.getServletContext().getContextPath(), this.contextPath));
+        this.eventLogger.log(SnapsLogEvents.SNAP_BOUND, SnapUtils.boundContextPath(this.host.getServletContext().getContextPath(), this.contextPath));
     }
 
     /**
@@ -133,7 +133,7 @@ class WebAppSnap implements Snap {
         } else {
             // TODO Log warning that class loader was null during destroy
         }
-        this.eventLogger.log(SnapsLogEvents.SLICE_UNBOUND, SnapUtils.boundContextPath(this.host.getServletContext().getContextPath(), this.contextPath));
+        this.eventLogger.log(SnapsLogEvents.SNAP_UNBOUND, SnapUtils.boundContextPath(this.host.getServletContext().getContextPath(), this.contextPath));
     }
 
     /**

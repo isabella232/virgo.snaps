@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 final class OsgiSnapRegistry implements SnapRegistry {
 
-    private static final String PROPERTY_SLICE_CONTEXT_PATH = "snap.context.path";
+    private static final String PROPERTY_SNAP_CONTEXT_PATH = "snap.context.path";
 
     private static final String FILTER_PATTERN = "(& (objectClass=" + Snap.class.getName() + ")(snap.host.id=%d))";
 
@@ -101,7 +101,7 @@ final class OsgiSnapRegistry implements SnapRegistry {
         }
 
         private String getSnapContextPath(ServiceReference reference) {
-            return (String) reference.getProperty(PROPERTY_SLICE_CONTEXT_PATH);
+            return (String) reference.getProperty(PROPERTY_SNAP_CONTEXT_PATH);
         }
 
     }

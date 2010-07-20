@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 public class BasicDeployLifecycleTests extends AbstractDeployerTests {
 

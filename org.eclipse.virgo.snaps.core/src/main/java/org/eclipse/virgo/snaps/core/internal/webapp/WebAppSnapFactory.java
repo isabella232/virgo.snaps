@@ -18,8 +18,8 @@ import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.osgi.medic.eventlog.EventLogger;
-import com.springsource.osgi.webcontainer.tomcat.spi.WebBundleClassLoaderFactory;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
 
 public final class WebAppSnapFactory implements SnapFactory {
 

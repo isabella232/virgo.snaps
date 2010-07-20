@@ -11,8 +11,8 @@
 
 package org.eclipse.virgo.snaps.test;
 
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 
 public abstract class AbstractCapabilityTests extends AbstractDeployerTests {

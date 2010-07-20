@@ -28,7 +28,7 @@
   <!-- JMX Support for the Tomcat server. Documentation at /docs/non-existent.html-->
   <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener" />
   
-  <Listener className="com.springsource.server.web.tomcat.ServerLifecycleLoggingListener"/>
+  <Listener className="org.eclipse.virgo.web.tomcat.ServerLifecycleLoggingListener"/>
   
   <!-- A "Service" is a collection of one or more "Connectors" that share
        a single "Container" Note:  A "Service" is not itself a "Container", 
@@ -65,14 +65,14 @@
     --> 
     <Engine name="Catalina" defaultHost="localhost">
 
-	  <Valve className="com.springsource.server.web.tomcat.ApplicationNameTrackingValve"/>
+	  <Valve className="org.eclipse.virgo.web.tomcat.ApplicationNameTrackingValve"/>
 	  
       <!-- Define the default virtual host
            Note: XML Schema validation will not work with Xerces 2.2.
        -->
       <Host name="localhost" deployOnStartup="false" autoDeploy="false"
             unpackWARs="true" xmlValidation="false" xmlNamespaceAware="false">
-			<Listener className="com.springsource.server.web.tomcat.ApplicationNameTrackingListener"/>
+			<Listener className="org.eclipse.virgo.web.tomcat.ApplicationNameTrackingListener"/>
       </Host>
     </Engine>
   </Service>

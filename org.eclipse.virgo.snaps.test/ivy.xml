@@ -20,9 +20,9 @@
 		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.api" rev="latest.integration"/>
 		<dependency org="org.eclipse.virgo.snaps" name="org.eclipse.virgo.snaps.core" rev="latest.integration"/>
 
-		<dependency org="com.springsource.kernel" name="com.springsource.kernel" rev="${com.springsource.kernel}" conf="test->compile"/>
-		<dependency org="com.springsource.server" name="com.springsource.server.web" rev="${com.springsource.server.web}" conf="test->compile"/>
-		<dependency org="com.springsource.osgi.test" name="com.springsource.osgi.test.framework" rev="${com.springsource.osgi.test}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.kernel" name="org.eclipse.virgo.kernel" rev="${org.eclipse.virgo.kernel}" conf="test->compile"/>
+		<dependency org="org.eclipse.virgo.web" name="org.eclipse.virgo.web.tomcat" rev="${org.eclipse.virgo.web}" conf="test->compile"/>
+		<dependency org="org.eclipse.virgo.test" name="org.eclipse.virgo.test.framework" rev="${org.eclipse.virgo.test}" conf="test->runtime"/>
 
 		<dependency org="org.springframework" name="org.springframework.test" rev="${org.springframework}" conf="test->runtime"/>
 		<dependency org="org.springframework" name="org.springframework.spring-library" rev="${org.springframework}" conf="test->runtime"/>
@@ -30,8 +30,8 @@
 
 		<dependency org="org.slf4j" name="com.springsource.slf4j.org.apache.commons.logging" rev="${org.slf4j}" conf="test->runtime"/>
 		<dependency org="org.slf4j" name="com.springsource.slf4j.bridge" rev="${org.slf4j}" conf="test->runtime"/>
-		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
-		<dependency org="com.springsource.osgi.medic" name="com.springsource.osgi.medic.core" rev="${com.springsource.osgi.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.core" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
 		<dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp.jstl" rev="${javax.servlet.jsp.jstl}" conf="test->runtime"/>
 		<dependency org="org.apache.taglibs" name="com.springsource.org.apache.taglibs.standard" rev="${org.apache.taglibs}" conf="test->runtime" />
 		<dependency name='org.apache.felix.eventadmin' rev='${org.apache.felix.eventadmin}' conf='test->runtime' org='org.apache.felix'/>
@@ -48,10 +48,10 @@
 		<!--  Prevent Derby coming down until we move to a Spring version when its JDCB bundle's Derby dependency is optional -->
 		<exclude org="org.apache.derby"/>
 
-		<override org="com.springsource.util" rev="${com.springsource.util}"/>
-		<override org="com.springsource.repository" rev="${com.springsource.repository}"/>
-		<override org="com.springsource.kernel" rev="${com.springsource.kernel}"/>
-		<override org="com.springsource.osgi.webcontainer" rev="${com.springsource.osgi.webcontainer}"/>
+		<override org="org.eclipse.virgo.util" rev="${org.eclipse.virgo.util}"/>
+		<override org="org.eclipse.virgo.repository" rev="${org.eclipse.virgo.repository}"/>
+		<override org="org.eclipse.virgo.kernel" rev="${org.eclipse.virgo.kernel}"/>
+		<override org="org.eclipse.gemini.web" rev="${org.eclipse.gemini.web}"/>
 	</dependencies>
 
 </ivy-module>

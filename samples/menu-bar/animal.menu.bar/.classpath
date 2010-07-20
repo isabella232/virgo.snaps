@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="var" path="SLICES_IVY_CACHE/org.apache.taglibs/com.springsource.org.apache.taglibs.standard/1.1.2/com.springsource.org.apache.taglibs.standard-1.1.2.jar" sourcepath="/SLICES_IVY_CACHE/org.apache.taglibs/com.springsource.org.apache.taglibs.standard/1.1.2/com.springsource.org.apache.taglibs.standard-sources-1.1.2.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.apache.taglibs/com.springsource.org.apache.taglibs.standard/1.1.2/com.springsource.org.apache.taglibs.standard-1.1.2.jar" sourcepath="/SNAPS_IVY_CACHE/org.apache.taglibs/com.springsource.org.apache.taglibs.standard/1.1.2/com.springsource.org.apache.taglibs.standard-sources-1.1.2.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.virgo.snaps.api"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6.0 (MacOS X Default)">
 		<attributes>

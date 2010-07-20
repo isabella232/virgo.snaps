@@ -5,12 +5,12 @@
 		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
 	xmlns:osgi="http://www.springframework.org/schema/osgi">
 
-	<osgi:reference id="webBundleManifestTransformer" interface="com.springsource.osgi.webcontainer.core.WebBundleManifestTransformer"/>
-	<osgi:reference id="webBundleClassLoaderFactory" interface="com.springsource.osgi.webcontainer.tomcat.spi.WebBundleClassLoaderFactory"/>
-	<osgi:reference id="eventLogger" interface="com.springsource.osgi.medic.eventlog.EventLogger"/>
+	<osgi:reference id="webBundleManifestTransformer" interface="org.eclipse.gemini.web.core.WebBundleManifestTransformer"/>
+	<osgi:reference id="webBundleClassLoaderFactory" interface="org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory"/>
+	<osgi:reference id="eventLogger" interface="org.eclipse.virgo.medic.eventlog.EventLogger"/>
 	
-	<osgi:service ref="lifecycleListener" interface="com.springsource.kernel.install.artifact.InstallArtifactLifecycleListener"/>
+	<osgi:service ref="lifecycleListener" interface="org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListener"/>
 	
-	<osgi:service ref="transformer" interface="com.springsource.kernel.install.pipeline.stage.transform.Transformer" ranking="1500"/>
+	<osgi:service ref="transformer" interface="org.eclipse.virgo.kernel.install.pipeline.stage.transform.Transformer" ranking="1500"/>
 	
 </beans>

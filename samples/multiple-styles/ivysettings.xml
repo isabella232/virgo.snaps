@@ -64,7 +64,7 @@
 	<modules>
 		<module organisation="org.springframework.*"	name="*"	resolver="spring-portfolio-lookup"/>
 		<module organisation="com.springsource.*"		name="*"	resolver="spring-portfolio-lookup"/>
-		<module organisation="com.springsource.kernel"	name="*"	resolver="integration"/>
+		<module organisation="org.eclipse.virgo.kernel"	name="*"	resolver="integration"/>
 	</modules>
 
 </ivysettings>

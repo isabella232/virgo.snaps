@@ -24,8 +24,8 @@ import javax.management.ObjectName;
 import org.junit.Test;
 import org.osgi.framework.Constants;
 
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 public class SnapCapabilityTests extends AbstractCapabilityTests {
 

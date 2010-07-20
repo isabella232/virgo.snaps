@@ -32,8 +32,8 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.osgi.medic.eventlog.EventLogger;
-import com.springsource.util.osgi.ServiceRegistrationTracker;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
+import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
 
 final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
 
@@ -91,7 +91,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
     
     private static final class SnapBinder implements ServiceListener {
 
-        private static final String SLICE_ORDER = "snap.order";
+        private static final String SNAP_ORDER = "snap.order";
 
         private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -164,7 +164,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
                     publishSnapService(snap, hostBundle);
                     
                 } catch (ServletException e) {
-                    this.eventLogger.log(SnapsLogEvents.SLICE_INIT_FAILURE, SnapUtils.boundContextPath(servletContext.getContextPath(), snap.getContextPath()));
+                    this.eventLogger.log(SnapsLogEvents.SNAP_INIT_FAILURE, SnapUtils.boundContextPath(servletContext.getContextPath(), snap.getContextPath()));
                 } finally {
                 	synchronized (this.snapStateMonitor) {                		
 						if (newState == SnapLifecycleState.INIT_SUCCEEDED) {
@@ -180,7 +180,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
         private void publishSnapService(Snap snap, Bundle hostBundle) {
             Dictionary serviceProperties = snap.getSnapProperties();
 
-            String snapOrder = (String) serviceProperties.get(SLICE_ORDER);
+            String snapOrder = (String) serviceProperties.get(SNAP_ORDER);
             if (snapOrder != null) {
                 serviceProperties.put(Constants.SERVICE_RANKING, Integer.parseInt(snapOrder));
             }

@@ -19,8 +19,8 @@ import org.junit.Test;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 public class TagLibraryTests extends AbstractDeployerTests {
     

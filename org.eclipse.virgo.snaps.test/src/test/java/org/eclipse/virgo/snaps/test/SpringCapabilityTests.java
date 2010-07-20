@@ -15,8 +15,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.springsource.kernel.deployer.core.DeploymentException;
-import com.springsource.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
 
 public class SpringCapabilityTests extends AbstractCapabilityTests {
     

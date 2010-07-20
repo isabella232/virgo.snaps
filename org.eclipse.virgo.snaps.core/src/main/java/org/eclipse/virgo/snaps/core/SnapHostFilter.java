@@ -30,7 +30,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.springsource.osgi.medic.eventlog.EventLogger;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
 
 public class SnapHostFilter implements Filter {
 
