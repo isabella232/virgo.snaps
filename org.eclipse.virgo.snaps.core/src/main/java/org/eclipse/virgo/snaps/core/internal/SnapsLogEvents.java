@@ -23,7 +23,7 @@ public enum SnapsLogEvents implements LogEvent {
     SNAP_UNBOUND(11, Level.INFO), //
     SNAP_INIT_FAILURE(12, Level.ERROR);
 
-    private static final String PREFIX = "SL";
+    private static final String PREFIX = "SN";
 
     private final LogEventDelegate delegate;
 

@@ -16,18 +16,18 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.eclipse.gemini.web.core.InstallationOptions;
+import org.eclipse.gemini.web.core.WebBundleManifestTransformer;
 import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
 import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
 import org.eclipse.virgo.kernel.install.environment.InstallEnvironment;
 import org.eclipse.virgo.kernel.install.pipeline.stage.transform.Transformer;
-import org.eclipse.gemini.web.core.WebBundleManifestTransformer;
 import org.eclipse.virgo.util.common.Tree;
 import org.eclipse.virgo.util.common.Tree.ExceptionThrowingTreeVisitor;
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <strong>Concurrent Semantics</strong><br />
@@ -42,6 +42,8 @@ final class SnapTransformer implements Transformer {
     private static final Logger logger = LoggerFactory.getLogger(SnapTransformer.class);
 
     private final WebBundleManifestTransformer manifestTransformer;
+    
+    private InstallOptionsFactory installOptionFactory = new DefaultInstallOptionsFactory();
 
     public SnapTransformer(WebBundleManifestTransformer manifestTransformer) {
         this.manifestTransformer = manifestTransformer;
@@ -66,9 +68,12 @@ final class SnapTransformer implements Transformer {
 
     void doTransform(BundleManifest bundleManifest, URL sourceUrl) throws DeploymentException {
         logger.info("Transforming bundle at '{}'", sourceUrl.toExternalForm());
-        bundleManifest.setModuleType(SNAP_MODULE_TYPE);
+        
         try {
-            this.manifestTransformer.transform(bundleManifest, sourceUrl, null, false);
+            bundleManifest.setModuleType(SNAP_MODULE_TYPE);
+            bundleManifest.setHeader("SpringSource-DefaultWABHeaders", "true");
+            InstallationOptions installationOptions = installOptionFactory.createDefaultInstallOptions();
+            this.manifestTransformer.transform(bundleManifest, sourceUrl, installationOptions, false);
         } catch (IOException ioe) {
             logger.error(String.format("Error transforming manifest for snap '%s' version '%s'",
                 bundleManifest.getBundleSymbolicName().getSymbolicName(), bundleManifest.getBundleVersion()), ioe);
@@ -90,5 +95,9 @@ final class SnapTransformer implements Transformer {
             logger.error("Install artifact '{}' has a null source URI", installArtifact);
             throw new DeploymentException("Install artifact '" + installArtifact + "' has a null source URI");
         }
+    }
+
+    public void setInstallOptionFactory(InstallOptionsFactory installOptionsFactory) {
+        this.installOptionFactory = installOptionsFactory;
     }
 }

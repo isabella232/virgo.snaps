@@ -63,7 +63,7 @@ public abstract class AbstractDeployerTests {
         EventHandler eventHandler = new InitialArtifactDeploymentAwaitingEventHandler();
         
         Properties properties = new Properties();
-        properties.setProperty("event.topics", "com/springsource/kernel/*");
+        properties.setProperty("event.topics", "org/eclipse/virgo/kernel/*");
         
         FrameworkUtil.getBundle(AbstractDeployerTests.class).getBundleContext().registerService(EventHandler.class.getName(), eventHandler, properties);       
     }
@@ -71,7 +71,7 @@ public abstract class AbstractDeployerTests {
     private static final class InitialArtifactDeploymentAwaitingEventHandler implements EventHandler {
         
         public void handleEvent(Event event) {
-            if ("com/springsource/kernel/userregion/systemartifacts/DEPLOYED".equals(event.getTopic())) {
+            if ("org/eclipse/virgo/kernel/userregion/systemartifacts/DEPLOYED".equals(event.getTopic())) {
                 latch.countDown();  
             }
         }

@@ -16,7 +16,6 @@ import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.fail;
@@ -27,6 +26,7 @@ import java.net.URI;
 import java.net.URL;
 
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapTransformer;
+import org.junit.Before;
 import org.junit.Test;
 
 import org.eclipse.virgo.kernel.artifact.fs.ArtifactFS;
@@ -42,16 +42,29 @@ import org.eclipse.virgo.util.osgi.manifest.internal.StandardBundleManifest;
 
 public class SnapTransformerTests {
     
-    private final WebBundleManifestTransformer manifestTransformer = createMock(WebBundleManifestTransformer.class);
+    private WebBundleManifestTransformer manifestTransformer;
+
+    private BundleManifest bundleManifest;
+
+    private InstallOptionsFactory installOptionsFactory;
+
+    private SnapTransformer snapTransformer;
     
-    private final BundleManifest bundleManifest = new StandardBundleManifest(null);
-    
-    private SnapTransformer snapTransformer = new SnapTransformer(manifestTransformer);
+    @Before
+    public void setUp() {
+        bundleManifest = new StandardBundleManifest(null);
+        manifestTransformer = createMock(WebBundleManifestTransformer.class);
+        snapTransformer = new SnapTransformer(manifestTransformer);
+        installOptionsFactory = createMock(InstallOptionsFactory.class);
+        snapTransformer.setInstallOptionFactory(installOptionsFactory);
+    }
     
     @Test(expected = DeploymentException.class)
     public void testInvalidTransformation() throws Exception {
 
-        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull(), eq(false));
+        InstallationOptions options = new DefaultInstallOptionsFactory().createDefaultInstallOptions();
+        expect(this.installOptionsFactory.createDefaultInstallOptions()).andReturn(options);
+        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), eq(options), eq(false));
         expectLastCall().andThrow(new IOException());
         replayAll();
         snapTransformer.doTransform(bundleManifest, URI.create("file:bar").toURL());
@@ -60,7 +73,11 @@ public class SnapTransformerTests {
 
     @Test
     public void testValidTransformation() throws Exception {
-        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), (InstallationOptions) isNull(), eq(false));        
+        
+        InstallationOptions options = new DefaultInstallOptionsFactory().createDefaultInstallOptions();
+        expect(this.installOptionsFactory.createDefaultInstallOptions()).andReturn(options);
+        
+        this.manifestTransformer.transform(eq(this.bundleManifest), isA(URL.class), eq(options), eq(false));        
         replayAll();
         snapTransformer.doTransform(bundleManifest, URI.create("file:bar").toURL());
         verifyAll();
@@ -86,17 +103,24 @@ public class SnapTransformerTests {
         File f2 = new File("/bar2");
         expect(artifactFS2.getFile()).andReturn(f2);
         
-        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null, false);
-        this.manifestTransformer.transform(bundleManifest2, f2.toURI().toURL(), null, false);
+        InstallOptionsFactory factory = new DefaultInstallOptionsFactory();
         
-        replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
+        InstallationOptions options1 = factory.createDefaultInstallOptions();
+        expect(this.installOptionsFactory.createDefaultInstallOptions()).andReturn(options1);
+        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), options1, false);
+        
+        InstallationOptions options2 = factory.createDefaultInstallOptions();
+        expect(this.installOptionsFactory.createDefaultInstallOptions()).andReturn(options2);
+        this.manifestTransformer.transform(bundleManifest2, f2.toURI().toURL(), options2, false);
+        
+        replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
         Tree<InstallArtifact> installTree = new ThreadSafeArrayListTree<InstallArtifact>(installArtifact1);
         installTree.addChild(new ThreadSafeArrayListTree<InstallArtifact>(installArtifact2));
         
         snapTransformer.transform(installTree, null);
         
-        verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
+        verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
     }
     
     @Test(expected=DeploymentException.class)
@@ -118,9 +142,15 @@ public class SnapTransformerTests {
         expect(installArtifact2.getArtifactFS()).andReturn(artifactFS2).anyTimes();        
         expect(artifactFS2.getFile()).andReturn(null);
         
-        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), null, false);
         
-        replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
+InstallOptionsFactory factory = new DefaultInstallOptionsFactory();
+        
+        InstallationOptions options1 = factory.createDefaultInstallOptions();
+        expect(this.installOptionsFactory.createDefaultInstallOptions()).andReturn(options1);
+        
+        this.manifestTransformer.transform(bundleManifest1, f1.toURI().toURL(), options1, false);
+        
+        replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
         Tree<InstallArtifact> installTree = new ThreadSafeArrayListTree<InstallArtifact>(installArtifact1);
         installTree.addChild(new ThreadSafeArrayListTree<InstallArtifact>(installArtifact2));
@@ -129,17 +159,17 @@ public class SnapTransformerTests {
             snapTransformer.transform(installTree, null);
             fail();
         } catch (Exception e) {
-            verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, manifestTransformer);
+            verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
             throw e;
         }                
     }
     
 
     private void verifyAll() {
-        verify(this.manifestTransformer);
+        verify(installOptionsFactory, this.manifestTransformer);
     }
 
     private void replayAll() {
-        replay(this.manifestTransformer);
+        replay(installOptionsFactory, this.manifestTransformer);
     }
 }
