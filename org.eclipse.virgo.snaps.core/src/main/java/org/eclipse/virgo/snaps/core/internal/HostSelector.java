@@ -28,6 +28,10 @@ final class HostSelector {
         this.hostDefinition = hostDefinition;
         this.moduleScope = moduleScope;
     }
+    
+    SnapHostDefinition getHostDefinition()  {
+        return this.hostDefinition;
+    }
 
     ServiceReference selectHost(ServiceReference[] candidates) {
         ServiceReference bestSoFar = null;

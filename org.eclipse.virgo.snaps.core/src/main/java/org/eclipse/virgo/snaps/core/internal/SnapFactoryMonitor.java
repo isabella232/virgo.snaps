@@ -146,10 +146,17 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             ServletContext servletContext = (ServletContext) this.context.getService(hostReference);
             if (servletContext != null) {
                 synchronized (this.hostStateMonitor) {
-                    this.hostReference = hostReference;
+                    
+                    //Bug 320505
+                    ServiceReference matchedHost = this.hostSelector.selectHost(new ServiceReference[] { hostReference });
+                    if (matchedHost == null) {
+                        logger.info("Host {} did not match {} ", hostReference.getBundle().getSymbolicName(),
+                            this.hostSelector.getHostDefinition().toString());
+                        return;
+                    }
                 }
+                
                 Bundle hostBundle = hostReference.getBundle();
-
 
                 SnapLifecycleState newState = SnapLifecycleState.INIT_FAILED;
 
@@ -172,7 +179,6 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
 						}
                 	}                	
                 }
-
             }
         }
 

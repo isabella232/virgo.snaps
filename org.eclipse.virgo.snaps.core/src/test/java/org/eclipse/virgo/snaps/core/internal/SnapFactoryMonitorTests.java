@@ -22,6 +22,10 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
 
@@ -43,6 +47,9 @@ import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
 public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
     private SnapFactoryMonitor binder;
+    
+    private static final CountDownLatch latch = new CountDownLatch(1);
+    private static final Executor executor = Executors.newFixedThreadPool(2); 
 
     @Before
     public void setupBinder() {
@@ -188,5 +195,88 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
         File f = new File(path);
         assertTrue("File: " + path + " does not exist", f.exists());
         return getBundleContext().installBundle("file:" + f.getAbsolutePath());
+    }
+    
+    
+    /**
+     * Test binding of snap to a host if snap started prior to the host and if there are many hosts out there vs. just the target host (singular)
+     * @throws Exception
+     */
+    @Test
+    public void testManyDifferentHosts() throws Exception {
+        final Bundle host = installBundle("travel_1");
+        final Bundle host2 = installBundle("travel_2");
+        final Bundle host3 = installBundle("travel_3");
+        final Bundle targetHost = installBundle("clinic_1");
+
+        // these will be picked up by "already published" logic
+        host2.start();
+        host3.start();
+       
+        publishContextForBundle(host2);
+        publishContextForBundle(host3);
+
+        Snap slice = createMock(Snap.class);
+        slice.init();
+        expect(slice.getSnapProperties()).andReturn(new Properties());
+        expect(slice.getContextPath()).andReturn("/hotels").anyTimes();
+
+        final SnapFactory factory = createMock(SnapFactory.class);
+        expect(factory.createSnap(isA(Host.class))).andReturn(slice);
+        replay(factory, slice);
+
+        // public snap factory bound to "clinic" host
+        executor.execute(new Runnable() {
+            public void run() {
+                publishFactory(factory, "clinic", "[1.0, 3.0)");
+            }
+        });
+        
+        
+        // need to wait for sec or so to let all services propagate.
+        try {
+            latch.await(1, TimeUnit.SECONDS);
+        } catch (Exception ex) {
+            // ignore
+        }
+        
+        // spin a thread so it does not block
+        // start host 1
+        executor.execute(new Runnable() {
+            
+            public void run() {
+                try {
+                    host.start();
+                } catch (BundleException e) {
+                    throw new RuntimeException(e);
+                }
+                publishContextForBundle(host);
+            }
+        });
+        
+        
+        // need to wait for few sec to let all services propagate.
+        try {
+            latch.await(1, TimeUnit.SECONDS);
+        } catch (Exception ex) {
+            // ignore
+        }
+        
+        // start host 2 (the actual one we are interested in)
+        executor.execute(new Runnable() {
+            
+            public void run() {
+                try {
+                    targetHost.start();
+                } catch (BundleException e) {
+                    throw new RuntimeException(e);
+                }
+                publishContextForBundle(targetHost);
+            }
+        });
+        
+
+        assertSnapPublished("/hotels", targetHost);
+        verify(factory, slice);
     }
 }
