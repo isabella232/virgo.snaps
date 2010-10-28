@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Export-Package: images;version="1.0"
 Import-Bundle: com.springsource.org.apache.taglibs.standard;version="[
  1.1.2,1.3)",com.springsource.javax.servlet.jsp.jstl;version="[1.1.2, 
  1.1.3)",org.eclipse.virgo.snaps.api;version="[1.0,2.0)"
