@@ -2,11 +2,10 @@ Manifest-Version: 1.0
 Export-Package: simple.host;version="1.0";uses:="javax.servlet,javax.s
  ervlet.http"
 Bundle-Version: 1.0
-Tool: Bundlor 1.0.0.M6
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Simple Host
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.virgo.snaps.core,javax.servlet;versio
- n="2.5",javax.servlet.http;version="2.5",org.eclipse.virgo.snaps.core;ver
- sion="1.0"
+Import-Package: javax.servlet;version="2.5",javax.servlet.http;version
+ ="2.5",org.eclipse.virgo.snaps.core;version="1.0"
 Bundle-SymbolicName: simple.host
 

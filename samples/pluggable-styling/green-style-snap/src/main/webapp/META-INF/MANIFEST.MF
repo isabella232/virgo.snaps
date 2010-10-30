@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
-Snap-Host: styled.host;version="[1.0, 2.0)"
 Bundle-Version: 1.0
-Tool: Bundlor 1.0.0.M6
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Styling Snap
 Bundle-ManifestVersion: 2
-Snap-ContextPath: /styles
 Bundle-SymbolicName: green.style.snap
+Snap-Host: styled.host;version="[1.0, 2.0)"
+Snap-ContextPath: /styles
 

@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
-Export-Package: snap.simple;version="1.0";uses:="javax.management,jav
- ax.servlet,javax.servlet.http"
-Snap-Host: simple.host;version="[1.0, 2.0)"
+Export-Package: snap.simple;version="1.0";uses:="javax.management,java
+ x.servlet,javax.servlet.http"
 Bundle-Version: 1.0
-Tool: Bundlor 1.0.0.M6
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Simple Snap
 Bundle-ManifestVersion: 2
-Snap-ContextPath: /simple
 Bundle-SymbolicName: simple.snap
 Import-Package: javax.management;version="0",javax.servlet;version="[2
  .5,3.0)",javax.servlet.http;version="[2.5,3.0)",org.osgi.framework;ve
  rsion="0"
+Snap-Host: simple.host;version="[1.0, 2.0)"
+Snap-ContextPath: /simple
 

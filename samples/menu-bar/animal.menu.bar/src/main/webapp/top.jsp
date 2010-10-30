@@ -31,7 +31,9 @@
 			<ul>
 				<snaps:snaps var="snaps">
 					<c:forEach var="snap" items="${snaps}">
-						<li><a href="<c:url value="${snap.contextPath}${snap.properties['link.path']}"/>">${snap.properties['link.text']}</a></li>
+						<li><a href="<c:url value="${snap.contextPath}${snap.properties['link.path']}"/>">
+							${snap.properties['link.text']}</a>
+						</li>
 					</c:forEach>
 				</snaps:snaps>
 			</ul>

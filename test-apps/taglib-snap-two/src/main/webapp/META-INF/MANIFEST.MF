@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
-Snap-Host: taglib.host;version="[1.0, 2.0)"
 Bundle-Version: 1.0
-Tool: Bundlor 1.0.0.M6
+Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Taglib Snap Two
 Bundle-ManifestVersion: 2
-Snap-ContextPath: /two
 Bundle-SymbolicName: taglib.snap.two
+Snap-Host: taglib.host;version="[1.0, 2.0)"
+Snap-ContextPath: /two
 
