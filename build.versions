@@ -1,4 +1,4 @@
-# Compile
+#Compile
 org.eclipse.osgi=3.6.1.R36x_v20100806
 org.slf4j=1.6.1
 org.tuckey=3.1.0
@@ -13,6 +13,7 @@ org.eclipse.gemini.web=1.1.0.RELEASE
 org.eclipse.virgo.test=2.1.0.RELEASE
 org.eclipse.virgo.web=2.1.0.RELEASE
 org.eclipse.virgo.osgi=2.1.0.RELEASE
+org.eclipse.virgo.snaps.samples=1.0.0
 
 
 # Test

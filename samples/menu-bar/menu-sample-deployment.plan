@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="menu-sample-deployment.plan" version="1.0.0" scoped="true" atomic="true"
+        xmlns="http://www.springsource.org/schema/dm-server/plan"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springsource.org/schema/dm-server/plan 
+                            http://www.springsource.org/schema/dm-server/plan/springsource-dm-server-plan.xsd">
+<!-- Web Console -->
+	<artifact type="bundle" name="animal.menu.bar" version="[1, 2)">
+	<!-- Override the Web-ContextPath for a shorter path e.g. http://localhost:8080/animal-menu-bar -> http://localhost:8080/menu -->
+		<property name="header:Web-ContextPath" value="menu"/>
+	</artifact>
+	<artifact type="bundle" name="sample.api" version="[1, 2)"  />
+	<artifact type="bundle" name="sample.impl" version="[1, 2)"  />
+	<artifact type="bundle" name="sample.snap" version="[1, 2)"  />
+
+</plan>
