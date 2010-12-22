@@ -9,7 +9,7 @@
   <display-name>SpringSource Snaps</display-name>
   <tlib-version>1.0</tlib-version>
   <short-name>snaps</short-name>
-  <uri>http://www.springsource.org/dmserver/snaps</uri>
+  <uri>http://www.eclipse.org/virgo/snaps</uri>
 
   <tag>
     <description>
