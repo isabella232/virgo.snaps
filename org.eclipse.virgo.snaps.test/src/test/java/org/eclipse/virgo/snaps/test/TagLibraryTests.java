@@ -28,7 +28,7 @@ public class TagLibraryTests extends AbstractDeployerTests {
     
     @Before
     public void deployHost() throws DeploymentException {
-        host = deploy("src/test/resources/taglib-host.war");
+        host = deploy("src/test/resources/taglib-host.jar");
     }
     
     private DeploymentIdentity deploySnapOne() throws Exception {

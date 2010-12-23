@@ -4,7 +4,7 @@ Bundle-ManifestVersion: 2
 Bundle-Version: 1.0
 Bundle-Name: Snaps API
 Import-Template: 
- org.eclipse.gemini.web.*;version="[1.0.0,2.0.0)",
+ org.eclipse.gemini.web.*;version="[1.1,2.0)",
  javax.servlet.*;version="2.5",
  javax.servlet.jsp.*;version="2.1",
  org.osgi.framework;version="0"

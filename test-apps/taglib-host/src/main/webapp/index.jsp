@@ -1,4 +1,4 @@
-<%@ taglib uri="http://www.springsource.org/dmserver/snaps" prefix="snaps" %>
+<%@ taglib uri="http://www.eclipse.org/virgo/snaps" prefix="snaps" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <snaps:snaps>

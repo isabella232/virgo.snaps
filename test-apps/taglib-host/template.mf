@@ -10,3 +10,4 @@ Import-Bundle:
  org.eclipse.virgo.snaps.api;version="1.0"
 Excluded-Imports: org.slf4j.impl
 Excluded-Exports: javax.*,org.slf4j.*
+Web-ContextPath: /taglib-host
