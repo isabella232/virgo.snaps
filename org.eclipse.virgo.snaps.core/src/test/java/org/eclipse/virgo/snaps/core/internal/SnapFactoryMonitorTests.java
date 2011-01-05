@@ -21,6 +21,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
@@ -158,30 +161,30 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
         verify(factory, snap);
     }
 
-    private ServiceRegistration publishFactory(SnapFactory factory, String hostName, String hostVersionRange) {
-        Properties p = new Properties();
-        p.setProperty(SnapFactory.FACTORY_NAME_PROPERTY, hostName);
-        p.setProperty(SnapFactory.FACTORY_RANGE_PROPERTY, hostVersionRange);
+    private ServiceRegistration<SnapFactory> publishFactory(SnapFactory factory, String hostName, String hostVersionRange) {
+        Dictionary<String, String> p = new Hashtable<String, String>();
+        p.put(SnapFactory.FACTORY_NAME_PROPERTY, hostName);
+        p.put(SnapFactory.FACTORY_RANGE_PROPERTY, hostVersionRange);
 
-        return getBundleContext().registerService(SnapFactory.class.getName(), factory, p);
+        return getBundleContext().registerService(SnapFactory.class, factory, p);
     }
 
     private void publishContextForBundle(Bundle bundle) {
         ServletContext context = new MockServletContext();
 
-        Properties p = new Properties();
-        p.setProperty("osgi.web.symbolicname", bundle.getSymbolicName());
-        p.setProperty("osgi.web.version", bundle.getVersion().toString());
+        Dictionary<String, String> p = new Hashtable<String, String>();
+        p.put("osgi.web.symbolicname", bundle.getSymbolicName());
+        p.put("osgi.web.version", bundle.getVersion().toString());
 
-        bundle.getBundleContext().registerService(ServletContext.class.getName(), context, p);
+        bundle.getBundleContext().registerService(ServletContext.class, context, p);
     }
 
     private void assertSnapPublished(String contextPath, Bundle host) throws Exception {
         String filter = String.format("(& (snap.host.id=%d) (snap.context.path=%s))", host.getBundleId(), contextPath);
         int count = 0;
         while (count++ < 10) {
-            ServiceReference[] serviceReferences = getBundleContext().getServiceReferences(Snap.class.getName(), filter);
-            if (serviceReferences != null) {
+            Collection<ServiceReference<Snap>> serviceReferences = getBundleContext().getServiceReferences(Snap.class, filter);
+            if (serviceReferences != null && !serviceReferences.isEmpty()) {
                 return;
             } else {
                 Thread.sleep(100);

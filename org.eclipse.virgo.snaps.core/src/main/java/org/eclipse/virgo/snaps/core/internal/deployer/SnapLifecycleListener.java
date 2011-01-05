@@ -12,8 +12,9 @@
 package org.eclipse.virgo.snaps.core.internal.deployer;
 
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
@@ -62,7 +63,7 @@ final class SnapLifecycleListener extends InstallArtifactLifecycleListenerSuppor
             Bundle bundle = ((BundleInstallArtifact) installArtifact).getBundle();
             BundleManifest bundleManifest = getBundleManifest((BundleInstallArtifact) installArtifact);
 
-            ServiceRegistration registration = createAndRegisterSnapFactoryService(bundle, bundleManifest);
+            ServiceRegistration<SnapFactory> registration = createAndRegisterSnapFactoryService(bundle, bundleManifest);
 
             ServiceRegistrationTracker registrationTracker = new ServiceRegistrationTracker();
             registrationTracker.track(registration);
@@ -71,17 +72,17 @@ final class SnapLifecycleListener extends InstallArtifactLifecycleListenerSuppor
         }
     }
 
-    ServiceRegistration createAndRegisterSnapFactoryService(Bundle bundle, BundleManifest bundleManifest) {
+    ServiceRegistration<SnapFactory> createAndRegisterSnapFactoryService(Bundle bundle, BundleManifest bundleManifest) {
         logger.info("Creating a SnapFactory for bundle '{}'", bundle);
         SnapFactory snapFactory = new WebAppSnapFactory(bundle, this.classLoaderFactory, this.eventLogger);
 
         SnapHostDefinition hostDefinition = SnapUtils.getSnapHostHeader(bundleManifest);
 
-        Properties serviceProperties = new Properties();
+        Dictionary<String, String> serviceProperties= new Hashtable<String, String>();
         serviceProperties.put(SnapFactory.FACTORY_NAME_PROPERTY, hostDefinition.getSymbolicName());
         serviceProperties.put(SnapFactory.FACTORY_RANGE_PROPERTY, hostDefinition.getVersionRange().toParseString());
 
-        ServiceRegistration registration = bundle.getBundleContext().registerService(SnapFactory.class.getName(), snapFactory, serviceProperties);
+        ServiceRegistration<SnapFactory> registration = bundle.getBundleContext().registerService(SnapFactory.class, snapFactory, serviceProperties);
         return registration;
     }
 

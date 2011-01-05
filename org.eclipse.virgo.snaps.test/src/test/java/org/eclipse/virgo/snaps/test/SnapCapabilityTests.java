@@ -21,12 +21,10 @@ import java.util.Properties;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.osgi.framework.Constants;
-
 import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
 import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
+import org.junit.Test;
+import org.osgi.framework.Constants;
 
 public class SnapCapabilityTests extends AbstractCapabilityTests {
 
@@ -265,7 +263,6 @@ public class SnapCapabilityTests extends AbstractCapabilityTests {
     }
 
     @Test
-    @Ignore("Fix with bugzilla 333164")
     public void snapBundleContext() throws Exception {
         deployHostAndSnap();
         try {

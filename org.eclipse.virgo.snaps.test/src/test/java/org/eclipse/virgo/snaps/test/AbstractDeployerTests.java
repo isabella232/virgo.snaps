@@ -16,10 +16,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.virgo.kernel.deployer.core.ApplicationDeployer;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.test.framework.dmkernel.DmKernelTestRunner;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -28,11 +33,6 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
-
-import org.eclipse.virgo.kernel.deployer.core.ApplicationDeployer;
-import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
-import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
-import org.eclipse.virgo.test.framework.dmkernel.DmKernelTestRunner;
 
 @RunWith(DmKernelTestRunner.class)
 public abstract class AbstractDeployerTests {
@@ -61,11 +61,11 @@ public abstract class AbstractDeployerTests {
     public static void registerEventHandler() {
         
         EventHandler eventHandler = new InitialArtifactDeploymentAwaitingEventHandler();
+
+        Dictionary<String, String> properties = new Hashtable<String, String>();
+        properties.put("event.topics", "org/eclipse/virgo/kernel/*");
         
-        Properties properties = new Properties();
-        properties.setProperty("event.topics", "org/eclipse/virgo/kernel/*");
-        
-        FrameworkUtil.getBundle(AbstractDeployerTests.class).getBundleContext().registerService(EventHandler.class.getName(), eventHandler, properties);       
+        FrameworkUtil.getBundle(AbstractDeployerTests.class).getBundleContext().registerService(EventHandler.class, eventHandler, properties);       
     }
     
     private static final class InitialArtifactDeploymentAwaitingEventHandler implements EventHandler {
@@ -90,7 +90,7 @@ public abstract class AbstractDeployerTests {
         
         this.context = FrameworkUtil.getBundle(getClass()).getBundleContext();
         
-        ServiceReference appDeployerServiceReference = this.context.getServiceReference(ApplicationDeployer.class.getName());
+        ServiceReference<ApplicationDeployer> appDeployerServiceReference = this.context.getServiceReference(ApplicationDeployer.class);
         assertNotNull("ApplicationDeployer service reference not found", appDeployerServiceReference);
         this.deployer = (ApplicationDeployer) this.context.getService(appDeployerServiceReference);
         assertNotNull("ApplicationDeployer service not found", this.deployer);

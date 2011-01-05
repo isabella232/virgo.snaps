@@ -1,34 +1,36 @@
 Manifest-Version: 1.0
-Export-Package: org.eclipse.virgo.snaps.core;version="1.0";uses:="java
- x.servlet,javax.servlet.http,org.eclipse.virgo.medic.eventlog,org.ecl
- ipse.virgo.snaps.core.internal,org.junit,org.osgi.framework,org.osgi.
- util.tracker,org.slf4j"
-Bundle-ClassPath: .,org.eclipse.virgo.snaps.api-1.0.0.BUILD-2010122217
- 0522.jar
+Export-Package: org.eclipse.virgo.snaps;version="1.0";uses:="javax.ser
+ vlet.jsp,javax.servlet.jsp.tagext,org.osgi.framework",org.eclipse.vir
+ go.snaps.core;version="1.0";uses:="javax.servlet,javax.servlet.http,o
+ rg.eclipse.virgo.medic.eventlog,org.eclipse.virgo.snaps.core.internal
+ ,org.junit,org.osgi.framework,org.osgi.util.tracker,org.slf4j"
+Bundle-ClassPath: .,org.eclipse.virgo.snaps.api-1.0.0.BUILD-2011010515
+ 1450.jar
 Bundle-Version: 1.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Snaps Core
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.virgo.snaps.core
 Import-Package: javax.servlet;version="2.5",javax.servlet.http;version
- ="2.5",javax.xml.parsers;version="0",org.apache.catalina;version="[6.
- 0,6.1)",org.easymock,org.eclipse.gemini.web.core;version="[1.1, 2.0)"
- ,org.eclipse.gemini.web.tomcat.spi;version="[1.1, 2.0)",org.eclipse.o
- sgi.launch,org.eclipse.virgo.kernel.artifact.fs;version="[2.1, 3.0)",
- org.eclipse.virgo.kernel.deployer.core;version="[2.1, 3.0)",org.eclip
- se.virgo.kernel.install.artifact;version="[2.1, 3.0)",org.eclipse.vir
- go.kernel.install.environment;version="[2.1, 3.0)",org.eclipse.virgo.
- kernel.install.pipeline.stage.transform;version="[2.1, 3.0)",org.ecli
- pse.virgo.kernel.serviceability;version="[2.1, 3.0)",org.eclipse.virg
- o.medic.eventlog;version="[2.1, 3.0)",org.eclipse.virgo.medic.test.ev
- entlog;version="[2.1, 3.0)",org.eclipse.virgo.teststubs.osgi.framewor
- k,org.eclipse.virgo.util.common;version="[2.1, 3.0)",org.eclipse.virg
- o.util.io;version="[2.1, 3.0)",org.eclipse.virgo.util.osgi;version="[
- 2.1, 3.0)",org.eclipse.virgo.util.osgi.manifest;version="[2.1, 3.0)",
- org.eclipse.virgo.util.osgi.manifest.internal;version="[2.1, 3.0)",or
- g.eclipse.virgo.util.osgi.manifest.parse;version="[2.1, 3.0)",org.jun
- it,org.osgi.framework;version="[1.5, 2.0)",org.osgi.framework.launch;
- version="[1.5, 2.0)",org.osgi.util.tracker;version="[1.4.2, 1.5)",org
- .slf4j;version="[1.6.1,1.7.0)",org.springframework.mock.web,org.w3c.d
- om;version="0",org.xml.sax;version="0"
+ ="2.5",javax.servlet.jsp;version="2.1",javax.servlet.jsp.tagext;versi
+ on="2.1",javax.xml.parsers;version="0",org.apache.catalina;version="[
+ 6.0,6.1)",org.easymock,org.eclipse.gemini.web.core;version="[1.1, 2.0
+ )",org.eclipse.gemini.web.tomcat.spi;version="[1.1, 2.0)",org.eclipse
+ .osgi.launch,org.eclipse.virgo.kernel.artifact.fs;version="[2.1, 3.0)
+ ",org.eclipse.virgo.kernel.deployer.core;version="[2.1, 3.0)",org.ecl
+ ipse.virgo.kernel.install.artifact;version="[2.1, 3.0)",org.eclipse.v
+ irgo.kernel.install.environment;version="[2.1, 3.0)",org.eclipse.virg
+ o.kernel.install.pipeline.stage.transform;version="[2.1, 3.0)",org.ec
+ lipse.virgo.kernel.serviceability;version="[2.1, 3.0)",org.eclipse.vi
+ rgo.medic.eventlog;version="[2.1, 3.0)",org.eclipse.virgo.medic.test.
+ eventlog;version="[2.1, 3.0)",org.eclipse.virgo.teststubs.osgi.framew
+ ork,org.eclipse.virgo.util.common;version="[2.1, 3.0)",org.eclipse.vi
+ rgo.util.io;version="[2.1, 3.0)",org.eclipse.virgo.util.osgi;version=
+ "[2.1, 3.0)",org.eclipse.virgo.util.osgi.manifest;version="[2.1, 3.0)
+ ",org.eclipse.virgo.util.osgi.manifest.internal;version="[2.1, 3.0)",
+ org.eclipse.virgo.util.osgi.manifest.parse;version="[2.1, 3.0)",org.j
+ unit,org.osgi.framework;version="0",org.osgi.framework.launch;version
+ ="0",org.osgi.util.tracker;version="0",org.slf4j;version="[1.6.1,1.7.
+ 0)",org.springframework.mock.web,org.w3c.dom;version="0",org.xml.sax;
+ version="0"
 

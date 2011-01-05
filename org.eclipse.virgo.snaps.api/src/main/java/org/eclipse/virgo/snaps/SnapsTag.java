@@ -61,13 +61,13 @@ public final class SnapsTag extends BodyTagSupport {
         BundleContext bundleContext = (BundleContext) this.pageContext.getServletContext().getAttribute(WebContainer.ATTRIBUTE_BUNDLE_CONTEXT);
         long hostId = bundleContext.getBundle().getBundleId();
         try {
-            ServiceReference[] serviceReferences = bundleContext.getServiceReferences(SNAP_SERVICE_CLASS, "(snap.host.id=" + hostId + ")");
+            ServiceReference<?>[] serviceReferences = bundleContext.getServiceReferences(SNAP_SERVICE_CLASS, "(snap.host.id=" + hostId + ")");
 
             List<Snap> snaps = new ArrayList<Snap>();
 
             if (serviceReferences != null) {
                 Arrays.sort(serviceReferences);
-                for (ServiceReference serviceReference : serviceReferences) {
+                for (ServiceReference<?> serviceReference : serviceReferences) {
                     snaps.add(createSnap(serviceReference));
                 }
             }
@@ -85,7 +85,7 @@ public final class SnapsTag extends BodyTagSupport {
         return EVAL_PAGE;
     }
 
-    private static Snap createSnap(ServiceReference serviceReference) {
+    private static Snap createSnap(ServiceReference<?> serviceReference) {
         String[] propertyKeys = serviceReference.getPropertyKeys();
         Map<String, Object> attributes = new HashMap<String, Object>();
         for (String key : propertyKeys) {

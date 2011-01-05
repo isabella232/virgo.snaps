@@ -11,14 +11,19 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
+import java.util.Collection;
 import java.util.Dictionary;
+import java.util.HashSet;
+import java.util.Hashtable;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.eclipse.virgo.medic.eventlog.EventLogger;
 import org.eclipse.virgo.snaps.core.RequestRouter;
 import org.eclipse.virgo.snaps.core.SnapRegistry;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
+import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
@@ -32,16 +37,13 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.eclipse.virgo.medic.eventlog.EventLogger;
-import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
-
-final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
+final class SnapFactoryMonitor implements ServiceTrackerCustomizer<SnapFactory, Object> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final BundleContext bundleContext;
 
-    private final ServiceTracker snapFactoryTracker;
+    private final ServiceTracker<SnapFactory, Object> snapFactoryTracker;
 
     private final EventLogger eventLogger;
 
@@ -49,7 +51,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
 
     public SnapFactoryMonitor(BundleContext bundleContext, EventLogger eventLogger, SnapRegistry snapRegistry) {
         this.bundleContext = bundleContext;
-        this.snapFactoryTracker = new ServiceTracker(bundleContext, SnapFactory.class.getName(), this);
+        this.snapFactoryTracker = new ServiceTracker<SnapFactory, Object>(bundleContext, SnapFactory.class, this);
         this.eventLogger = eventLogger;
         this.snapRegistry = snapRegistry;
     }
@@ -62,8 +64,8 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
         this.snapFactoryTracker.close();
     }
 
-    public Object addingService(ServiceReference reference) {
-        SnapFactory snapFactory = (SnapFactory) this.bundleContext.getService(reference);
+    public Object addingService(ServiceReference<SnapFactory> reference) {
+        SnapFactory snapFactory = this.bundleContext.getService(reference);
         if (snapFactory != null) {
             BundleContext snapBundleContext = reference.getBundle().getBundleContext();
             SnapBinder snapBinder = new SnapBinder(snapBundleContext, snapFactory, SnapHostDefinition.fromServiceReference(reference),
@@ -75,10 +77,10 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
         return null;
     }
 
-    public void modifiedService(ServiceReference reference, Object service) {
+    public void modifiedService(ServiceReference<SnapFactory> reference, Object service) {
     }
 
-    public void removedService(ServiceReference reference, Object service) {
+    public void removedService(ServiceReference<SnapFactory> reference, Object service) {
         logger.info("Destroying SnapBinder for bundle '{}'", reference.getBundle());
         ((SnapBinder) service).destroy();
     }
@@ -107,7 +109,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
 
         private boolean queriedInitialHosts = false;
 
-        private ServiceReference hostReference;
+        private ServiceReference<ServletContext> hostReference;
 
         private final ServiceRegistrationTracker registrationTracker = new ServiceRegistrationTracker();
 
@@ -117,8 +119,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
 
         private Snap snap;                
 
-        public SnapBinder(BundleContext context, SnapFactory factory, SnapHostDefinition hostDefinition, EventLogger eventLogger,
-            SnapRegistry snapRegistry) {
+        public SnapBinder(final BundleContext context, final SnapFactory factory, final SnapHostDefinition hostDefinition, final EventLogger eventLogger, final SnapRegistry snapRegistry) {
             this.context = context;
             this.factory = factory;
             this.hostSelector = new HostSelector(hostDefinition, (String)context.getBundle().getHeaders().get("Module-Scope"));
@@ -140,15 +141,17 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             }
         }
 
-        private void hostPublished(ServiceReference hostReference) {
+        private void hostPublished(ServiceReference<ServletContext> hostReference) {
             assert (!Thread.holdsLock(this.hostStateMonitor));
 
-            ServletContext servletContext = (ServletContext) this.context.getService(hostReference);
+            ServletContext servletContext = this.context.getService(hostReference);
             if (servletContext != null) {
                 synchronized (this.hostStateMonitor) {
                     
-                    //Bug 320505
-                    ServiceReference matchedHost = this.hostSelector.selectHost(new ServiceReference[] { hostReference });
+                	Collection<ServiceReference<ServletContext>> references = new HashSet<ServiceReference<ServletContext>>();
+                	references.add(hostReference);
+                    ServiceReference<ServletContext> matchedHost = this.hostSelector.selectHost(references);
+                    
                     if (matchedHost == null) {
                         logger.info("Host {} did not match {} ", hostReference.getBundle().getSymbolicName(),
                             this.hostSelector.getHostDefinition().toString());
@@ -182,10 +185,14 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             }
         }
 
-        @SuppressWarnings("unchecked")
         private void publishSnapService(Snap snap, Bundle hostBundle) {
-            Dictionary serviceProperties = snap.getSnapProperties();
-
+        	Hashtable<Object, Object> props = snap.getSnapProperties();
+            Dictionary<String, Object> serviceProperties = new Hashtable<String, Object>();
+            
+        	for(Object key : props.keySet()){
+        		serviceProperties.put(key.toString(), props.get(key));
+        	}
+        	            
             String snapOrder = (String) serviceProperties.get(SNAP_ORDER);
             if (snapOrder != null) {
                 serviceProperties.put(Constants.SERVICE_RANKING, Integer.parseInt(snapOrder));
@@ -194,7 +201,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             serviceProperties.put("snap.context.path", snap.getContextPath());
             serviceProperties.put("snap.name", (String) this.context.getBundle().getHeaders().get("Bundle-Name"));
 
-            ServiceRegistration registration = this.context.registerService(Snap.class.getName(), snap, serviceProperties);
+            ServiceRegistration<Snap> registration = this.context.registerService(Snap.class, snap, serviceProperties);
             this.registrationTracker.track(registration);
             logger.info("Published snap service for '{}'", snap.getContextPath());
         }
@@ -212,7 +219,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             this.context.removeServiceListener(this);
         }
 
-        public void serviceChanged(ServiceEvent event) {
+		public void serviceChanged(ServiceEvent event) {
             synchronized (this.hostStateMonitor) {
                 while (!queriedInitialHosts) {
                     try {
@@ -224,7 +231,8 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             }
 
             int type = event.getType();
-            ServiceReference serviceReference = event.getServiceReference();
+            @SuppressWarnings("unchecked")
+			ServiceReference<ServletContext> serviceReference = (ServiceReference<ServletContext>) event.getServiceReference();
 
             if (type == ServiceEvent.REGISTERED && this.hostReference == null) {
                 hostPublished(serviceReference);
@@ -235,7 +243,7 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             }
         }
 
-        private void hostRetracted(ServiceReference serviceReference) {
+        private void hostRetracted(ServiceReference<ServletContext> serviceReference) {
             try {
                 destroySnap();
             } finally {
@@ -259,10 +267,10 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
         }
 
         private void searchForExistingHost() {
-            ServiceReference existingHost = null;
-            ServiceReference[] candidates = findHostCandidiates();
-            if (candidates != null) {
-                logger.info("{} host candidates found", candidates.length);
+            ServiceReference<ServletContext> existingHost = null;
+            Collection<ServiceReference<ServletContext>> candidates = findHostCandidiates();
+            if (candidates != null && !candidates.isEmpty()) {
+                logger.info("{} host candidates found", candidates.size());
             } else {
                 logger.info("No host candidates found");
             }
@@ -280,9 +288,9 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer {
             }
         }
 
-        private ServiceReference[] findHostCandidiates() {
+        private Collection<ServiceReference<ServletContext>> findHostCandidiates() {
             try {
-                return this.context.getServiceReferences(ServletContext.class.getName(), null);
+                return this.context.getServiceReferences(ServletContext.class, null);
             } catch (InvalidSyntaxException ise) {
                 throw new IllegalStateException("Unexpected invalid filter syntax with null filter", ise);
             }

@@ -60,7 +60,7 @@ public final class SnapHostDefinition {
         return createSnapHostDefinition(factoryName, rangeString);
     }
 
-    public static SnapHostDefinition fromServiceReference(ServiceReference snapFactoryReference) {
+    public static SnapHostDefinition fromServiceReference(ServiceReference<SnapFactory> snapFactoryReference) {
         String factoryName = (String) snapFactoryReference.getProperty(SnapFactory.FACTORY_NAME_PROPERTY);
         if (factoryName == null) {
             logger.error("Missing service property '{}'", SnapFactory.FACTORY_NAME_PROPERTY);

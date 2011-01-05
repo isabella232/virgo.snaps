@@ -36,13 +36,13 @@ final class OsgiSnapRegistry implements SnapRegistry {
 
     private final BundleContext bundleContext;
 
-    private final ServiceTracker tracker;
+    private final ServiceTracker<Snap, Object> tracker;
 
     private final Map<String, Snap> snaps = new ConcurrentHashMap<String, Snap>();
 
     public OsgiSnapRegistry(BundleContext bundleContext) throws InvalidSyntaxException {
         this.bundleContext = bundleContext;
-        this.tracker = new ServiceTracker(bundleContext, createFilter(bundleContext), new OsgiSnapRegistryCustomizer());
+        this.tracker = new ServiceTracker<Snap, Object>(bundleContext, createFilter(bundleContext), new OsgiSnapRegistryCustomizer());
     }
 
     private Filter createFilter(BundleContext bundleContext) throws InvalidSyntaxException {
@@ -70,13 +70,13 @@ final class OsgiSnapRegistry implements SnapRegistry {
         return snap;
     }
 
-    private final class OsgiSnapRegistryCustomizer implements ServiceTrackerCustomizer {
+    private final class OsgiSnapRegistryCustomizer implements ServiceTrackerCustomizer<Snap, Object> {
 
-        public Object addingService(ServiceReference reference) {
+        public Object addingService(ServiceReference<Snap> reference) {
             String contextPath = getSnapContextPath(reference);
             if (contextPath != null) {
                 logger.info("Adding snap service '{}' to service registry for context path '{}'", reference.toString(), contextPath);
-                Snap snap = (Snap) bundleContext.getService(reference);
+                Snap snap = bundleContext.getService(reference);
                 snaps.put(contextPath, snap);
                 return contextPath;
 
@@ -86,10 +86,10 @@ final class OsgiSnapRegistry implements SnapRegistry {
             return null;
         }
 
-        public void modifiedService(ServiceReference reference, Object service) {
+        public void modifiedService(ServiceReference<Snap> reference, Object service) {
         }
 
-        public void removedService(ServiceReference reference, Object service) {
+        public void removedService(ServiceReference<Snap> reference, Object service) {
             String contextPath = getSnapContextPath(reference);
             if (contextPath != null) {
                 logger.info("Removing snap service '{}' from service registry for context path '{}'", reference.toString(), contextPath);
@@ -100,7 +100,7 @@ final class OsgiSnapRegistry implements SnapRegistry {
             bundleContext.ungetService(reference);
         }
 
-        private String getSnapContextPath(ServiceReference reference) {
+        private String getSnapContextPath(ServiceReference<Snap> reference) {
             return (String) reference.getProperty(PROPERTY_SNAP_CONTEXT_PATH);
         }
 

@@ -40,7 +40,6 @@ import org.springframework.mock.web.MockPageContext;
 
 import org.eclipse.gemini.web.core.WebContainer;
 
-
 /**
  * TODO Document SnapsTagTests
  * <p />
@@ -65,8 +64,7 @@ public class SnapsTagTests {
         snapsTag.setPageContext(pageContext);
     }
     
-    @Test
-    @SuppressWarnings("unchecked")
+	@Test
     public void noSnapsFromServiceRegistry() throws JspException, InvalidSyntaxException {
         Bundle bundle = createMock(Bundle.class);
         expect(bundleContext.getBundle()).andReturn(bundle);
@@ -80,25 +78,25 @@ public class SnapsTagTests {
         
         verify(servletContext, bundleContext, bundle);
         
-        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
+        @SuppressWarnings("unchecked")
+		List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
         assertNotNull(snaps);
         assertEquals(0, snaps.size());
     }
     
     @Test
-    @SuppressWarnings("unchecked")
     public void snapsFromServiceRegistry() throws JspException, InvalidSyntaxException {
-        Dictionary properties1 = new Hashtable();
+        Dictionary<String, Object> properties1 = new Hashtable<String, Object>();
         properties1.put("a", "b");
         properties1.put("c", new Integer(6));
         
-        ServiceReference serviceReference1 = createServiceReference(properties1);
-        
-        Dictionary properties2 = new Hashtable();
+        ServiceReference<?> serviceReference1 = createServiceReference(properties1);
+
+        Dictionary<String, Object> properties2 = new Hashtable<String, Object>();
         properties2.put("d", "e");
         properties2.put("f", Boolean.TRUE);
         
-        ServiceReference serviceReference2 = createServiceReference(properties2);
+        ServiceReference<?> serviceReference2 = createServiceReference(properties2);
                 
         expect(servletContext.getAttribute(WebContainer.ATTRIBUTE_BUNDLE_CONTEXT)).andReturn(bundleContext);
         
@@ -116,7 +114,8 @@ public class SnapsTagTests {
         
         verify(servletContext, bundleContext, serviceReference1, serviceReference2, bundle);
         
-        List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
+        @SuppressWarnings("unchecked")
+		List<Snap> snaps = (List<Snap>)pageContext.getAttribute(SnapsTag.SNAPS_ATTRIBUTE_NAME);
         assertNotNull(snaps);
         assertEquals(2, snaps.size());
         
@@ -130,11 +129,9 @@ public class SnapsTagTests {
         
     }
     
-    @SuppressWarnings("unchecked")
-    private static ServiceReference createServiceReference(Dictionary<?, ?> properties) {
-        ServiceReference serviceReference = createMock(ServiceReference.class);
-        List<String> list = toList((Enumeration<String>)properties.keys());
-        String[] keys = list.toArray(new String[list.size()]);
+    private static ServiceReference<?> createServiceReference(Dictionary<?, ?> properties) {
+        ServiceReference<?> serviceReference = createMock(ServiceReference.class);
+        String[] keys = toArray(properties.keys());
         expect(serviceReference.getPropertyKeys()).andReturn(keys);
         for (String key : keys) {
             expect(serviceReference.getProperty(key)).andReturn(properties.get(key));
@@ -142,12 +139,12 @@ public class SnapsTagTests {
         return serviceReference;
     }
     
-    private static final <T> List<T> toList(Enumeration<T> enumeration) {
-        List<T> list = new ArrayList<T>();
+    private static final String[] toArray(Enumeration<?> enumeration) {
+        List<String> list = new ArrayList<String>();
         while(enumeration.hasMoreElements()) {
-            T element = enumeration.nextElement();
+            String element = enumeration.nextElement().toString();
             list.add(element);
         }
-        return list;
+        return list.toArray(new String[list.size()]);
     }
 }

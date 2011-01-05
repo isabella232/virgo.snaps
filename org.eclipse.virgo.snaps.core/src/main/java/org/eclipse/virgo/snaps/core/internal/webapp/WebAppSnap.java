@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.Lifecycle;
 import org.apache.catalina.LifecycleException;
+import org.eclipse.gemini.web.core.WebContainer;
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
 import org.eclipse.virgo.snaps.core.RequestRouter;
 import org.eclipse.virgo.snaps.core.internal.Host;
 import org.eclipse.virgo.snaps.core.internal.Snap;
@@ -32,14 +35,10 @@ import org.eclipse.virgo.snaps.core.internal.webapp.config.BundleWebXmlLoader;
 import org.eclipse.virgo.snaps.core.internal.webapp.config.WebXml;
 import org.eclipse.virgo.snaps.core.internal.webapp.container.VirtualContainer;
 import org.eclipse.virgo.snaps.core.internal.webapp.container.VirtualContainerFactory;
+import org.eclipse.virgo.util.io.IOUtils;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.eclipse.virgo.medic.eventlog.EventLogger;
-import org.eclipse.gemini.web.core.WebContainer;
-import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
-import org.eclipse.virgo.util.io.IOUtils;
 
 /**
  * TODO Document WebAppSnap

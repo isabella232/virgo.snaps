@@ -15,9 +15,9 @@ import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
-import org.eclipse.virgo.snaps.core.OsgiSnapRegistry;
 import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.junit.Test;
 
@@ -32,11 +32,11 @@ public class OsgiSnapRegistryTests extends AbstractEquinoxLaunchingTests {
         registry.init();
         assertNull(registry.findSnapByContextPath("/hotels"));
 
-        Properties p = new Properties();
+        Dictionary<String, Object> p = new Hashtable<String, Object>();
         p.put("snap.context.path", "/hotels");
         p.put("snap.host.id", getBundleContext().getBundle().getBundleId());
 
-        getBundleContext().registerService(Snap.class.getName(), snap, p);
+        getBundleContext().registerService(Snap.class, snap, p);
 
         assertEquals(snap, registry.findSnapByContextPath("/hotels"));
         registry.destroy();
@@ -50,11 +50,11 @@ public class OsgiSnapRegistryTests extends AbstractEquinoxLaunchingTests {
         registry.init();
         assertNull(registry.findSnapByContextPath("/hotels"));
 
-        Properties p = new Properties();
+        Dictionary<String, Object> p = new Hashtable<String, Object>();
         p.put("snap.context.path", "/hotels");
         p.put("snap.host.id", getBundleContext().getBundle().getBundleId() + 1);
 
-        getBundleContext().registerService(Snap.class.getName(), snap, p);
+        getBundleContext().registerService(Snap.class, snap, p);
 
         assertNull(registry.findSnapByContextPath("/hotels"));
         registry.destroy();

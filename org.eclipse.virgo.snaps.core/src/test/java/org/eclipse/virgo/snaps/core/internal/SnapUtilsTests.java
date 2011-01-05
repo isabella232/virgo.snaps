@@ -21,7 +21,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
 import org.eclipse.virgo.snaps.core.internal.SnapUtils;
@@ -102,8 +103,8 @@ public class SnapUtilsTests {
     
     @Test
     public void getSnapContextPath() {
-        Properties p = new Properties();
-        p.setProperty(SnapUtils.HEADER_SNAP_CONTEXT_PATH, "snap");
+        Dictionary<String, String> p = new Hashtable<String, String>();
+        p.put(SnapUtils.HEADER_SNAP_CONTEXT_PATH, "snap");
         
         Bundle bundle = createMock(Bundle.class);
         expect(bundle.getHeaders()).andReturn(p);
@@ -115,7 +116,7 @@ public class SnapUtilsTests {
     
     @Test
     public void getDefaultSnapContextPath() {
-        Properties p = new Properties();
+        Dictionary<String, String> p = new Hashtable<String, String>();
         
         Bundle bundle = createMock(Bundle.class);
         expect(bundle.getHeaders()).andReturn(p);

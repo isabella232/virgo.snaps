@@ -11,6 +11,10 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
+import java.util.Collection;
+
+import javax.servlet.ServletContext;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
@@ -33,11 +37,11 @@ final class HostSelector {
         return this.hostDefinition;
     }
 
-    ServiceReference selectHost(ServiceReference[] candidates) {
-        ServiceReference bestSoFar = null;
+    ServiceReference<ServletContext> selectHost(Collection<ServiceReference<ServletContext>> candidates) {
+        ServiceReference<ServletContext> bestSoFar = null;
         if (candidates != null) {
 
-            for (ServiceReference candidateServiceReference : candidates) {
+            for (ServiceReference<ServletContext> candidateServiceReference : candidates) {
                 if (isPossibleHost(candidateServiceReference) && isHigherPriority(bestSoFar, candidateServiceReference)) {
                     bestSoFar = candidateServiceReference;
                     logger.info("Found best-so-far Host candidate from bundle '{}'", candidateServiceReference.getBundle());
@@ -51,11 +55,11 @@ final class HostSelector {
         return bestSoFar;
     }
 
-    private boolean isHigherPriority(ServiceReference bestSoFar, ServiceReference candidate) {
+    private boolean isHigherPriority(ServiceReference<ServletContext> bestSoFar, ServiceReference<ServletContext> candidate) {
         return (bestSoFar == null || candidate.getBundle().getVersion().compareTo(bestSoFar.getBundle().getVersion()) > 0);
     }
 
-    private boolean isPossibleHost(ServiceReference servletContextReference) {
+    private boolean isPossibleHost(ServiceReference<ServletContext> servletContextReference) {
         Bundle bundle = servletContextReference.getBundle();
         return bundleMatchesHostName(bundle) && bundleMatchesHostRange(bundle) && bundleIsActive(bundle);
     }
