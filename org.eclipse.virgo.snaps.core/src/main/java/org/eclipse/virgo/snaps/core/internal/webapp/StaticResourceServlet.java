@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.apache.catalina.util.RequestUtil;
 import org.eclipse.virgo.util.io.IOUtils;
 
 
@@ -49,7 +50,10 @@ public class StaticResourceServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {                        
-        String pathInfo = request.getPathInfo();
+        // As an alternative of the Tomcat's escaping utility we can use one of the following libraries:
+        // - org.springframework.web.util.HtmlUtils.htmlEscape(String)
+        // - org.apache.commons.lang3.StringEscapeUtils.escapeHtml4(String)
+        String pathInfo = RequestUtil.filter(request.getPathInfo());
         try {
             URL resource = getServletContext().getResource(pathInfo);
             if (resource == null) {
