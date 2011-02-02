@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: org.eclipse.virgo.snaps.api
 Bundle-ManifestVersion: 2
-Bundle-Version: 1.0
+Bundle-Version: 3.0.0
 Bundle-Name: Snaps API
 Import-Template: 
  org.eclipse.gemini.web.*;version="[1.1,2.0)",
