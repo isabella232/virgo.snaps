@@ -27,6 +27,7 @@
 	<servlet-mapping>
 		<servlet-name>two</servlet-name>
 		<url-pattern>/two</url-pattern>
+		<url-pattern>/two/and/two</url-pattern>
 	</servlet-mapping>
 	
 	<filter>

@@ -102,8 +102,13 @@ final class WebXmlParser {
         for (int x = 0; x < nodes.getLength(); x++) {
             Node e = nodes.item(x);
             String servletName = extractChildNodeValue(e, ELEMENT_SERVLET_NAME);
-            String urlPattern = extractChildNodeValue(e, ELEMENT_URL_PATTERN);
-            webXml.addServletMappingDefinition(servletName, urlPattern);
+            String[] urlPatterns = extractChildNodesValues(e, ELEMENT_URL_PATTERN);
+            if (urlPatterns.length == 0) {
+                throw new WebXmlParseException("Missing '" + ELEMENT_URL_PATTERN + "' under '" + e.getNodeName() + "' for servlet name '" + servletName +"'");
+            }
+            for (String urlPattern : urlPatterns) {
+                webXml.addServletMappingDefinition(servletName, urlPattern);
+            }
         }
     }
     

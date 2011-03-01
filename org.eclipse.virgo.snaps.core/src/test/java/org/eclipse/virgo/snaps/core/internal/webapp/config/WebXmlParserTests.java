@@ -55,10 +55,13 @@ public class WebXmlParserTests {
         WebXml webXml = parse();
         ServletMappingDefinition[] servletMappingDefinitions = webXml.getServletMappingDefinitions();
         
+        assertEquals(3,servletMappingDefinitions.length);
+        
         assertEquals("one", servletMappingDefinitions[0].getServletName());
         assertEquals("/one", servletMappingDefinitions[0].getUrlPattern());
         assertEquals("two", servletMappingDefinitions[1].getServletName());
         assertEquals("/two", servletMappingDefinitions[1].getUrlPattern());
+        assertEquals("/two/and/two", servletMappingDefinitions[2].getUrlPattern());
     }
     
     @Test
