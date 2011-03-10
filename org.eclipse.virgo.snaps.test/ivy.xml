@@ -39,8 +39,8 @@
 		<exclude org="org.apache.xerces"/>
 		<exclude org="org.apache.xalan"/>
 
-		<!--  Prevent Derby coming down until we move to a Spring version when its JDCB bundle's Derby dependency is optional -->
-		<exclude org="org.apache.derby"/>
+		<!--  Prevent Derby coming down until we move to a Spring version when its JDCB bundle's Derby dependency is optional 
+		<exclude org="org.apache.derby"/>-->
 
 		<override org="org.eclipse.virgo.util" rev="${org.eclipse.virgo.util}"/>
 		<override org="org.eclipse.virgo.repository" rev="${org.eclipse.virgo.repository}"/>
