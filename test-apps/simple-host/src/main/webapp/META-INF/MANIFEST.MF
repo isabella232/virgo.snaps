@@ -5,7 +5,8 @@ Bundle-Version: 1.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Simple Host
 Bundle-ManifestVersion: 2
+Bundle-SymbolicName: simple.host
+Web-ContextPath: /simple-host
 Import-Package: javax.servlet;version="2.5",javax.servlet.http;version
  ="2.5",org.eclipse.virgo.snaps.core;version="1.0"
-Bundle-SymbolicName: simple.host
 

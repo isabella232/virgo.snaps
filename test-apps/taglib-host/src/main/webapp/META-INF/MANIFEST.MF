@@ -6,6 +6,7 @@ Bundle-Version: 1.0
 Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Simple Host
 Bundle-ManifestVersion: 2
-Import-Package: org.eclipse.virgo.snaps.core;version="1.0"
 Bundle-SymbolicName: taglib.host
+Web-ContextPath: /taglib-host
+Import-Package: org.eclipse.virgo.snaps.core;version="1.0"
 

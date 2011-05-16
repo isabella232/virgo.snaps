@@ -1,10 +1,10 @@
-<plan name="snaps.test.scoped" version="2.0.0" scoped="true" atomic="false"
-                xmlns="http://www.springsource.org/schema/dm-server/plan"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="
-                        http://www.springsource.org/schema/dm-server/plan 
-                        http://www.springsource.org/schema/dm-server/plan/springsource-dm-server-plan.xsd">
+<plan name="snaps.test.scoped" version="2.0.0" scoped="true" atomic="false" 
+	xmlns="http://www.eclipse.org/virgo/schema/plan"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/virgo/schema/plan
+                http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
 
-        <artifact type="bundle" name="simple.host" version="[1, 2)"/>
-        <artifact type="bundle" name="simple.snap" version="[1, 2)"/>        
+
+	<artifact type="bundle" name="simple.host" version="[1, 2)" />
+	<artifact type="bundle" name="simple.snap" version="[1, 2)" />
 </plan>
