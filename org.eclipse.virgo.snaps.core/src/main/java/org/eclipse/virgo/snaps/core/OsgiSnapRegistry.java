@@ -14,7 +14,6 @@ package org.eclipse.virgo.snaps.core;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.FrameworkUtil;

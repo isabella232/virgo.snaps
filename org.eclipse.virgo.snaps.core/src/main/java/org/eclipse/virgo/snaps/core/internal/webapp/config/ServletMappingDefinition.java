@@ -11,9 +11,7 @@
 
 package org.eclipse.virgo.snaps.core.internal.webapp.config;
 
-public interface ServletMappingDefinition {
-
-    String getServletName();
+public interface ServletMappingDefinition extends ServletNameAware {
 
     String getUrlPattern();
 }

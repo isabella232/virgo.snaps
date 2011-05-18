@@ -11,8 +11,8 @@
 
 package org.eclipse.virgo.snaps.core.internal.webapp;
 
+import org.eclipse.virgo.snaps.core.Snap;
 import org.eclipse.virgo.snaps.core.internal.Host;
-import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;

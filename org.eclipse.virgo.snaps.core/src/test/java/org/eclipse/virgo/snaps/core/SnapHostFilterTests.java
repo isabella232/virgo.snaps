@@ -28,7 +28,6 @@ import javax.servlet.ServletException;
 
 import org.eclipse.virgo.snaps.core.SnapHostFilter;
 import org.eclipse.virgo.snaps.core.SnapRegistry;
-import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockFilterChain;

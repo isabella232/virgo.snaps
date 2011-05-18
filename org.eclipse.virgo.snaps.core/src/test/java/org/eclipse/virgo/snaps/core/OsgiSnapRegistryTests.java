@@ -18,7 +18,6 @@ import static org.junit.Assert.assertNull;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.junit.Test;
 
 

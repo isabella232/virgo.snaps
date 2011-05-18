@@ -33,8 +33,8 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContext;
 
 import org.eclipse.virgo.snaps.core.AbstractEquinoxLaunchingTests;
+import org.eclipse.virgo.snaps.core.Snap;
 import org.eclipse.virgo.snaps.core.internal.Host;
-import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.eclipse.virgo.snaps.core.internal.SnapFactoryMonitor;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
 import org.junit.Before;

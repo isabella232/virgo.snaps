@@ -21,13 +21,14 @@ package org.eclipse.virgo.snaps.core.internal.webapp.config;
  * 
  * Implementations <strong>must</strong> be thread-safe.
  * 
- *
+ * 
  */
-public interface ServletNameFilterMappingDefinition extends FilterMappingDefinition {
-    
+public interface ServletNameFilterMappingDefinition extends FilterMappingDefinition, ServletNameAware {
+
     /**
      * Returns the name of the servlet to which this mapping applies.
+     * 
      * @return the servlet's name
      */
-    String getServletName();    
+    String getServletName();
 }

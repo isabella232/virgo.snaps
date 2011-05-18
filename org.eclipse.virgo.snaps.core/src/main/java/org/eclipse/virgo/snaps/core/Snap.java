@@ -9,7 +9,7 @@
  *   VMware Inc. - initial contribution
  *******************************************************************************/
 
-package org.eclipse.virgo.snaps.core.internal;
+package org.eclipse.virgo.snaps.core;
 
 import java.io.IOException;
 import java.util.Properties;
