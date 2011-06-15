@@ -11,6 +11,9 @@
 
 package org.eclipse.virgo.snaps.core.internal.webapp;
 
+import java.util.Collections;
+import java.util.Enumeration;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
@@ -39,5 +42,12 @@ public final class ImmutableServletConfig extends AbstractConfig implements Serv
      */
     public String getServletName() {
         return this.servletDefinition.getServletName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Enumeration<String> getInitParameterNames(){
+    	return Collections.enumeration(this.servletDefinition.getInitParameters().keySet());
     }
 }

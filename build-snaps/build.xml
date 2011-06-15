@@ -19,4 +19,19 @@
 
 	<target name="precommit" depends="clean, clean-integration, test, findbugs, clover"/>
 
+	<path id="test.apps.bundles">
+		<pathelement location="../test-apps/simple-host"/>
+		<pathelement location="../test-apps/simple-snap"/>
+		<pathelement location="../test-apps/spring-snap"/>
+		<pathelement location="../test-apps/taglib-host"/>
+		<pathelement location="../test-apps/taglib-snap-one"/>
+		<pathelement location="../test-apps/taglib-snap-two"/>
+	</path>
+
+	<target name="build-test-apps" description="Build all of the test applications">
+		<delete dir="${basedir}/../org.eclipse.virgo.snaps.test/src/test/apps" />
+		<mkdir dir="${basedir}/../org.eclipse.virgo.snaps.test/src/test/apps" />
+		<all-bundles target="jar" buildpathRef="test.apps.bundles"></all-bundles>
+	</target>
+
 </project>

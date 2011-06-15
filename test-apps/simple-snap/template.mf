@@ -6,8 +6,8 @@ Bundle-ManifestVersion: 2
 Snap-Host: simple.host;version="[1.0, 2.0)"
 Snap-ContextPath: /simple
 Import-Template: javax.management;version="0",
- javax.servlet;version="[2.5,3.0)",
- javax.servlet.http;version="[2.5,3.0)",
+ javax.servlet;version="${javax.servlet:[=.=.=,+1.=.=)}",
+ javax.servlet.http;version="${javax.servlet:[=.=.=,+1.=.=)}",
  javax.security.auth.x500;version="0",
  javax.xml.parsers;version="0",
  org.xml.sax;version="0",

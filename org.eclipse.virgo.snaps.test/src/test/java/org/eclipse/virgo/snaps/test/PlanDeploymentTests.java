@@ -25,7 +25,7 @@ public class PlanDeploymentTests extends AbstractDeployerTests {
     
     @Test
     public void unscopedPlan() throws Exception {
-        DeploymentIdentity deployed = getDeployer().deploy(new File("src/test/resources/plan/unscoped.plan").toURI());
+        DeploymentIdentity deployed = getDeployer().deploy(new File("src/test/resources/unscoped.plan").toURI());
         
         try {
             RequestUtils.assertContent("index", "/simple-host", "/index.jsp");
@@ -37,7 +37,7 @@ public class PlanDeploymentTests extends AbstractDeployerTests {
     
     @Test
     public void scopedPlan() throws Exception {
-        DeploymentIdentity deployed = getDeployer().deploy(new File("src/test/resources/plan/scoped.plan").toURI());
+        DeploymentIdentity deployed = getDeployer().deploy(new File("src/test/resources/scoped.plan").toURI());
         
         try {
             RequestUtils.assertContent("index", "/simple-host", "/index.jsp");

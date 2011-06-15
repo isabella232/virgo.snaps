@@ -14,8 +14,8 @@
 
     <dependencies>
         <dependency org="org.eclipse.osgi" name="org.eclipse.osgi" rev="${org.eclipse.osgi}" conf="compile->compile"/>
-        <dependency org="javax.servlet" name="com.springsource.javax.servlet" rev="${javax.servlet}" conf="compile->runtime"/>
-        <dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp" rev="${javax.servlet.jsp}" conf="compile->compile"/>
+        <dependency org="javax.servlet" name="javax.servlet" rev="${javax.servlet}" conf="compile->runtime"/>
+        <dependency org="javax.servlet" name="javax.servlet.jsp" rev="${javax.servlet.jsp}" conf="compile->compile"/>
         <dependency org="org.eclipse.gemini.web" name="org.eclipse.gemini.web.core" rev="${org.eclipse.gemini.web}" conf="compile->compile" />
         <dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
         <dependency org="org.springframework" name="org.springframework.test" rev="${org.springframework}" conf="test->runtime"/>

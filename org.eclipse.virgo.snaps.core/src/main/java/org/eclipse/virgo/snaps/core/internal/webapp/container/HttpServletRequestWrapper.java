@@ -15,15 +15,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  * TODO Document HttpServletRequestWrapper
@@ -56,7 +65,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.ServletRequest#getAttributeNames()
      */
-    public Enumeration<?> getAttributeNames() {
+    public Enumeration<String> getAttributeNames() {
         return delegate.getAttributeNames();
     }
 
@@ -130,7 +139,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.http.HttpServletRequest#getHeaderNames()
      */
-    public Enumeration<?> getHeaderNames() {
+    public Enumeration<String> getHeaderNames() {
         return delegate.getHeaderNames();
     }
 
@@ -139,7 +148,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.http.HttpServletRequest#getHeaders(java.lang.String)
      */
-    public Enumeration<?> getHeaders(String name) {
+    public Enumeration<String> getHeaders(String name) {
         return delegate.getHeaders(name);
     }
 
@@ -181,7 +190,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.ServletRequest#getLocales()
      */
-    public Enumeration<?> getLocales() {
+    public Enumeration<Locale> getLocales() {
         return delegate.getLocales();
     }
 
@@ -222,7 +231,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.ServletRequest#getParameterMap()
      */
-    public Map<?,?> getParameterMap() {
+    public Map<String, String[]> getParameterMap() {
         return delegate.getParameterMap();
     }
 
@@ -230,7 +239,7 @@ class HttpServletRequestWrapper implements HttpServletRequest {
      * @return
      * @see javax.servlet.ServletRequest#getParameterNames()
      */
-    public Enumeration<?> getParameterNames() {
+    public Enumeration<String> getParameterNames() {
         return delegate.getParameterNames();
     }
 
@@ -489,5 +498,89 @@ class HttpServletRequestWrapper implements HttpServletRequest {
     public String getServletPath() {
         return this.delegate.getServletPath();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	public ServletContext getServletContext() {
+		return this.delegate.getServletContext();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public AsyncContext startAsync() throws IllegalStateException {
+		return this.delegate.startAsync();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+		return this.delegate.startAsync(servletRequest, servletResponse);
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean isAsyncStarted() {
+		return this.delegate.isAsyncStarted();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean isAsyncSupported() {
+		return this.delegate.isAsyncSupported();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public AsyncContext getAsyncContext() {
+		return this.delegate.getAsyncContext();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public DispatcherType getDispatcherType() {
+		return this.delegate.getDispatcherType();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
+		return this.delegate.authenticate(response);
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public void login(String username, String password) throws ServletException {
+		this.delegate.login(username, password);
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public void logout() throws ServletException {
+		this.delegate.logout();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public Collection<Part> getParts() throws IOException, ServletException {
+		return this.delegate.getParts();
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+	public Part getPart(String name) throws IOException, ServletException {
+		return this.delegate.getPart(name);
+	}
 
 }

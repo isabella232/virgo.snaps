@@ -58,7 +58,6 @@ public class SnapServletContextTests {
     }
     
     @Test 
-    @SuppressWarnings("unchecked")
     public void attributeNames() {
         Vector<String> delegateAttributeNames = new Vector<String>();
         delegateAttributeNames.add("c");

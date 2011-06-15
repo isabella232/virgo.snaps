@@ -13,7 +13,9 @@ package org.eclipse.virgo.snaps.core.internal.webapp.container;
 
 import java.util.Enumeration;
 
+import javax.naming.OperationNotSupportedException;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 import org.eclipse.virgo.snaps.core.internal.webapp.SnapServletContext;
 
@@ -39,7 +41,7 @@ public final class SnapHttpSession extends HttpSessionWrapper {
     }
 
     @Override
-    public Enumeration<?> getAttributeNames() {
+    public Enumeration<String> getAttributeNames() {
         return new UnqualifyingEnumerationWrapper(super.getAttributeNames());
     }
 
@@ -52,6 +54,12 @@ public final class SnapHttpSession extends HttpSessionWrapper {
     public void setAttribute(String name, Object value) {
         super.setAttribute(qualifyName(name), value);
     }
+
+    @SuppressWarnings("deprecation")
+	@Override
+	public HttpSessionContext getSessionContext() {
+		throw new RuntimeException(new OperationNotSupportedException("getSessionContext is deprecated"));
+	}
 
     private String qualifyName(String baseName) {
         return QUALIFIED_NAME_MARKER + this.snapServletContext.getSnapContextPath() + "." + baseName;

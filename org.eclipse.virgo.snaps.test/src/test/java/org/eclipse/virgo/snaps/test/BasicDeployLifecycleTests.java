@@ -22,8 +22,8 @@ public class BasicDeployLifecycleTests extends AbstractDeployerTests {
     @Test
     public void basicDeploy() throws Exception {
         // this just tests whether or not we can actually deploy snaps/wars
-        DeploymentIdentity host = deploy("src/test/resources/simple-host.jar");
-        DeploymentIdentity snap = deploy("src/test/resources/simple-snap.jar");
+        DeploymentIdentity host = deploy("src/test/apps/simple-host.jar");
+        DeploymentIdentity snap = deploy("src/test/apps/simple-snap.jar");
         try {
             assertNotNull(host);
             assertNotNull(snap);

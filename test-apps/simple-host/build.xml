@@ -3,7 +3,7 @@
 
 	<property file="${basedir}/../build.properties"/>
 	<property file="${basedir}/../../build.versions"/>
-	<property name="wab.output.dir" value="${basedir}/../../org.eclipse.virgo.snaps.test/src/test/resources"/>
+	<property name="wab.output.dir" value="${basedir}/../../org.eclipse.virgo.snaps.test/src/test/apps"/>
 	<import file="${basedir}/../../virgo-build/wab/default.xml"/>
 
 </project>

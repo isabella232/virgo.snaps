@@ -32,7 +32,7 @@ public class SnapCapabilityTests extends AbstractCapabilityTests {
 
     private void deployHostAndSnap() throws DeploymentException {
         deployHost();
-        snap = deploy("src/test/resources/simple-snap.jar");
+        snap = deploy("src/test/apps/simple-snap.jar");
     }
 
     private void undeployHostAndSnap() throws DeploymentException {
@@ -53,7 +53,7 @@ public class SnapCapabilityTests extends AbstractCapabilityTests {
     @Test
     public void simpleMappingWithRootHost() throws Exception {
         deployRootHost();
-        snap = deploy("src/test/resources/simple-snap.jar");
+        snap = deploy("src/test/apps/simple-snap.jar");
         try {
             RequestUtils.assertContent("test1", "/", "/simple/test1");
         } finally {

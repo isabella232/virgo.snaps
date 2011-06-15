@@ -31,6 +31,8 @@
 		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.event" rev="${org.eclipse.equinox.event}" conf="test->runtime"/>
 		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.util" rev="${org.eclipse.equinox.util}" conf="test->runtime"/>
 		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.ds" rev="${org.eclipse.equinox.ds}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.cm" rev="${org.eclipse.equinox.cm}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.region" rev="${org.eclipse.equinox.region}" conf="test->runtime"/>
 		<dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
 		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="${org.easymock}" conf="test->runtime"/>
 		<dependency org="org.aspectj" name="com.springsource.org.aspectj.weaver" rev="${org.aspectj}" conf="test->runtime"/>

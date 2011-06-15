@@ -17,9 +17,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
-@SuppressWarnings("deprecation")
 abstract class HttpSessionWrapper implements HttpSession {
 
     private final HttpSession delegate;
@@ -32,7 +30,7 @@ abstract class HttpSessionWrapper implements HttpSession {
         return delegate.getAttribute(name);
     }
 
-    public Enumeration<?> getAttributeNames() {
+    public Enumeration<String> getAttributeNames() {
         return delegate.getAttributeNames();
     }
 
@@ -54,10 +52,6 @@ abstract class HttpSessionWrapper implements HttpSession {
 
     public ServletContext getServletContext() {
         return delegate.getServletContext();
-    }
-
-    public HttpSessionContext getSessionContext() {
-        return delegate.getSessionContext();
     }
 
     public Object getValue(String name) {
