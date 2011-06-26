@@ -13,16 +13,15 @@
 
 package org.eclipse.virgo.snaps.core.internal.webapp.config;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * TODO Document StandardWebXmlValidator
+ * Base validation of the merged web.xml internal definition for the snap.
  * <p />
  * 
  * <strong>Concurrent Semantics</strong><br />
- * TODO Document concurrent semantics of StandardWebXmlValidator
+ * ThreadSafe
  */
 class StandardWebXmlValidator implements WebXmlValidator {
 
@@ -48,7 +47,7 @@ class StandardWebXmlValidator implements WebXmlValidator {
         Set<String> snameFromFilterMapping = readServeltNames(xml.getServletNameFilterMappingDefinitions());
         snameFromFilterMapping.removeAll(names);
         if (!snameFromFilterMapping.isEmpty()) {
-            throw new WebXmlValidationException(String.format("WebXml contains filter mapping without matching servlet definition.  '[%s]'",
+            throw new WebXmlValidationException(String.format("WebXml contains filter mapping without matching servlet definition.  '%s'",
                 snameFromFilterMapping));
         }
 
@@ -65,7 +64,7 @@ class StandardWebXmlValidator implements WebXmlValidator {
 
         mappingNames.removeAll(names);
         if (!mappingNames.isEmpty()) {
-            throw new WebXmlValidationException(String.format("WebXml contains servlet mapping without matching servlet definition.  '[%s]'",
+            throw new WebXmlValidationException(String.format("WebXml contains servlet mapping(s) '%s' without matching servlet definition.",
                 mappingNames));
         }
     }
