@@ -32,10 +32,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
 
+import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
 import org.eclipse.virgo.snaps.core.AbstractEquinoxLaunchingTests;
-import org.eclipse.virgo.snaps.core.internal.Host;
-import org.eclipse.virgo.snaps.core.internal.Snap;
-import org.eclipse.virgo.snaps.core.internal.SnapFactoryMonitor;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,8 +42,6 @@ import org.osgi.framework.BundleException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.springframework.mock.web.MockServletContext;
-
-import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
 
 public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 

@@ -11,8 +11,8 @@
 
 package org.eclipse.virgo.snaps.core.internal.deployer;
 
-import org.eclipse.virgo.snaps.core.internal.Host;
 import org.eclipse.virgo.snaps.core.internal.Snap;
+import org.eclipse.virgo.snaps.core.internal.Host;
 
 public interface SnapFactory {
     

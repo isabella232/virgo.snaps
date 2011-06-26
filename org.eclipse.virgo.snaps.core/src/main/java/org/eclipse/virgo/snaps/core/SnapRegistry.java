@@ -13,6 +13,7 @@ package org.eclipse.virgo.snaps.core;
 
 import org.eclipse.virgo.snaps.core.internal.Snap;
 
+
 public interface SnapRegistry {
 
     void init();

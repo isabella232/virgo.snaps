@@ -39,7 +39,16 @@ public final class BundleWebXmlLoader {
         entry = FrameworkUtil.getBundle(BundleWebXmlLoader.class).getEntry(ENTRY_DEFAULT_WEB_XML);
         doParse(entry, webXml);
 
+        validateWebXml(webXml);
         return webXml;
+    }
+
+    /**
+     * @param webXml
+     */
+    private static void validateWebXml(MutableWebXml webXml) {
+        StandardWebXmlValidator validator = new StandardWebXmlValidator();
+        validator.validate(webXml);
     }
 
     private static void doParse(URL webXmlUrl, MutableWebXml webXml) {

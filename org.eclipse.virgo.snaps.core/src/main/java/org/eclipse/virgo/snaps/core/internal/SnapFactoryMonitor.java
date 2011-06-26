@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 
 import org.eclipse.virgo.medic.eventlog.EventLogger;
 import org.eclipse.virgo.snaps.core.RequestRouter;
+import org.eclipse.virgo.snaps.core.internal.Snap;
 import org.eclipse.virgo.snaps.core.SnapRegistry;
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
 import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;

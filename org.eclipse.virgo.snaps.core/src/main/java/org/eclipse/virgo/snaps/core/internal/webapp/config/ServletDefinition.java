@@ -12,9 +12,7 @@
 package org.eclipse.virgo.snaps.core.internal.webapp.config;
 
 
-public interface ServletDefinition extends WebComponentDefinition {
-
-    String getServletName();
+public interface ServletDefinition extends WebComponentDefinition, ServletNameAware   {
 
     String getServletClassName();        
 }
