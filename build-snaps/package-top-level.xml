@@ -11,6 +11,10 @@
 			<property name="package.output.dir" value="${package.output.dir}"/>
 		</all-bundles>
 
+		<all-bundles buildpathRef="doc.bundles" target="doc">
+			<property name="docbook.output.dir" value="${package.docs.dir}"/>
+		</all-bundles>
+
 		<copy todir="${package.output.dir}" failonerror="false">
 			<fileset dir="resources"/>
 		</copy>

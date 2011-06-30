@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="installation">
+	<title>Installing @snaps.product.name@</title>
+	<section id="installation-prereqs">
+		<title>Prerequisites</title>
+		<para>
+			The @snaps.product.name@, or @snaps.product.name.short@ for short, requires @tomcat.product.name@ and Java SE 6 or later 
+			to be installed. Java is available from <ulink url="http://www.java.com/">http://www.java.com/</ulink> and elsewhere. 
+			@tomcat.product.name@ is available from <ulink url="http://www.eclipse.org/virgo/download/">here</ulink>.
+		</para>
+	</section>
+	<section id="installation-zip">
+		<title>Installing from the ZIP Download</title>
+		<section>
+			<title>Downloading the ZIP file</title>
+			<para>
+				@snaps.product.name@ is distributed as a ZIP file. This can be downloaded from 
+				<ulink url="http://www.eclipse.org/virgo/download/">here</ulink>.
+			</para>
+		</section>
+		<section>
+			<title>Downloading the ZIP file</title>
+			<para>
+				Once the zip is unpacked you will find several things inside including a copy of this documentation in the <literal>docs</literal> folder.
+			</para>
+		</section>
+	</section>
+	
+	<section id="installation-post">
+		<title>Post-installation steps</title>
+		Snap Snap
+	</section>
+</chapter>

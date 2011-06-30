@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="further-reading">
+	
+	<title>Further Reading</title>
+	<para>
+		<ulink url="../../virgo-programmer-guide/html/index.html">
+			@tomcat.product.name@ Programmer Guide
+		</ulink>
+	</para>
+	<para>
+		<ulink url="../../virgo-user-guide/html/index.html">
+			@tomcat.product.name@ User Guide
+		</ulink>
+	</para>
+	
+</chapter>
