@@ -15,6 +15,12 @@
 			<property name="docbook.output.dir" value="${package.docs.dir}"/>
 		</all-bundles>
 
+		<all-bundles target="clean" buildpathRef="sample.app.bundles" />
+		<all-bundles target="jar" buildpathRef="sample.app.bundles" />
+		<all-bundles target="package" buildpathRef="sample.app.bundles">
+			<property name="package.output.dir" value="${package.output.dir}"/>
+		</all-bundles>
+
 		<copy todir="${package.output.dir}" failonerror="false">
 			<fileset dir="resources"/>
 		</copy>

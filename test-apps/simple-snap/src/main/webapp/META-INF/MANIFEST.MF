@@ -6,9 +6,9 @@ Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Simple Snap
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: simple.snap
-Import-Package: javax.management;version="0",javax.servlet;version="[2
- .5,3.0)",javax.servlet.http;version="[2.5,3.0)",org.osgi.framework;ve
- rsion="0"
+Import-Package: javax.management;version="0",javax.servlet;version="[3
+ .0.0,4.0.0)",javax.servlet.http;version="[3.0.0,4.0.0)",org.osgi.fram
+ ework;version="0"
 Snap-Host: simple.host;version="[1.0, 2.0)"
 Snap-ContextPath: /simple
 

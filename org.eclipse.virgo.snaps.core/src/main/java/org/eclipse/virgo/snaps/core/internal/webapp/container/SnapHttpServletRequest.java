@@ -14,6 +14,7 @@ package org.eclipse.virgo.snaps.core.internal.webapp.container;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -54,21 +55,30 @@ class SnapHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     /**
-     * @return
-     * @see javax.servlet.http.HttpServletRequest#getPathInfo()
+     * {@inheritDoc}
      */
     public String getPathInfo() {
         return this.pathInfo;
     }
 
     /**
-     * @return
-     * @see javax.servlet.http.HttpServletRequest#getServletPath()
+     * {@inheritDoc}
      */
     public String getServletPath() {
         return this.servletPath;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ServletContext getServletContext(){
+    	return this.virtualContainer.getSnapServletContext();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public HttpSession getSession(boolean create) {
         HttpSession session = super.getSession(create);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="package-sample">
+
+	<target name="package" depends="ivy.init">
+		<src-jar/>
+
+		<property name="subsystem.dir" value="${package.output.dir}/sample"/>
+		<mkdir dir="${subsystem.dir}"/>
+		<dist-jar output.dir="${subsystem.dir}"/>
+	</target>
+
+</project>

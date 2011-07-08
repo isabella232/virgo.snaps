@@ -1,0 +1,15 @@
+/* 
+ *  Local style information for the Snaps Demo
+ *
+ *  Christopher Frost - Nov 2010
+ *
+ */
+
+
+.dj_ie7 .search {
+	margin-top: 22px;
+}
+
+.dj_ie6 .search {
+	display: none;
+}
