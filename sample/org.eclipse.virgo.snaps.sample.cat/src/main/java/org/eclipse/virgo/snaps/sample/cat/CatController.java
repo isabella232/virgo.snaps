@@ -26,12 +26,12 @@ public class CatController {
 
     @RequestMapping("/meow")
     public ModelAndView cat(HttpServletRequest request) throws IOException {
-    	URL host = request.getServletContext().getResource("/WEB-INF/host.sample.properties");
+    	URL host = request.getServletContext().getResource("host:/WEB-INF/sample.properties");
     	Properties host_props = new Properties();
     	if(host != null){
     		host_props.load(host.openStream());
     	}
-    	URL snap = request.getServletContext().getResource("/WEB-INF/snap.sample.properties");
+    	URL snap = request.getServletContext().getResource("/WEB-INF/sample.properties");
     	Properties snap_props = new Properties();
     	if(snap != null){
     		snap_props.load(snap.openStream());
