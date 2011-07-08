@@ -50,6 +50,8 @@ import org.eclipse.virgo.util.common.IterableEnumeration;
  *
  */
 public class SnapServletContext implements ServletContext {
+
+    private static final String HOST_PATH_PREFIX = "host:";
     
     private final ServletContext delegate;
     
@@ -63,6 +65,10 @@ public class SnapServletContext implements ServletContext {
         this.delegate = delegate;
         this.snapBundle = snapBundle;
         this.snapContextPath = snapContextPath;
+    }
+    
+    public String getSnapContextPath() {
+        return this.snapContextPath;
     }
 
     /**
@@ -188,14 +194,23 @@ public class SnapServletContext implements ServletContext {
      * @see javax.servlet.ServletContext#getResource(java.lang.String)
      */
     public URL getResource(String path) throws MalformedURLException {
+    	boolean hostOnly = false;
+        if (path.startsWith(HOST_PATH_PREFIX)) {
+            path = path.substring(HOST_PATH_PREFIX.length());
+            hostOnly = true;
+        }
 		if (path == null || !path.startsWith("/")) {
 			throw new MalformedURLException(String.format("'%s' is not a valid resource path", path));
 		}
-        URL resource = getLocalResource(path);
-        if (resource == null) {
-            resource = delegate.getResource(path);
+        if(hostOnly){
+        	return delegate.getResource(path);
+        } else {
+        	URL resource = getLocalResource(path);
+            if (resource == null) {
+                resource = delegate.getResource(path);
+            }
+            return resource;
         }
-        return resource;
     }
 
     private URL getLocalResource(String path) {
@@ -212,16 +227,19 @@ public class SnapServletContext implements ServletContext {
      * @see javax.servlet.ServletContext#getResourceAsStream(java.lang.String)
      */
     public InputStream getResourceAsStream(String path) {
-        URL resource = getLocalResource(path);
-        if (resource != null) {
-            try {
-                return resource.openStream();
-            } catch (IOException e) {
-                throw new SnapException("Failed to open stream for resource " + resource + " in bundle " + this.snapBundle, e);
-            }
+        if (path.startsWith(HOST_PATH_PREFIX)) {
+            path = path.substring(HOST_PATH_PREFIX.length());
         } else {
-            return delegate.getResourceAsStream(path);
+	        URL resource = getLocalResource(path);
+	        if (resource != null) {
+	            try {
+	                return resource.openStream();
+	            } catch (IOException e) {
+	                throw new SnapException("Failed to open stream for resource " + resource + " in bundle " + this.snapBundle, e);
+	            }
+	        }
         }
+        return delegate.getResourceAsStream(path);
     }
 
     /**
@@ -333,10 +351,6 @@ public class SnapServletContext implements ServletContext {
      */
     public void setAttribute(String name, Object object) {
         this.attributes.put(name, object);
-    }
-    
-    public String getSnapContextPath() {
-        return this.snapContextPath;
     }
 
 	@Override
