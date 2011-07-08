@@ -15,7 +15,7 @@ org.eclipse.virgo.osgi=3.0.0.M06
 org.eclipse.virgo.snaps.samples=1.1.0
 
 
-# Test
+# Test/Sample
 org.apache.commons.codec=1.3.0
 org.apache.commons.httpclient=3.1.0
 org.apache.catalina=7.0.12

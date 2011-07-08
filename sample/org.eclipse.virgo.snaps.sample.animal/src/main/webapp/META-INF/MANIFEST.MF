@@ -1,0 +1,13 @@
+Manifest-Version: 1
+Export-Package: images;version="1.0",styles;version="1.0"
+Import-Bundle: com.springsource.org.apache.taglibs.standard;version="[
+ 1.1.2,2.1.2)",org.eclipse.virgo.snaps.api;version="[3.0.0,3.1)"
+Bundle-Version: 1.0
+Tool: Bundlor 1.0.0.RELEASE
+Bundle-Name: Multiple Styles Host
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.virgo.snaps.sample.animal
+Web-ContextPath: /animal-menu-bar
+Import-Package: javax.servlet.jsp.jstl.core;version="[1.2.0,2.2.0)",or
+ g.eclipse.virgo.snaps.core;version="[3.0.0,3.1)"
+
