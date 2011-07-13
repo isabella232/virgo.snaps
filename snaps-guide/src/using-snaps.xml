@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="using-snaps">
+	<title>Using @snaps.product.name@ in your application</title>
+	<para>
+		Every snap/host should also be a regular WAB (Web Application Bundle), all you have to do is add some additional 
+		configuration to benefit from @snaps.product.name.short@.
+	</para>
+	
+	<section id="using-snaps-configuring-the-host">
+		<title>Configuring the host</title>
+		<para>
+			In the WAB that is to act as a host to snaps bundles all that needs to be added is a filter in the hosts 'web.xml'. 
+			This filter can be mapped to any sub path that you want forwarded to any registered snaps. It is important to note
+			the extra <literal>dispatcher</literal> declarations in the in the <literal>filter-mapping</literal>. Without these 
+			internal lookups for resources like JSPs won't got passed on to the appropriate snap.
+		</para>
+		<programlisting>
+<![CDATA[<filter>
+	<filter-name>host-filter</filter-name>
+	<filter-class>org.eclipse.virgo.snaps.core.SnapHostFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>host-filter</filter-name>
+	<url-pattern>/*</url-pattern>
+	<dispatcher>INCLUDE</dispatcher>
+	<dispatcher>FORWARD</dispatcher>
+	<dispatcher>REQUEST</dispatcher>
+</filter-mapping>]]>
+		</programlisting>
+	</section>
+	
+	<section id="using-snaps-configuring-a-snap">
+		<title>Configuring a snap</title>
+		<para>
+			A Snap is a normal WAB with the addition of two extra manifest headers. The first <literal>Snap-Host</literal> is used 
+			to resolve the WAB you want to act as a host for this snap. The second <literal>Snap-ContextPath</literal> gives the 
+			path the snap will answer to. In order to reach the snap a request must be made for the hosts context path, plus any 
+			path in the hosts snaps filter followed by the path given with the <literal>Snap-ContextPath</literal> header.
+		</para>
+		<programlisting>
+<![CDATA[Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="${version:[=.=.=, =.+1)}"
+Snap-ContextPath: /dog]]>
+		</programlisting>
+	</section>
+	
+	<section id="using-snaps-taglibs">
+		<title>Using the snaps taglibs</title>
+		<para>
+			There is a tag library available that makes information about the snaps environment available to the host from within a 
+			JSP page. The prefix and URI to declare are <code>&#60;%@ taglib prefix="snaps" uri="http://www.eclipse.org/virgo/snaps" 
+			%&#62;</code>. You can now access an array of all the snaps currently registered with the host. Each snap has two values, 
+			the first is the context path the snap is registered with, as given in the snaps manifest header. The second is an array 
+			of properties, if any, given in a property file in the snap. The file must be in the <literal>META-INF</literal> and have 
+			a name of <literal>snap.properties</literal>. The following code snipet shows all of these in use to produce links to 
+			each of the installed snaps.
+		</para>
+		<programlisting>
+<![CDATA[<snaps:snaps var="snaps">
+	<c:forEach var="snap" items="${snaps}">
+		<a href="<c:url value="${snap.contextPath}${snap.properties['link.path']}"/>">${snap.properties['link.text']}</a>
+	</c:forEach>
+</snaps:snaps>]]>
+		</programlisting>
+		<para>
+			The first line uses the snaps tag library to place the array of snaps in to the <code>snaps</code> variable. Then it 
+			simply loops through each snap with a <code>forEach</code> loop. The middle line is the really interesting one. The 
+			first variable look up, <code>${snap.contextPath}</code>, will return the context path of the snap. The second two lookups 
+			<code>${snap.properties['something']}</code> are relying on the snap having a properties file in place with <literal>
+			link.path</literal> and <literal>link.text</literal> defined in it. This shows the flexibility you have for defining 
+			your own contract between host and snaps. In this case the snap can contribute extra information about how links in a 
+			menu should be constructed.
+		</para>
+	</section>
+	
+	<section id="using-snaps-host-prefix">
+		<title>Referencing resources</title>
+		<para>
+			If the snap needs to lookup any resources this can be done in the normal way and the if the resource can not be found in
+			the snap then the host will be checked. Remember that a host and all it's snaps use a single <literal>ServletContext</literal>. 
+			As the snap is always checked first it can hide resources at the same path in the host. So if you want to lookup a resource 
+			in the host that you know exists in the snap simply prefix the lookup path with <code>host:</code>. This will then cause the 
+			snaps system to bypass the snap and look only in the host for the requested resource. If it is not found in the host the snap 
+			will NOT be checked, the lookup will simple return with nothing.
+			<programlisting>
+	<![CDATA[request.getServletContext().getResource("host:/WEB-INF/sample.properties");]]>
+			</programlisting>
+			<para>
+				This is a line of Java code that gets the ServletContext from the HttpRequest object and then tries to get a resource from 
+				the host, bypassing the snap.
+			</para>
+		</para>
+	</section>
+	
+</chapter>

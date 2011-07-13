@@ -2,12 +2,60 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter id="sample-application">
-	
 	<title>A Sample Application</title>
-	
 	<para>
-		Snap Snap
+		The @snaps.product.name@ zip comes with a sample app that you will already of deployed if you used it earlier 
+		to verify you @snaps.product.name.short@ install. In this chapter you will look at it in more detail to see 
+		how an application can be composed and see all the snaps features running.
 	</para>
+	<section id="sample-application-structure">
+		<title>Structure of the sample application</title>
+		<para>
+			The application is very simple, it consists of just a front end, composed of four bundles. A host with three 
+			different snaps.
+		</para>
+		<para>
+			<imagedata fileref="images/sampleApp.png"/>
+		</para>
+		<para>
+			The host is in blue and the three snaps in green giving their <literal>Snap-ContextPath</literal>. The cat 
+			and dog snaps both contribute content while the final snap just contributes styling information in the form 
+			of <literal>css</literal> files.
+		</para>
+	</section>
 	
+	<section id="sample-application-host">
+		<title>The Host bundle</title>
+		<para>
+			This bundle is very simple with no Java code. It defines the Snaps filter in it's <literal>web.xml</literal> 
+			and uses the tag libs support to render a menu bar that links out to the registered snaps.  
+		</para>
+	</section>
+	
+	<section id="sample-application-new-content">
+		<title>Adding New Content</title>
+		<para>
+			If you now deploy both the cat and dog snaps two new items will appear on the menu bar, each providing content 
+			from their respective snaps.
+		</para>
+	</section>
+	
+	<section id="sample-application-host-content">
+		<title>Getting Content From The Host</title>
+		<para>
+			If you look at the cat page you will see it is also displaying some properties. The cat snap is a little more 
+			complex, it has it's own <literal>DispatcherServlet</literal> and a controller defined using annotations. If you 
+			look at the controller code you will see where these two properties come from.
+		</para>
+	</section>
+	
+	<section id="sample-application-dynamic-styling">
+		<title>Re-styling</title>
+		<para>
+			Finally the styling snap called blue shows how snaps can be used in other way. Deploying this will cause all 
+			requests to <literal>/styles</literal> to be redirected and the application will change in appearance completely. 
+			All without re-deploying the host bundle.
+		</para>
+	</section>
 	
 </chapter>

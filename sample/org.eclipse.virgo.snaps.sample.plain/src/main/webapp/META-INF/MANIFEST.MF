@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-Version: 1.0
-Tool: Bundlor 1.0.0.RELEASE
-Bundle-Name: Plain Styling Snap
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.eclipse.virgo.snaps.sample.plain
-Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="[3.0.0,3.1)"
-Snap-ContextPath: /styles
-

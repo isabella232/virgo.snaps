@@ -2,12 +2,16 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 		"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter id="known-issues">
-	
 	<title>Known Issues</title>
-	
 	<para>
-		Snap Snap
+		This section describes known issues that you might run into, along with corresponding workarounds.
 	</para>
 	
+	<section id="known-issues-jetty-restriction">
+		<title>@jetty.product.name@ Restriction</title>
+		<para>
+			@snaps.product.name@ is not supported on the @jetty.product.name@, please use with the @tomcat.product.name@.
+		</para>
+	</section>
 	
 </chapter>

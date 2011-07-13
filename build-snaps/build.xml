@@ -46,7 +46,6 @@
 	<path id="sample.app.bundles">
 		<pathelement location="../sample/org.eclipse.virgo.snaps.sample.animal"/>
 		<pathelement location="../sample/org.eclipse.virgo.snaps.sample.blue"/>
-		<pathelement location="../sample/org.eclipse.virgo.snaps.sample.plain"/>
 		<pathelement location="../sample/org.eclipse.virgo.snaps.sample.cat"/>
 		<pathelement location="../sample/org.eclipse.virgo.snaps.sample.dog"/>
 	</path>

@@ -8,11 +8,13 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.virgo.snaps.sample.cat
 Import-Package: javax.servlet;version="[2.5.0,4)",javax.servlet.http;v
  ersion="[2.5.0,4)",javax.servlet.jsp.jstl.core;version="[1.2.0,2.2.0)
- ",org.eclipse.virgo.snaps.core;version="[3.0.0,3.1)",org.springframew
- ork.context.config;version="[2.5.6,4)",org.springframework.context.su
- pport;version="[2.5.6,4)",org.springframework.stereotype;version="[2.
- 5.6,4)",org.springframework.web.bind.annotation;version="[2.5.6,4)",o
- rg.springframework.web.servlet;version="[2.5.6,4)"
+ ",org.eclipse.virgo.snaps.core;version="[3.0.0,3.1)",org.eclipse.virg
+ o.web.dm;version="[2,4)",org.springframework.context.config;version="
+ [2.5.6,4)",org.springframework.context.support;version="[2.5.6,4)",or
+ g.springframework.stereotype;version="[2.5.6,4)",org.springframework.
+ web.bind.annotation;version="[2.5.6,4)",org.springframework.web.conte
+ xt;version="[2.5.6,4)",org.springframework.web.servlet;version="[2.5.
+ 6,4)",org.springframework.web.servlet.view;version="[2.5.6,4)"
 Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="[3.0.0,3.1)"
 Snap-ContextPath: /cat
 

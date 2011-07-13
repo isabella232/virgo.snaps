@@ -34,8 +34,8 @@
 	<toc />
 	<xi:include href="introduction.xml"/>
 	<xi:include href="installing.xml"/>
+	<xi:include href="using-snaps.xml"/>
 	<xi:include href="sample-application.xml"/>
-	<xi:include href="snaps-api.xml"/>
     <xi:include href="further-reading.xml"/>
     <xi:include href="known-issues.xml"/>
 </book>
