@@ -12,14 +12,14 @@
 		<para>
 			Using @snaps.product.name@, or @snaps.product.name.short@ for short, you can construct a web application from multiple OSGi 
 			bundles, each of which serves up content for a distinct sub-portion of your application's URL space. @snaps.product.name.short@ 
-			applications are arranged in a parent/child structure, with each application having at most one parent, referred to as the host, 
-			and zero or more children, referred to as snaps.
+			applications are arranged in a parent/child structure, with each application having at most one top-level parent, and zero or more 
+			children/grand children and so on. Parents are referred to as the hosts, children as Snaps.
 		</para>
 		<para>
 			<imagedata fileref="images/snapsAndHosts.png"/>
 		</para>
 		<para>
-			Here you see that any <literal>http</literal> requests for '/app' will be dealt with by the host bundle in green while '/app/orders' 
+			Here you see that any <literal>HTTP</literal> requests for '/app' will be dealt with by the host bundle while '/app/orders' 
 			and '/app/billing' will be dealt with by their respective snaps bundles. Each host/snap can use completely different web technologies 
 			to deal with the requests, @snaps.product.name.short@ places no restrictions on your choices. It's down to the developer how to split 
 			the application up and how closely to couple the host and various snaps. @snaps.product.name.short@ has been designed to be as 

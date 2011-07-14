@@ -5,67 +5,79 @@
 	<title>Installing @snaps.product.name@</title>
 	
 	<section id="installation-zip">
-		<title>Installing from the ZIP Download</title>
+		<title>Installing from the Zip Download</title>
 		<para>
-			@snaps.product.name@, or @snaps.product.name.short@ for short, is distributed as a ZIP file. This can be 
-			downloaded from <ulink url="http://www.eclipse.org/virgo/download/">here</ulink>.
+			@snaps.product.name.short@ is distributed as a Zip file. This can be downloaded from 
+			<ulink url="http://www.eclipse.org/virgo/download/">here</ulink>.
 		</para>
 		<para>
-			Once the zip is unpacked you will find several things inside including a copy of this documentation in the 
+			Once the zip is unpacked you will find several things inside, including a copy of this documentation in the 
 			<literal>docs</literal> folder. The layout is shown below.
 		</para>
 		<para>
-			<imagedata fileref="images/snapsZipFile.png"/>
+			<imagedata fileref="images/snapsZipFile.png" align="center" width="12cm"/>
 		</para>
 		<para>
 			Take the bundles and plan in the <literal>dist</literal> folder and place them in the <literal>/repository/usr</literal> 
 			folder of your Virgo install. Later you will need the bundles in the <literal>sample</literal> folder. If you wish 
-			to view the source for @snaps.product.name.short@ or its sample then these are in the <literal>src</literal> folder.
+			to view the source for @snaps.product.name.short@ or its sample, then these are in the <literal>src</literal> folder.
+		</para>
+		<para>
+			In order to start the Snaps system as a part of your @tomcat.product.name@, the Snaps plan needs to be referenced 
+			from the <literal>initialArtifacts</literal> property. This is located in the config file at 
+			<literal>${SERVER_HOME}/config/org.eclipse.virgo.kernel.userregion.properties</literal>. The property should be 
+			extended like this.
+		</para>
+		<screen>initialArtifacts=repository:plan/org.eclipse.virgo.kernel.userregion.springdm, 
+		repository:plan/org.eclipse.virgo.web.tomcat, 
+		<emphasis>repository:plan/org.eclipse.virgo.snaps</emphasis></screen>
+		<para>
+			Now you are ready to move on and check that Snaps is working.
 		</para>
 	</section>
 	
 	<section id="installation-post">
-		<title>Verify it's working'</title>
+		<title>Verifying it's working</title>
 		<para>
-			The <literal>snaps-x.x.x.zip</literal> also contains a sample application to demo all of the features of Snaps. We will 
-			cover this application in detail later but for now we can install it to verify that you have a working snaps install.
-			Start the server up and check the output it produces, it should contain the following.
+			The sample application in the zip file demos all of the features of Snaps. We will cover this application in 
+			detail later, but for now can install it to verify that you have a working Snaps install. Start the server 
+			up and check the output it produces contains the following:
 		</para>
-		<screen>[2011-07-11 15:35:01.013] system-artifacts             &#60;DE0004I&#62; Starting plan 'org.eclipse.virgo.snaps' version '3.0.0'. 
-[2011-07-11 15:35:01.034] system-artifacts             &#60;DE0004I&#62; Starting bundle 'org.eclipse.virgo.snaps.api' version '3.0.0.RELEASE'. 
-[2011-07-11 15:35:01.042] start-signalling-1           &#60;DE0005I&#62; Started bundle 'org.eclipse.virgo.snaps.api' version '3.0.0.RELEASE'. 
-[2011-07-11 15:35:01.048] system-artifacts             &#60;DE0004I&#62; Starting bundle 'org.eclipse.virgo.snaps.core' version '3.0.0.RELEASE'. 
-[2011-07-11 15:35:01.185] start-signalling-1           &#60;DE0005I&#62; Started bundle 'org.eclipse.virgo.snaps.core' version '3.0.0.RELEASE'. 
-[2011-07-11 15:35:01.188] start-signalling-1           &#60;DE0005I&#62; Started plan 'org.eclipse.virgo.snaps' version '3.0.0'.</screen>
+		<screen>&#60;DE0004I&#62; Starting plan 'org.eclipse.virgo.snaps' version '3.0.0'. 
+&#60;DE0004I&#62; Starting bundle 'org.eclipse.virgo.snaps.api' version '@bundle.version@'. 
+&#60;DE0005I&#62; Started bundle 'org.eclipse.virgo.snaps.api' version '@bundle.version@'. 
+&#60;DE0004I&#62; Starting bundle 'org.eclipse.virgo.snaps.core' version '@bundle.version@'. 
+&#60;DE0005I&#62; Started bundle 'org.eclipse.virgo.snaps.core' version '@bundle.version@'. 
+&#60;DE0005I&#62; Started plan 'org.eclipse.virgo.snaps' version '3.0.0'.</screen>
 		<para>
 			Open up the @project.name@ Admin Console by navigating to <literal>http://localhost:8080/admin</literal> and then go 
-			to the artifacts tab to deploy some new bundles. The first bundle to deploy is located 
-			<literal>/sample/org.eclipse.virgo.snaps.sample.animal-x.x.x.jar</literal>, select it in the browser and upload. In 
-			terminal window you started the server in you should see the message.
+			to the artifacts tab to deploy some new bundles. The first bundle to deploy is located at 
+			<literal>/sample/org.eclipse.virgo.snaps.sample.animal-@bundle.version@.jar</literal>, select it in the browser and 
+			upload. In the terminal window you started the @tomcat.product.name@ in you should see the usual messages about the 
+			bundle starting and this message:
 		</para>
-		<screen>[2011-07-11 15:53:45.468] Thread-39                    &#60;SN0000I&#62; Host created for path '/animal-menu-bar'</screen>
+		<screen>&#60;SN0000I&#62; Host created for path '/animal-menu-bar'</screen>
 		<para>
-			This shows that the host snap has been registered and is ready for other snaps to attach to it. To view the application take 
-			your browser to <literal>http://localhost:8080/animal-menu-bar/</literal>. You should be presented with a very green looking 
-			page that has a menu bar with two links on it. One will take you to the page you are currently on while the other goes back to 
-			the admin page.
+			This shows that the host has been registered and is ready for Snaps to attach to it. To view the application take 
+			your browser to <literal>http://localhost:8080/animal-menu-bar/</literal>. You should be presented with a green looking 
+			page that has a menu bar with two links on it. One will take you to the page you are currently on while the other goes 
+			back to the admin page.
 		</para>
 		<para>
-			This is all very nice but it's time to deploy another snap that will dynamicaly add some extra content to the app. The next bundle
-			to deploy is at <literal>/sample/org.eclipse.virgo.snaps.sample.dog-x.x.x.jar</literal>. Deploy it the same as the last one using 
-			using the admin console and check the messages that come out. There will be the usual messages about the bundle starting but also 
-			the following to indicate it has been bound to the host snap.
+			This is all very nice, but it's time to deploy another snap that will dynamicaly add some extra content to the app. The next bundle
+			to deploy is located at <literal>/sample/org.eclipse.virgo.snaps.sample.dog-@bundle.version@.jar</literal>. Deploy it the same way 
+			as the last one using the admin console and check the messages to verify it has been bound to the host:
 		</para>
-		<screen>[2011-07-12 14:57:01.264] start-signalling-5           &#60;SN0010I&#62; Snap bound to path '/animal-menu-bar/dog' </screen>
+		<screen>&#60;SN0010I&#62; Snap bound to path '/animal-menu-bar/dog' </screen>
 		<para>
 			In your browser, go back to the application and refresh the page and a new menu item should now be present. If you click it a new 
-			page will load with content from the newly installed snap. In this case a picture of a dog.
+			page will load with content from the newly installed Snap. In this case a picture of a dog.
 		</para>
 		<para>	
 			<imagedata fileref="images/sampleDog.png"/>
 		</para>
 		<para>
-			You have now confirmed that you install is working and can continue on to learn how snaps works and how you can use it to break up 
+			You have now verified that you install is working and can continue on to learn how snaps works and how you can use it to break up 
 			your web applications.
 		</para>
 	</section>

@@ -36,7 +36,8 @@ public class CatController {
     	if(snap != null){
     		snap_props.load(snap.openStream());
     	}
-    	return new ModelAndView("index").addObject("host", host_props.getProperty("some.property")).addObject("snap", snap_props.getProperty("some.property"));
+    	return new ModelAndView("index").addObject("host", host_props.getProperty("some.property"))
+										.addObject("snap", snap_props.getProperty("some.property"));
     }
 	
 }
