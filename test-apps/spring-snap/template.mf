@@ -3,7 +3,7 @@ Bundle-SymbolicName: spring.snap
 Bundle-Name: Spring Snap
 Bundle-Version: 1.0
 Bundle-ManifestVersion: 2
-Snap-Host: simple.host;version="[1.0, 2.0)"
+Snap-Host: simple.host;version="[1.0, 4.0)"
 Snap-ContextPath: /spring
 Import-Bundle: org.springframework.beans;version="${org.springframework:[=.=.=,+1.=.=)}",
  org.springframework.context;version="${org.springframework:[=.=.=,+1.=.=)}",

@@ -3,7 +3,7 @@ Bundle-SymbolicName: taglib.snap.two
 Bundle-Name: Taglib Snap Two
 Bundle-Version: 1.0
 Bundle-ManifestVersion: 2
-Snap-Host: taglib.host;version="[1.0, 2.0)"
+Snap-Host: taglib.host;version="[1.0, 4.0)"
 Snap-ContextPath: /two
 Import-Template: 
  javax.management;version="0",

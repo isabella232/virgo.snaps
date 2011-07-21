@@ -3,7 +3,7 @@ Bundle-SymbolicName: taglib.snap.one
 Bundle-Name: Taglib Snap One
 Bundle-Version: 1.0
 Bundle-ManifestVersion: 2
-Snap-Host: taglib.host;version="[1.0, 2.0)"
+Snap-Host: taglib.host;version="[1.0, 4.0)"
 Snap-ContextPath: /one
 Import-Template: 
  javax.management;version="0",

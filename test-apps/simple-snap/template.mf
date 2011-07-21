@@ -3,7 +3,7 @@ Bundle-SymbolicName: simple.snap
 Bundle-Name: Simple Snap
 Bundle-Version: 1.0
 Bundle-ManifestVersion: 2
-Snap-Host: simple.host;version="[1.0, 2.0)"
+Snap-Host: simple.host;version="[1.0, 4.0)"
 Snap-ContextPath: /simple
 Import-Template: javax.management;version="0",
  javax.servlet;version="${javax.servlet:[=.=.=,+1.=.=)}",
