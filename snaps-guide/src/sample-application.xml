@@ -4,8 +4,8 @@
 <chapter id="sample-application">
 	<title>A Sample Application</title>
 	<para>
-		The @snaps.product.name@ Zip comes with a sample application that you may have already deployed to verify 
-		your @snaps.product.name.short@ install. In this chapter we will look at it in more detail to see how an 
+		The @snaps.product.name@ Zip file comes with a sample application that you may have already deployed to verify 
+		your @snaps.product.name.short@ install. In this chapter you will look at it in more detail to see how an 
 		application can be composed and see all the Snaps features in action.
 	</para>
 	<section id="sample-application-structure">
@@ -18,8 +18,8 @@
 			<imagedata fileref="images/sampleApp.png"/>
 		</para>
 		<para>
-			The host and the three Snaps showing their <literal>Snap-ContextPath</literal>s. The Cat and Dog Snaps both 
-			contribute content while the final Snap just contributes styling information in the form of <literal>css</literal> 
+			The host and three snaps show their <literal>Snap-ContextPath</literal>s. The Cat and Dog snaps both 
+			contribute content while the final snap just contributes styling information in the form of <literal>css</literal> 
 			files. The following sections look at each of these in detail.
 		</para>
 	</section>
@@ -28,7 +28,7 @@
 		<title>The Host bundle</title>
 		<para>
 			This bundle is very simple with no Java code. It defines the Snaps filter in its <literal>web.xml</literal> 
-			just as we have seen in the <link linkend="using-snaps-configuring-the-host">Using Snaps</link> section. The 
+			just as you have seen in the <link linkend="using-snaps-configuring-the-host">Using Snaps</link> section. The 
 			menu bar uses the taglibs support to render links for each registered Snap.  
 		</para>
 		<programlisting>
@@ -46,8 +46,8 @@
 </ul>]]>
 		</programlisting>
 		<para>
-			This is very similar to an example we have already seen. It puts the links in a list and adds a link at the 
-			beginning to return to the host. The properties it is referencing are located in the Snaps themselves at 
+			This is very similar to an example you have already seen. It puts the links in a list and adds a link at the 
+			beginning to return to the host. The properties it is referencing are located in the snaps themselves at 
 			<literal>/META-INF/snap.properties</literal>.
 		</para>
 	</section>
@@ -55,8 +55,8 @@
 	<section id="sample-application-new-content">
 		<title>Adding New Content</title>
 		<para>
-			If you now deploy both the Dog and Cat Snaps, two new items will appear on the menu bar, each providing content 
-			from their respective Snaps.
+			If you now deploy both the Dog and Cat snaps, two new items will appear on the menu bar, each providing content 
+			from their respective snaps.
 		</para>
 		<para>
 			<imagedata fileref="images/sampleCat.png"/>
@@ -89,26 +89,26 @@ public class CatController {
 }]]>
 		</programlisting>
 		<para>
-			There are two properties files called <literal>sample.properties</literal> located in the same place in both 
-			the Cat Snap and the host. Each contains a property called <literal>some.property</literal> but with different
+			There are two properties files called <literal>sample.properties</literal> located at the same path within both 
+			the Cat snap and the host. Each contains a property called <literal>some.property</literal> but with distinct 
 			value. Looking at the code above you can see the <code>host:</code> prefix being used to ensure the first lookup
-			only looks in the host and skips the Snap. These values are then placed in the Model for the JSP page to render.
+			only looks in the host and skips the snap. These values are then placed in the Model for the JSP page to render.
 		</para>
 	</section>
 	
 	<section id="sample-application-dynamic-styling">
 		<title>Re-styling</title>
 		<para>
-			Finally the Blue styling Snap shows how Snaps can be used in other ways. Deploying this will cause all requests 
+			Finally the Blue styling snap shows how Snaps can be used in other ways. Deploying this will cause all requests 
 			to <literal>/styles</literal> to be redirected and the application will change in appearance but not content. All 
-			this happens without re-deploying the host bundle, although you may need to do full refresh to clear your browser's 
+			this happens without re-deploying the host bundle, although you may need to do a full refresh to clear your browser's 
 			cache.
 		</para>
 		<para>
 			<imagedata fileref="images/sampleBlue.png"/>
 		</para>
-		This is the same page as before, being rendered by the host and the Cat Snap, but with the style information now coming
-		from the Blue Snap.
+		This is the same page as before, being rendered by the host and the Cat snap, but with the style information now coming
+		from the Blue snap.
 	</section>
 	
 </chapter>

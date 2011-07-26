@@ -4,26 +4,26 @@
 <chapter id="using-snaps">
 	<title>Using @snaps.product.name@ in your application</title>
 	<para>
-		Every Snap or host should also be a regular WAB (Web Application Bundle), all you have to do is add some additional 
+		Every snap or host should also be a regular WAB (Web Application Bundle), all you have to do is add some additional 
 		configuration to benefit from @snaps.product.name.short@.
 	</para>
 	
 	<section id="using-snaps-configuring-the-host">
-		<title>Configuring the host</title>
+		<title>Configuring the Host</title>
 		<para>
 			In the WAB that is to act as a host to Snaps bundles, all that needs to be added is a filter in the hosts '
 			<literal>web.xml</literal>'. This filter can be mapped to any sub path that you want forwarded to registered 
-			Snaps. It is important to note the extra <literal>dispatcher</literal> declarations in the <literal>filter-mapping</literal>. 
-			Without these internal lookups for resources like JSPs won't get passed to the appropriate Snap when needed.
+			snaps. It is important to note the extra <literal>dispatcher</literal> declarations in the <literal>filter-mapping</literal>. 
+			Without these internal lookups, resources like JSPs won't get passed to the appropriate snap when needed.
 		</para>
 		<programlisting>
 <![CDATA[<filter>
-    <filter-name>host-filter</filter-name>
+    <filter-name>host-filter-name</filter-name>
     <filter-class>org.eclipse.virgo.snaps.core.SnapHostFilter</filter-class>
 </filter>
 
 <filter-mapping>
-    <filter-name>host-filter</filter-name>
+    <filter-name>host-filter-name</filter-name>
     <url-pattern>/*</url-pattern>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>FORWARD</dispatcher>
@@ -35,9 +35,9 @@
 	<section id="using-snaps-configuring-a-snap">
 		<title>Configuring a Snap</title>
 		<para>
-			A Snap is a normal WAB with the addition of two extra manifest headers. The first <literal>Snap-Host</literal> is used 
-			to resolve the WAB you want to act as a host for this Snap. The second <literal>Snap-ContextPath</literal> gives the 
-			path the snap will answer to. In order to reach the Snap a request must be made for the host's context path, plus any 
+			A snap is a normal WAB with the addition of two extra manifest headers. The first <literal>Snap-Host</literal> is used 
+			to resolve the WAB you want to act as a host for this snap. The second <literal>Snap-ContextPath</literal> gives the 
+			path the snap will answer to. In order to reach the snap a request must be made for the host's context path, plus any 
 			path in the host's Snaps filter followed by the path given with the <literal>Snap-ContextPath</literal> header.
 		</para>
 		<programlisting>
@@ -47,15 +47,15 @@ Snap-ContextPath: /dog]]>
 	</section>
 	
 	<section id="using-snaps-taglibs">
-		<title>Using the snaps taglibs</title>
+		<title>Using the Snaps taglibs</title>
 		<para>
-			There is a tag library available that makes information about the snaps environment available to the host from within a 
+			There is a tag library available that makes information about the Snaps environment available to the host from within a 
 			JSP page. The prefix and URI to declare are <code>&#60;%@ taglib prefix="snaps" uri="http://www.eclipse.org/virgo/snaps" 
-			%&#62;</code>. You can now access an array of all the Snaps currently registered with the host. Each Snap in the array
-			has two values, the first is the context path the Snap is registered with, as given in the Snaps manifest header. The 
-			second is an array of properties, if any, given in a property file in the Snap. The file must be in the <literal>META-INF
-			</literal> and have a name of <literal>snap.properties</literal>. The following code snippet shows all of these in use to 
-			produce links to each of the installed Snaps.
+			%&#62;</code>. You can now access an array of all the Snaps currently registered with the host. Each snap in the array
+			has two values, the first is the context path the Snap is registered with, as given in the snaps manifest header. The 
+			second is an array of properties, if any, given in a property file in the snap. The file must be in the <literal>META-INF
+			</literal> directory and have a name of <literal>snap.properties</literal>. The following code snippet shows all of these 
+			in use to produce links to each of the installed snaps.
 		</para>
 		<programlisting>
 <![CDATA[<snaps:snaps var="snaps">
@@ -66,31 +66,31 @@ Snap-ContextPath: /dog]]>
 </snaps:snaps>]]>
 		</programlisting>
 		<para>
-			The first line uses the Snaps tag library to place the array of Snaps in to the <code>snaps</code> variable. Then a 
-			<code>forEach</code> loop goes through each Snap. The middle line is the really interesting one. The first variable 
-			looks up <code>${snap.contextPath}</code> which will return the context path of the snap. The second two lookups are 
-			for properties <code>${snap.properties['something']}</code>. They rely on the Snap having the properties file in place 
-			with <literal>link.path</literal> and <literal>link.text</literal> defined in it. This shows the flexibility you have 
-			for defining your own contract between the host and its Snaps. In this case the Snap can contribute extra information 
-			about how links in a menu should be constructed.
+			The first line uses the Snaps tag library to place the array of snaps into the <code>snaps</code> variable. Then a 
+			<code>forEach</code> loop goes through each snap. The content of the <code>forEach</code> loop is the really interesting 
+			bit. The first variable <code>${snap.contextPath}</code> returns the context path of the snap. The two lookups are for 
+			properties <code>${snap.properties['something']}</code>. They rely on the snap having the properties file in place with 
+			<literal>link.path</literal> and <literal>link.text</literal> defined in it. This shows the flexibility you have for defining 
+			your own contract between the host and its snaps. In this case each snap can contribute extra information about how links in 
+			a menu should be constructed.
 		</para>
 	</section>
 	
 	<section id="using-snaps-host-prefix">
-		<title>Referencing resources</title>
+		<title>Referencing Resources</title>
 		<para>
-			If the Snap needs to lookup any resources, this can be done in the normal way and if the resource cannot be found in the Snap, 
-			then the host will be checked. Remember that a host and all its Snaps use a single <literal>ServletContext</literal>. As the 
-			Snap is always checked first it can hide resources at the same path in its host. So if you want to look up a resource in the 
-			Snaps host that exists in the Snap simply prefix the path with <code>host:</code>. This will then cause the Snaps system to 
-			bypass the Snap and look only in its host for the requested resource. If it is not found in its host the Snap will NOT be 
-			checked, the lookup will simple return with nothing.
+			If the snap needs to lookup any resources, this can be done in the normal way and if the resource cannot be found in the snap, 
+			then the host will be checked. Remember that a host and all its snaps use a single <literal>ServletContext</literal>. As the 
+			snap is always checked first it can hide resources at the same path in its host. So if you want to look up a resource in the 
+			snaps host that exists in the snap simply prefix the path with <code>host:</code>. This will then cause the Snaps system to 
+			bypass the snap and look only in its host for the requested resource. If it is not found in its host the snap will NOT be 
+			checked, the lookup will return with nothing.
 			<programlisting>
 <![CDATA[request.getServletContext().getResource("host:/WEB-INF/sample.properties");]]>
 			</programlisting>
 			<para>
-				This is a line of Java code that gets the ServletContext from the HttpRequest object and then tries to get a resource from 
-				the host, bypassing the Snap.
+				This line of Java code gets the ServletContext from the HttpRequest object and then tries to get a resource from the host, 
+				bypassing the snap.
 			</para>
 		</para>
 	</section>

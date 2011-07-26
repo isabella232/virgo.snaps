@@ -11,7 +11,7 @@
 			<ulink url="http://www.eclipse.org/virgo/download/">here</ulink>.
 		</para>
 		<para>
-			Once the zip is unpacked you will find several things inside, including a copy of this documentation in the 
+			Once the Zip file is unpacked you will find several things inside, including a copy of this documentation in the 
 			<literal>docs</literal> folder. The layout is shown below.
 		</para>
 		<para>
@@ -19,8 +19,8 @@
 		</para>
 		<para>
 			Take the bundles and plan in the <literal>dist</literal> folder and place them in the <literal>/repository/usr</literal> 
-			folder of your Virgo install. Later you will need the bundles in the <literal>sample</literal> folder. If you wish 
-			to view the source for @snaps.product.name.short@ or its sample, then these are in the <literal>src</literal> folder.
+			folder of your Virgo install. Later you need the bundles in the <literal>sample</literal> folder. If you wish to view 
+			the source for @snaps.product.name.short@ or its sample, then these are in the <literal>src</literal> folder.
 		</para>
 		<para>
 			In order to start the Snaps system as a part of your @tomcat.product.name@, the Snaps plan needs to be referenced 
@@ -32,16 +32,16 @@
 		repository:plan/org.eclipse.virgo.web.tomcat, 
 		<emphasis>repository:plan/org.eclipse.virgo.snaps</emphasis></screen>
 		<para>
-			Now you are ready to move on and check that Snaps is working.
+			Now you are ready to check that Snaps is working.
 		</para>
 	</section>
 	
 	<section id="installation-post">
 		<title>Verifying it's working</title>
 		<para>
-			The sample application in the zip file demos all of the features of Snaps. We will cover this application in 
-			detail later, but for now can install it to verify that you have a working Snaps install. Start the server 
-			up and check the output it produces contains the following:
+			The sample application in the Zip file demonstrates all of the features of Snaps. You will cover this application in 
+			detail later, but for now install it to verify that you have a working Snaps install. Start the server up and check 
+			the output it produces contains the following:
 		</para>
 		<screen>&#60;DE0004I&#62; Starting plan 'org.eclipse.virgo.snaps' version '3.0.0'. 
 &#60;DE0004I&#62; Starting bundle 'org.eclipse.virgo.snaps.api' version '@bundle.version@'. 
@@ -71,13 +71,13 @@
 		<screen>&#60;SN0010I&#62; Snap bound to path '/animal-menu-bar/dog' </screen>
 		<para>
 			In your browser, go back to the application and refresh the page and a new menu item should now be present. If you click it a new 
-			page will load with content from the newly installed Snap. In this case a picture of a dog.
+			page will load with content from the newly installed snap. In this case a picture of a dog.
 		</para>
 		<para>	
 			<imagedata fileref="images/sampleDog.png"/>
 		</para>
 		<para>
-			You have now verified that you install is working and can continue on to learn how snaps works and how you can use it to break up 
+			You have now verified that your install is working and can continue on to learn how Snaps works and how you can use it to break up 
 			your web applications.
 		</para>
 	</section>
