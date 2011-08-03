@@ -11,7 +11,8 @@
 			<property name="package.output.dir" value="${package.output.dir}"/>
 		</all-bundles>
 
-		<all-bundles buildpathRef="doc.bundles" target="doc">
+		<all-bundles target="clean" buildpathRef="doc.bundles" />
+		<all-bundles target="doc" buildpathRef="doc.bundles">
 			<property name="docbook.output.dir" value="${package.docs.dir}"/>
 		</all-bundles>
 
@@ -22,28 +23,15 @@
 		</all-bundles>
 
 		<copy todir="${package.output.dir}" failonerror="false">
-			<fileset dir="resources"/>
+			<fileset dir="${basedir}/resources"/>
 		</copy>
 
 		<ant target="javadoc-api" inheritAll="false">
 			<property name="target.dir" value="${package.docs.dir}"/>
 		</ant>
 
-		<copy todir="${package.output.dir}/projects">
-			<fileset dir="${basedir}/..">
-				<exclude name="**/.git/**" />
-				<exclude name="**/target/**"/>
-				<exclude name="**/integration-repo/**"/>
-				<exclude name="**/ivy-cache/**"/>
-				<exclude name="**/virgo-build/lib/docbook/**" />
-				<exclude name="**/virgo-build/lib/findbugs/**" />
-			</fileset>
-		</copy>
-
-		<replaceregexp match="build.stamp.*\n" replace="" flags="g"
-				file="${package.output.dir}/projects/build.properties"/>
-		<replaceregexp match="release.type=.*" replace="release.type=integration" flags="g"
-				file="${package.output.dir}/projects/build.properties"/>
+		<replaceregexp match="build.stamp.*\n" replace="" flags="g" file="${package.output.dir}/projects/build.properties"/>
+		<replaceregexp match="release.type=.*" replace="release.type=integration" flags="g" file="${package.output.dir}/projects/build.properties"/>
 
 		<zip destfile="${package.output.file}">
 			<zipfileset dir="${package.dir}"/>

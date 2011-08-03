@@ -18,9 +18,10 @@
 			<imagedata fileref="images/snapsZipFile.png" align="center" width="12cm"/>
 		</para>
 		<para>
-			Take the bundles and plan in the <literal>dist</literal> folder and place them in the <literal>/repository/usr</literal> 
-			folder of your Virgo install. Later you need the bundles in the <literal>sample</literal> folder. If you wish to view 
-			the source for @snaps.product.name.short@ or its sample, then these are in the <literal>src</literal> folder.
+			Take the bundles and plan in the <literal>dist</literal> folder and place them in either the <literal>/repository/usr</literal> 
+			or <literal>/repository/ext</literal> folder of your Virgo install. Later you need the bundles in the <literal>sample</literal> 
+			folder. If you wish to view the source for @snaps.product.name.short@ or its sample, then these are in the <literal>src</literal> 
+			folder.
 		</para>
 		<para>
 			In order to start the Snaps system as a part of your @tomcat.product.name@, the Snaps plan needs to be referenced 
