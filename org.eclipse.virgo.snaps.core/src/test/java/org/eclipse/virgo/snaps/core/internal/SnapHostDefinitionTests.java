@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
 import org.junit.Test;
 
-import org.eclipse.virgo.util.osgi.VersionRange;
+import org.eclipse.virgo.util.osgi.manifest.internal.VersionRange;
 
 
 public class SnapHostDefinitionTests {
