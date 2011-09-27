@@ -19,7 +19,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.eclipse.virgo.util.osgi.manifest.internal.VersionRange;
+import org.eclipse.virgo.util.osgi.manifest.VersionRange;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderDeclaration;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParser;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParserFactory;
