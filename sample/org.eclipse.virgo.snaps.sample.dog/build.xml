@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="org.eclipse.virgo.snaps.sample.dog">
-
-	<property name="ivy.cache.dir" value="${basedir}/../../ivy-cache" />
-	<property name="integration.repo.dir" value="${basedir}/../../integration-repo" />
 	
 	<property file="${basedir}/../build.properties"/>
 	<property file="${basedir}/../../build.versions"/>

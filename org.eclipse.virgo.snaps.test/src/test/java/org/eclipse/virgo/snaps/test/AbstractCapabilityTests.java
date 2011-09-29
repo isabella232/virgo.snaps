@@ -20,7 +20,7 @@ public abstract class AbstractCapabilityTests extends AbstractDeployerTests {
     private DeploymentIdentity host;
     
     protected void deployHost() throws DeploymentException {
-        host = deploy("src/test/apps/simple-host.jar");
+        host = deploy("target/test-apps/simple-host.jar");
     }
     
     protected void deployRootHost() throws DeploymentException {

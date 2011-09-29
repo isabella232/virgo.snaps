@@ -24,7 +24,7 @@ public class SpringCapabilityTests extends AbstractCapabilityTests {
     
     public void deployHostAndSnap() throws DeploymentException {
         deployHost();
-        snap = deploy("src/test/apps/spring-snap.jar");
+        snap = deploy("target/test-apps/spring-snap.jar");
     }
 
     public void undeployHostAndSnap() throws DeploymentException {
