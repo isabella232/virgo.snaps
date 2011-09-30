@@ -11,8 +11,6 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.framework.Bundle;
 
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
@@ -26,22 +24,6 @@ public final class SnapUtils {
     private static final String PATH_ELEMENT_SEPARATOR = "/";
 
     private SnapUtils() {
-    }
-
-    public static String determineSnapContextPath(HttpServletRequest request) {
-        // TODO Move to HostUtils, or similar
-    	String result;
-    	String includeServletPath = (String)request.getAttribute("javax.servlet.include.servlet_path");
-    	if (includeServletPath != null) {
-    		result = includeServletPath;
-    	} else {
-    		result = request.getServletPath();
-    	}
-        int index = result.indexOf(PATH_ELEMENT_SEPARATOR, 1);
-        if (index > -1) {
-            result = result.substring(0, index);
-        }
-        return result;
     }
 
     public static boolean hasSnapHostHeader(BundleManifest manifest) {

@@ -20,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.virgo.snaps.core.internal.Snap;
-import org.eclipse.virgo.snaps.core.internal.SnapUtils;
-
-
 
 /**
  * TODO Document RequestRouter
@@ -34,6 +31,8 @@ import org.eclipse.virgo.snaps.core.internal.SnapUtils;
  *
  */
 public final class RequestRouter {
+
+    private static final String PATH_ELEMENT_SEPARATOR = "/";
     
     private final SnapRegistry snapRegistry;
     
@@ -56,21 +55,54 @@ public final class RequestRouter {
     }
     
     public void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String contextPath = SnapUtils.determineSnapContextPath(request);
+        String contextPath = determineSnapContextPath(request);
         servletContext.getRequestDispatcher(contextPath + path).forward(request, response);
     }
     
     public void include(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String contextPath = SnapUtils.determineSnapContextPath(request);
+        String contextPath = determineSnapContextPath(request);
         servletContext.getRequestDispatcher(contextPath + path).include(request, response);
     }    
     
     private Snap findSnap(HttpServletRequest request) {
-        String contextPath = SnapUtils.determineSnapContextPath(request);
+        String contextPath = determineSnapContextPath(request);
         return this.snapRegistry.findSnapByContextPath(contextPath);
     }
     
     void destroy() {
         this.snapRegistry.destroy();
     }
+    
+    private String determineSnapContextPath(HttpServletRequest request) {
+    	String result;
+    	String includeServletPath = (String)request.getAttribute("javax.servlet.include.servlet_path");
+    	if (includeServletPath != null) {
+    		result = includeServletPath;
+    	} else {
+    		result = request.getServletPath();
+    	}
+
+    	String checking = result;
+    	// /dog/cat/web/page
+    	
+    	int index2 = result.indexOf(PATH_ELEMENT_SEPARATOR, 1);
+    	if (index2 > -1){
+    		String result2 = result.substring(0, index2);
+    	}
+    	//return result2;
+    	
+    	Snap snap = this.snapRegistry.findSnapByContextPath(checking);
+    	while(snap == null){
+    		int index = checking.lastIndexOf(PATH_ELEMENT_SEPARATOR);
+    		if(index <= 0){
+    			return result;
+    		}
+    		checking = checking.substring(0, index);
+    		snap = this.snapRegistry.findSnapByContextPath(checking);
+    	}
+    	return checking;
+    }
+    
+       
+    
 }

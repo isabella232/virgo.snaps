@@ -13,7 +13,6 @@ javadoc-api
 osgi-validate
 p2.extract-publisher
 package-multi-bundle.package
-publish
 publish-ivy
 publish-maven
 quality-multi-bundle.test

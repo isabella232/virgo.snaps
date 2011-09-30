@@ -9,6 +9,6 @@ Bundle-SymbolicName: simple.snap
 Import-Package: javax.management;version="0",javax.servlet;version="[3
  .0.0,4.0.0)",javax.servlet.http;version="[3.0.0,4.0.0)",org.osgi.fram
  ework;version="0"
-Snap-Host: simple.host;version="[1.0, 2.0)"
+Snap-Host: simple.host;version="[1.0, 4.0)"
 Snap-ContextPath: /simple
 

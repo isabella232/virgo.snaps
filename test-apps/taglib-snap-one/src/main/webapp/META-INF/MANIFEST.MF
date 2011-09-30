@@ -4,6 +4,6 @@ Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Taglib Snap One
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: taglib.snap.one
-Snap-Host: taglib.host;version="[1.0, 2.0)"
+Snap-Host: taglib.host;version="[1.0, 4.0)"
 Snap-ContextPath: /one
 

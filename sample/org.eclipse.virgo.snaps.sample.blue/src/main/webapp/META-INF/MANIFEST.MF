@@ -5,6 +5,6 @@ Tool: Bundlor 1.0.0.RELEASE
 Bundle-Name: Styling Snap
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.virgo.snaps.sample.blue
-Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="[3.0.0,3.1)"
+Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="[3.1.0,3.2)"
 Snap-ContextPath: /styles
 

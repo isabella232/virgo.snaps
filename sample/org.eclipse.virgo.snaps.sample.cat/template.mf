@@ -3,18 +3,18 @@ Bundle-SymbolicName: org.eclipse.virgo.snaps.sample.cat
 Bundle-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Cat Menu Item Snap
-Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="${version:[=.=.=, =.+1)}"
-Snap-ContextPath: /cat
+Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="${version:[=.=.=, +1.0.0)}"
+Snap-ContextPath: /dog/cat
 Import-Bundle: 
  com.springsource.org.apache.taglibs.standard;version="${org.apache.taglibs.standard:[=.=.=,+1.=.=)}",
- org.eclipse.virgo.snaps.api;version="${version:[=.=.=, =.+1)}"
+ org.eclipse.virgo.snaps.api;version="${version:[=.=.=, +1.0.0)}"
 Import-Package: 
  javax.servlet.jsp.jstl.core;version="${javax.servlet.jsp.jstl:[=.=.=,+1.=.=)}",
- org.eclipse.virgo.snaps.core;version="${version:[=.=.=, =.+1)}",
- org.springframework.context.config;version="${org.springframework:[2.5.6,+1)}",
- org.springframework.context.support;version="${org.springframework:[2.5.6,+1)}"
+ org.eclipse.virgo.snaps.core;version="${version:[=.=.=, +1.0.0)}",
+ org.springframework.context.config;version="${org.springframework:[=.=.=,+1)}",
+ org.springframework.context.support;version="${org.springframework:[=.=.=,+1)}"
 Import-Template: 
  javax.servlet.*;version="${javax.servlet:[-1.5.=,+1)}",
- org.springframework.*;version="${org.springframework:[2.5.6,+1)}",
- org.eclipse.virgo.web.*;version="${org.eclipse.virgo.web:[-1,+1)}"
+ org.springframework.*;version="${org.springframework:[=.=.=,+1)}",
+ org.eclipse.virgo.web.*;version="${org.eclipse.virgo.web:[=.=.=,+1)}"
 Excluded-Exports: *
