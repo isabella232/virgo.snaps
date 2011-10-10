@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: taglib.host
 Bundle-Name: Simple Host
-Bundle-Version: 1.0
+Bundle-Version: ${version}
 Bundle-ManifestVersion: 2
 Import-Package: 
  org.eclipse.virgo.snaps.core;version="1.0",

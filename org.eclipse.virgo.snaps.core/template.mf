@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.virgo.snaps.core
-Bundle-Version: 1.0.0
+Bundle-Version: ${version}
 Bundle-Name: Snaps Core
 Import-Template: 
  org.eclipse.virgo.kernel.*;version="${org.eclipse.virgo.kernel:[=.=.=, +1)}",
