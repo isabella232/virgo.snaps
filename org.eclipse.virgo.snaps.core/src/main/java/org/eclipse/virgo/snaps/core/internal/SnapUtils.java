@@ -11,32 +11,45 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.framework.Bundle;
-
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 
 public final class SnapUtils {
 
     public static final String HEADER_SNAP_HOST = "Snap-Host";
-    
+
     public static final String HEADER_SNAP_CONTEXT_PATH = "Snap-ContextPath";
 
     private static final String PATH_ELEMENT_SEPARATOR = "/";
 
+    private static final String ATTRIBUTE_OSGI_CONTEXT = "osgi-bundlecontext";
+
     private SnapUtils() {
+    }
+
+    public static final BundleContext getRequiredBundleContext(ServletContext servletContext) throws ServletException {
+        Object attr = servletContext.getAttribute(ATTRIBUTE_OSGI_CONTEXT);
+        if (attr == null) {
+            // logger.error("ServletContext attribute '{}' is missing.", ATTRIBUTE_OSGI_CONTEXT);
+            throw new ServletException("ServletContext attribute '" + ATTRIBUTE_OSGI_CONTEXT + "' is missing.");
+        }
+        return (BundleContext) attr;
     }
 
     public static String determineSnapContextPath(HttpServletRequest request) {
         // TODO Move to HostUtils, or similar
-    	String result;
-    	String includeServletPath = (String)request.getAttribute("javax.servlet.include.servlet_path");
-    	if (includeServletPath != null) {
-    		result = includeServletPath;
-    	} else {
-    		result = request.getServletPath();
-    	}
+        String result;
+        String includeServletPath = (String) request.getAttribute("javax.servlet.include.servlet_path");
+        if (includeServletPath != null) {
+            result = includeServletPath;
+        } else {
+            result = request.getServletPath();
+        }
         int index = result.indexOf(PATH_ELEMENT_SEPARATOR, 1);
         if (index > -1) {
             result = result.substring(0, index);
@@ -55,7 +68,7 @@ public final class SnapUtils {
 
     public static String getSnapContextPath(Bundle bundle) {
         String contextPath = (String) bundle.getHeaders().get(HEADER_SNAP_CONTEXT_PATH);
-        if(contextPath == null) {
+        if (contextPath == null) {
             contextPath = generateDefaultContextPath(bundle);
         }
         return contextPath;
@@ -64,31 +77,32 @@ public final class SnapUtils {
     /**
      * Catenate the host and snap context paths, <i>unless</i> host context path ends with a path separator.<br/>
      * <code>null</code> {@link String}s are converted to the empty string <code>""</code>.
+     * 
      * @param hostContextPath the host context path
      * @param snapContextPath the snap context path
      * @return the concatenated host and snap context path (with removal of extra path separator)
      */
     public static String boundContextPath(String hostContextPath, String snapContextPath) {
-        if (null==hostContextPath) {
-            return (null==snapContextPath ? "" : snapContextPath);
+        if (null == hostContextPath) {
+            return (null == snapContextPath ? "" : snapContextPath);
         }
-        if (null==snapContextPath) {
+        if (null == snapContextPath) {
             return hostContextPath;
         }
         if (hostContextPath.endsWith(PATH_ELEMENT_SEPARATOR)) {
-            return hostContextPath.substring(0,hostContextPath.length()-1) + snapContextPath;
+            return hostContextPath.substring(0, hostContextPath.length() - 1) + snapContextPath;
         } else {
             return hostContextPath + snapContextPath;
         }
     }
-    
+
     private static String generateDefaultContextPath(Bundle bundle) {
         return getBaseName(bundle.getLocation());
     }
-    
+
     static String getBaseName(String path) {
         String base = path;
-        if(base.endsWith("/")) {
+        if (base.endsWith("/")) {
             base = base.substring(0, base.length() - 1);
         }
         base = stripScheme(base);
@@ -118,7 +132,7 @@ public final class SnapUtils {
     private static String stripQuery(String path) {
         String result = path;
         int index = result.lastIndexOf("?");
-        if(index > -1) {
+        if (index > -1) {
             result = result.substring(0, index);
         }
         return result;
@@ -127,7 +141,7 @@ public final class SnapUtils {
     private static String stripScheme(String path) {
         String result = path;
         int index = result.indexOf(":");
-        if(index > - 1 && index < result.length()) {
+        if (index > -1 && index < result.length()) {
             result = result.substring(index + 1);
         }
         return result;

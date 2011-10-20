@@ -23,6 +23,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.virgo.snaps.core.internal.SnapUtils;
 import org.eclipse.virgo.snaps.core.internal.SnapsLogEvents;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -33,8 +34,6 @@ import org.slf4j.LoggerFactory;
 import org.eclipse.virgo.medic.eventlog.EventLogger;
 
 public class SnapHostFilter implements Filter {
-
-    private static final String ATTRIBUTE_OSGI_CONTEXT = "osgi-bundlecontext";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -84,19 +83,12 @@ public class SnapHostFilter implements Filter {
 
     protected SnapRegistry createSnapRegistry(ServletContext servletContext) throws ServletException {
         try {
-            return new OsgiSnapRegistry(getRequiredBundleContext(servletContext));
+            return new OsgiSnapRegistry(SnapUtils.getRequiredBundleContext(servletContext));
         } catch (InvalidSyntaxException e) {
             logger.error("Unable to create OsgiSnapRegistry", e);
             throw new ServletException("Unable to create OsgiSnapRegistry.", e);
         }
     }
 
-    protected final BundleContext getRequiredBundleContext(ServletContext servletContext) throws ServletException {
-        Object attr = servletContext.getAttribute(ATTRIBUTE_OSGI_CONTEXT);
-        if (attr == null) {
-            logger.error("ServletContext attribute '{}' is missing.", ATTRIBUTE_OSGI_CONTEXT);
-            throw new ServletException("ServletContext attribute '" + ATTRIBUTE_OSGI_CONTEXT + "' is missing.");
-        }
-        return (BundleContext) attr;
-    }
+    
 }
