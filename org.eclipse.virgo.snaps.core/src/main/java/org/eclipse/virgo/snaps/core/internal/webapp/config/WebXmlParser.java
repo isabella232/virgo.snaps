@@ -32,11 +32,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 final class WebXmlParser {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
     private static final String ELEMENT_PARAM_VALUE = "param-value";
 
     private static final String ELEMENT_PARAM_NAME = "param-name";
@@ -52,27 +51,45 @@ final class WebXmlParser {
     private static final String ELEMENT_SERVLET_NAME = "servlet-name";
 
     private static final String ELEMENT_SERVLET = "servlet";
-    
+
     private static final String ELEMENT_FILTER = "filter";
-    
+
     private static final String ELEMENT_FILTER_CLASS = "filter-class";
 
     private static final String ELEMENT_FILTER_NAME = "filter-name";
-    
+
     private static final String ELEMENT_FILTER_MAPPING = "filter-mapping";
-    
+
     private static final String ELEMENT_DISPATCHER = "dispatcher";
+
+    private static final String ELEMENT_LISTENER = "listener";
+
+    private static final String ELEMENT_LISTENER_CLASS = "listener-class";
 
     public void parse(InputStream resource, MutableWebXml webXml) {
         InputStream parseResource = new BufferedInputStream(resource);
         Document document = loadDocument(parseResource);
-        
+
         parseServletDefinitions(document, webXml);
         parseServletMappingDefinitions(document, webXml);
-        
+
         parseFilterDefinitions(document, webXml);
         parseFilterMappingDefinitions(document, webXml);
-    }    
+        parseListnerMappingDefinitions(document, webXml);
+    }
+
+    /**
+     * @param document
+     * @param webXml
+     */
+    private void parseListnerMappingDefinitions(Document document, MutableWebXml webXml) {
+        NodeList nodes = document.getElementsByTagName(ELEMENT_LISTENER);
+        for (int x = 0; x < nodes.getLength(); x++) {
+            Node e = nodes.item(x);
+            String listenerClassName = extractChildNodeValue(e, ELEMENT_LISTENER_CLASS);
+            webXml.addListenerDefinition(listenerClassName);
+        }
+    }
 
     private void parseServletDefinitions(Document document, MutableWebXml webXml) {
         NodeList nodes = document.getElementsByTagName(ELEMENT_SERVLET);
@@ -84,7 +101,7 @@ final class WebXmlParser {
             parseInitParameters(e, servletDefinition);
         }
     }
-      
+
     private void parseInitParameters(Node servletOrFilterNode, AbstractWebComponentDefinition definition) {
         NodeList childNodes = servletOrFilterNode.getChildNodes();
         for (int x = 0; x < childNodes.getLength(); x++) {
@@ -93,7 +110,7 @@ final class WebXmlParser {
                 String paramName = extractChildNodeValue(node, ELEMENT_PARAM_NAME);
                 String paramValue = extractChildNodeValue(node, ELEMENT_PARAM_VALUE);
                 definition.addInitParameter(paramName, paramValue);
-            }            
+            }
         }
     }
 
@@ -104,14 +121,15 @@ final class WebXmlParser {
             String servletName = extractChildNodeValue(e, ELEMENT_SERVLET_NAME);
             String[] urlPatterns = extractChildNodesValues(e, ELEMENT_URL_PATTERN);
             if (urlPatterns.length == 0) {
-                throw new WebXmlParseException("Missing '" + ELEMENT_URL_PATTERN + "' under '" + e.getNodeName() + "' for servlet name '" + servletName +"'");
+                throw new WebXmlParseException("Missing '" + ELEMENT_URL_PATTERN + "' under '" + e.getNodeName() + "' for servlet name '"
+                    + servletName + "'");
             }
             for (String urlPattern : urlPatterns) {
                 webXml.addServletMappingDefinition(servletName, urlPattern);
             }
         }
     }
-    
+
     private void parseFilterDefinitions(Document document, MutableWebXml webXml) {
         NodeList nodes = document.getElementsByTagName(ELEMENT_FILTER);
         for (int x = 0; x < nodes.getLength(); x++) {
@@ -122,48 +140,48 @@ final class WebXmlParser {
             parseInitParameters(e, filterDefinition);
         }
     }
-    
+
     private void parseFilterMappingDefinitions(Document document, MutableWebXml webXml) {
         NodeList nodes = document.getElementsByTagName(ELEMENT_FILTER_MAPPING);
         for (int x = 0; x < nodes.getLength(); x++) {
             Node e = nodes.item(x);
-            
+
             String filterName = extractChildNodeValue(e, ELEMENT_FILTER_NAME);
-            
+
             String[] servletNames = extractChildNodesValues(e, ELEMENT_SERVLET_NAME);
             String[] urlPatterns = extractChildNodesValues(e, ELEMENT_URL_PATTERN);
-            
+
             Set<FilterDispatcherType> dispatcherTypes = getConfiguredDispatcherTypes(e);
-            
+
             if (servletNames.length == 0 && urlPatterns.length == 0) {
-                throw new WebXmlParseException("Missing '" + ELEMENT_SERVLET_NAME + "' or '" + ELEMENT_URL_PATTERN + "' under '" + e.getNodeName() + "'");
+                throw new WebXmlParseException("Missing '" + ELEMENT_SERVLET_NAME + "' or '" + ELEMENT_URL_PATTERN + "' under '" + e.getNodeName()
+                    + "'");
             }
-            
+
             for (String servletName : servletNames) {
                 webXml.addServletNameFilterMappingDefinition(filterName, servletName, dispatcherTypes);
             }
-            
+
             for (String urlPattern : urlPatterns) {
                 webXml.addUrlPatternFilterMappingDefinition(filterName, urlPattern, dispatcherTypes);
-            }      
+            }
         }
     }
 
     private Set<FilterDispatcherType> getConfiguredDispatcherTypes(Node e) {
         String[] values = extractChildNodesValues(e, ELEMENT_DISPATCHER);
-        
+
         Set<FilterDispatcherType> dispatcherTypes = new HashSet<FilterDispatcherType>();
-        
+
         for (String dispatcherType : values) {
             dispatcherTypes.add(FilterDispatcherType.valueOf(dispatcherType));
         }
-        
+
         if (dispatcherTypes.isEmpty()) {
             dispatcherTypes.add(FilterDispatcherType.REQUEST);
         }
         return dispatcherTypes;
     }
-    
 
     private String extractChildNodeValue(Node node, String childName) {
         NodeList childNodes = node.getChildNodes();
@@ -172,13 +190,13 @@ final class WebXmlParser {
             if (childName.equals(child.getNodeName())) {
                 return child.getTextContent().trim();
             }
-        }        
-        throw new WebXmlParseException("Missing '" + childName + "' under '" + node.getNodeName() + "'");        
-    }    
-    
+        }
+        throw new WebXmlParseException("Missing '" + childName + "' under '" + node.getNodeName() + "'");
+    }
+
     private String[] extractChildNodesValues(Node node, String childName) {
         List<String> values = new ArrayList<String>();
-        
+
         NodeList childNodes = node.getChildNodes();
         for (int x = 0; x < childNodes.getLength(); x++) {
             Node child = childNodes.item(x);
@@ -186,8 +204,8 @@ final class WebXmlParser {
                 values.add(child.getTextContent().trim());
             }
         }
-        
-        return values.toArray(new String[values.size()]);                
+
+        return values.toArray(new String[values.size()]);
     }
 
     private Document loadDocument(InputStream resource) {

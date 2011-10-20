@@ -23,4 +23,6 @@ public interface WebXml {
     UrlPatternFilterMappingDefinition[] getUrlPatternFilterMappingDefinitions();
     
     ServletNameFilterMappingDefinition[] getServletNameFilterMappingDefinitions();
+    
+    ListenerDefinition[] getListenerDefinitions();
 }

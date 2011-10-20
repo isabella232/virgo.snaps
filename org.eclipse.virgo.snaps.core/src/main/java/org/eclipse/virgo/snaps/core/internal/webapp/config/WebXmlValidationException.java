@@ -13,13 +13,11 @@
 
 package org.eclipse.virgo.snaps.core.internal.webapp.config;
 
-
 /**
- * TODO Document WebXmlValidationException
+ * Exception raised during validation of the the snap web.xml
  * <p />
- *
+ * 
  * <strong>Concurrent Semantics</strong><br />
- * TODO Document concurrent semantics of WebXmlValidationException
  */
 public class WebXmlValidationException extends WebXmlParseException {
 
@@ -53,6 +51,4 @@ public class WebXmlValidationException extends WebXmlParseException {
     WebXmlValidationException(Throwable arg0) {
         super(arg0);
     }
-
-    
 }
