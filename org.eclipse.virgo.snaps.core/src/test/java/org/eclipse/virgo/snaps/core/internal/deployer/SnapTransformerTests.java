@@ -35,8 +35,9 @@ import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
 import org.eclipse.gemini.web.core.InstallationOptions;
 import org.eclipse.gemini.web.core.WebBundleManifestTransformer;
-import org.eclipse.virgo.util.common.ThreadSafeArrayListTree;
-import org.eclipse.virgo.util.common.Tree;
+import org.eclipse.virgo.util.common.DirectedAcyclicGraph;
+import org.eclipse.virgo.util.common.GraphNode;
+import org.eclipse.virgo.util.common.ThreadSafeDirectedAcyclicGraph;
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 import org.eclipse.virgo.util.osgi.manifest.internal.StandardBundleManifest;
 
@@ -49,6 +50,8 @@ public class SnapTransformerTests {
     private InstallOptionsFactory installOptionsFactory;
 
     private SnapTransformer snapTransformer;
+
+    private DirectedAcyclicGraph<InstallArtifact> dag;
     
     @Before
     public void setUp() {
@@ -57,6 +60,7 @@ public class SnapTransformerTests {
         snapTransformer = new SnapTransformer(manifestTransformer);
         installOptionsFactory = createMock(InstallOptionsFactory.class);
         snapTransformer.setInstallOptionFactory(installOptionsFactory);
+        dag = new ThreadSafeDirectedAcyclicGraph<InstallArtifact>();
     }
     
     @Test(expected = DeploymentException.class)
@@ -115,10 +119,11 @@ public class SnapTransformerTests {
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
-        Tree<InstallArtifact> installTree = new ThreadSafeArrayListTree<InstallArtifact>(installArtifact1);
-        installTree.addChild(new ThreadSafeArrayListTree<InstallArtifact>(installArtifact2));
+        GraphNode<InstallArtifact> installGraph = dag.createRootNode(installArtifact1);
+        GraphNode<InstallArtifact> node = dag.createRootNode(installArtifact2);
+        installGraph.addChild(node);
         
-        snapTransformer.transform(installTree, null);
+        snapTransformer.transform(installGraph, null);
         
         verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
     }
@@ -152,11 +157,12 @@ InstallOptionsFactory factory = new DefaultInstallOptionsFactory();
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
-        Tree<InstallArtifact> installTree = new ThreadSafeArrayListTree<InstallArtifact>(installArtifact1);
-        installTree.addChild(new ThreadSafeArrayListTree<InstallArtifact>(installArtifact2));
+        GraphNode<InstallArtifact> installGraph = dag.createRootNode(installArtifact1);
+        GraphNode<InstallArtifact> node = dag.createRootNode(installArtifact2);
+        installGraph.addChild(node);
         
         try {
-            snapTransformer.transform(installTree, null);
+            snapTransformer.transform(installGraph, null);
             fail();
         } catch (Exception e) {
             verify(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
