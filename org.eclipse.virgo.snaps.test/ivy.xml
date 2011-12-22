@@ -38,6 +38,12 @@
 		<dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
 		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="${org.easymock}" conf="test->runtime"/>
 		<dependency org="org.aspectj" name="com.springsource.org.aspectj.weaver" rev="${org.aspectj}" conf="test->runtime"/>
+    	<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.core" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.logbackcorefragment" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
+		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.logbackclassicfragment" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
+		<dependency org="ch.qos.logback" name="com.springsource.ch.qos.logback.classic" rev="${ch.qos.logback}" conf="test->runtime"/>
+		<dependency org="ch.qos.logback" name="com.springsource.ch.qos.logback.core" rev="${ch.qos.logback}" conf="test->runtime"/>
+
 
 		<!-- Prevent Xerces and Xalan from being on the classpath to work around Java bug 6723276 during integration testing -->
 		<exclude org="org.apache.xerces"/>
