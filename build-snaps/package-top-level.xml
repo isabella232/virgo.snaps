@@ -12,7 +12,7 @@
 		</all-bundles>
 
 		<all-bundles target="clean" buildpathRef="doc.bundles" />
-		<all-bundles target="doc" buildpathRef="doc.bundles">
+		<all-bundles target="doc-html" buildpathRef="doc.bundles">
 			<property name="docbook.output.dir" value="${package.docs.dir}"/>
 		</all-bundles>
 
