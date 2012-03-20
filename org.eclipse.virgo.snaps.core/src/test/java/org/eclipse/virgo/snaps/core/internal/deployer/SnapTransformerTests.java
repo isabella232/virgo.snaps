@@ -119,8 +119,8 @@ public class SnapTransformerTests {
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
-        GraphNode<InstallArtifact> installGraph = dag.createRootNode(installArtifact1);
-        GraphNode<InstallArtifact> node = dag.createRootNode(installArtifact2);
+        GraphNode<InstallArtifact> installGraph = dag.createNode(installArtifact1);
+        GraphNode<InstallArtifact> node = dag.createNode(installArtifact2);
         installGraph.addChild(node);
         
         snapTransformer.transform(installGraph, null);
@@ -157,8 +157,8 @@ InstallOptionsFactory factory = new DefaultInstallOptionsFactory();
         
         replay(installArtifact1, artifactFS1, installArtifact2, artifactFS2, installOptionsFactory, manifestTransformer);
         
-        GraphNode<InstallArtifact> installGraph = dag.createRootNode(installArtifact1);
-        GraphNode<InstallArtifact> node = dag.createRootNode(installArtifact2);
+        GraphNode<InstallArtifact> installGraph = dag.createNode(installArtifact1);
+        GraphNode<InstallArtifact> node = dag.createNode(installArtifact2);
         installGraph.addChild(node);
         
         try {
