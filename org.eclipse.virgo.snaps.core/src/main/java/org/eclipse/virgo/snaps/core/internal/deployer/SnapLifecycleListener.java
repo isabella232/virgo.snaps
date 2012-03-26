@@ -29,6 +29,7 @@ import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
 import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
+import org.eclipse.virgo.kernel.shim.scope.Scope;
 import org.eclipse.virgo.medic.eventlog.EventLogger;
 import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
 import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
@@ -79,6 +80,7 @@ final class SnapLifecycleListener extends InstallArtifactLifecycleListenerSuppor
         SnapHostDefinition hostDefinition = SnapUtils.getSnapHostHeader(bundleManifest);
 
         Dictionary<String, String> serviceProperties= new Hashtable<String, String>();
+        serviceProperties.put(Scope.PROPERTY_SERVICE_SCOPE, Scope.SCOPE_ID_GLOBAL); // expose service outside any containing scope
         serviceProperties.put(SnapFactory.FACTORY_NAME_PROPERTY, hostDefinition.getSymbolicName());
         serviceProperties.put(SnapFactory.FACTORY_RANGE_PROPERTY, hostDefinition.getVersionRange().toParseString());
 
