@@ -6,11 +6,11 @@ javax.persistence=1.0.0
 javax.servlet=3.0.0.v201103241009
 javax.servlet.jsp=2.2.0.v201103241009
 org.springframework=3.0.5.RELEASE
-org.eclipse.virgo.kernel=3.0.2.RELEASE
+org.eclipse.virgo.kernel=3.0.3.D-20120424152547
 org.eclipse.virgo.util=3.0.2.RELEASE
 org.eclipse.gemini.web=2.0.2.RELEASE
 org.eclipse.virgo.test=3.0.2.RELEASE
-org.eclipse.virgo.web=3.0.2.RELEASE
+org.eclipse.virgo.web=3.0.3.D-20120424155325
 org.eclipse.virgo.osgi=3.0.2.RELEASE
 org.eclipse.virgo.snaps.samples=1.1.0
 
