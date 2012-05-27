@@ -12,7 +12,7 @@ Import-Template:
  javax.servlet.*;version="${javax.servlet:[=.=.=, +1)}",
  javax.naming.*;version="0",
  org.apache.catalina.*;version="${org.apache.catalina:[=.=.=,+1)}",
- org.slf4j.*;version="${org.slf4j:[=.=.=,=.+1.=)]}",
+ org.slf4j.*;version="${org.slf4j.api:[=.=.=,=.+1.=)]}",
  javax.xml.parsers.*;version="0",
  org.osgi.*;version="0",
  org.w3c.dom.*;version="0",
