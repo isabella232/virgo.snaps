@@ -27,26 +27,25 @@
 		<dependency org="org.springframework" name="org.springframework.test" rev="${org.springframework}" conf="test->runtime"/>
 		<dependency org="org.springframework" name="org.springframework.spring-library" rev="${org.springframework}" conf="test->runtime"/>
 		<dependency org="org.springframework" name="org.springframework.aspects" rev="${org.springframework}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.slf4j.jcl" rev="${org.slf4j.jcl}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.slf4j.jul" rev="${org.slf4j.jul}" conf="test->runtime"/>
+		<dependency org="org.slf4j" name="com.springsource.slf4j.org.apache.commons.logging" rev="${org.slf4j}" conf="test->runtime"/>
+		<dependency org="org.slf4j" name="com.springsource.slf4j.bridge" rev="${org.slf4j}" conf="test->runtime"/>
 		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
 		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.core" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
 		<dependency org="javax.servlet" name="com.springsource.javax.servlet.jsp.jstl" rev="${javax.servlet.jsp.jstl}" conf="test->runtime"/>
 		<dependency org="org.apache.taglibs" name="com.springsource.org.apache.taglibs.standard" rev="${org.apache.taglibs}" conf="test->runtime" />
-		<dependency org="org.eclipse.virgo.mirrored" name="org.eclipse.equinox.event" rev="${org.eclipse.equinox.event}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.eclipse.equinox.util" rev="${org.eclipse.equinox.util}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.eclipse.equinox.ds" rev="${org.eclipse.equinox.ds}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.eclipse.equinox.cm" rev="${org.eclipse.equinox.cm}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="org.eclipse.equinox.region" rev="${org.eclipse.equinox.region}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.event" rev="${org.eclipse.equinox.event}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.util" rev="${org.eclipse.equinox.util}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.ds" rev="${org.eclipse.equinox.ds}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.cm" rev="${org.eclipse.equinox.cm}" conf="test->runtime"/>
+		<dependency org="org.eclipse.osgi" name="org.eclipse.equinox.region" rev="${org.eclipse.equinox.region}" conf="test->runtime"/>
 		<dependency org="org.junit" name="com.springsource.org.junit" rev="${org.junit}" conf="test->runtime"/>
 		<dependency org="org.easymock" name="com.springsource.org.easymock" rev="${org.easymock}" conf="test->runtime"/>
 		<dependency org="org.aspectj" name="com.springsource.org.aspectj.weaver" rev="${org.aspectj}" conf="test->runtime"/>
     	<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.core" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
 		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.logbackcorefragment" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
 		<dependency org="org.eclipse.virgo.medic" name="org.eclipse.virgo.medic.logbackclassicfragment" rev="${org.eclipse.virgo.medic}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="ch.qos.logback.classic" rev="${ch.qos.logback.classic}" conf="test->runtime"/>
-		<dependency org="org.eclipse.virgo.mirrored" name="ch.qos.logback.core" rev="${ch.qos.logback.core}" conf="test->runtime"/>
-        <dependency org="org.eclipse.virgo.mirrored" name="ch.qos.logback.slf4j" rev="${ch.qos.logback.slf4j}" conf="test->runtime"/>
+		<dependency org="ch.qos.logback" name="com.springsource.ch.qos.logback.classic" rev="${ch.qos.logback}" conf="test->runtime"/>
+		<dependency org="ch.qos.logback" name="com.springsource.ch.qos.logback.core" rev="${ch.qos.logback}" conf="test->runtime"/>
 
 
 		<!-- Prevent Xerces and Xalan from being on the classpath to work around Java bug 6723276 during integration testing -->
