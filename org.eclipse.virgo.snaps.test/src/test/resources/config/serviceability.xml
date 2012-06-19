@@ -69,11 +69,6 @@
 		<appender-ref ref="LOG_FILE" />
 	</logger>
 
-	<logger level="TRACE" additivity="false" name="org.eclipse.virgo.snaps.core.internal">
-		<appender-ref ref="SIFTED_LOG_FILE" />
-		<appender-ref ref="LOG_FILE" />
-	</logger>
-
 	<root level="INFO">
 		<appender-ref ref="SIFTED_LOG_FILE" />
 		<appender-ref ref="LOG_FILE" />
