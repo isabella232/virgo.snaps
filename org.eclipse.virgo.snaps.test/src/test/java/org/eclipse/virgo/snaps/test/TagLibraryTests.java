@@ -29,14 +29,26 @@ public class TagLibraryTests extends AbstractDeployerTests {
     @Before
     public void deployHost() throws DeploymentException {
         host = deploy("target/test-apps/taglib-host.jar");
+        sleep();
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
     }
     
     private DeploymentIdentity deploySnapOne() throws Exception {
-        return deploySnap("target/test-apps/taglib-snap-one.jar", "taglib.snap.one"); 
+        DeploymentIdentity snap = deploySnap("target/test-apps/taglib-snap-one.jar", "taglib.snap.one");
+        sleep();
+        return snap; 
     }
     
     private DeploymentIdentity deploySnapTwo() throws Exception {
-        return deploySnap("target/test-apps/taglib-snap-two.jar", "taglib.snap.two"); 
+        DeploymentIdentity snap = deploySnap("target/test-apps/taglib-snap-two.jar", "taglib.snap.two");
+        sleep();
+        return snap; 
     }
     
     private DeploymentIdentity deploySnap(String snap, final String symbolicName) throws Exception {
