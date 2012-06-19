@@ -33,6 +33,11 @@ public class SnapCapabilityTests extends AbstractCapabilityTests {
     private void deployHostAndSnap() throws DeploymentException {
         deployHost();
         snap = deploy("target/test-apps/simple-snap.jar");
+        // Allow snap to be published before proceeding with test
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
     }
 
     private void undeployHostAndSnap() throws DeploymentException {
