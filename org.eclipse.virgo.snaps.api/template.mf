@@ -6,5 +6,5 @@ Bundle-Name: Snaps API
 Import-Template: 
  org.eclipse.gemini.web.*;version="${org.eclipse.gemini.web:[=.=.=, +1)}",
  javax.servlet.jsp*;version="${javax.servlet.jsp:[=.=.=, +1)}",
- javax.servlet.*;version="${javax.servlet:[=.=.=, +1)}",
+ javax.servlet.*;version="${javax.servlet:[-1.6.=, +1)}",
  org.osgi.framework;version="0"
