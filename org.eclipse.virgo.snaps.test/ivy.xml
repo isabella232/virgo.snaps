@@ -52,6 +52,8 @@
 		<!-- Prevent Xerces and Xalan from being on the classpath to work around Java bug 6723276 during integration testing -->
 		<exclude org="org.apache.xerces"/>
 		<exclude org="org.apache.xalan"/>
+        <exclude org="javax.servlet" module="javax.servlet"/>
+        <exclude org="org.eclipse.osgi"/>
 
 		<!--  Prevent Derby coming down until we move to a Spring version when its JDCB bundle's Derby dependency is optional 
 		<exclude org="org.apache.derby"/>-->
