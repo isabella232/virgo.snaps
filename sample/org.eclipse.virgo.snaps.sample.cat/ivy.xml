@@ -17,7 +17,7 @@
     </publications>
 
     <dependencies>    
-		<dependency org="javax.servlet" name="javax.servlet" rev="${javax.servlet}" conf="provided->runtime"/>
+		<dependency org="org.eclipse.virgo.mirrored" name="javax.servlet" rev="${javax.servlet}" conf="provided->runtime"/>
 		<dependency org="org.springframework" name="org.springframework.context" rev="${org.springframework}" conf="provided->runtime"/>
 		<dependency org="org.springframework" name="org.springframework.web" rev="${org.springframework}" conf="provided->runtime"/>
         <dependency org="org.springframework" name="org.springframework.web.servlet" rev="${org.springframework}" conf="provided->runtime"/>
