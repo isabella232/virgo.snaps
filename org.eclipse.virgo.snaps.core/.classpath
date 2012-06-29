@@ -21,7 +21,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="SNAPS_IVY_CACHE/javax.servlet/javax.servlet/3.0.0.v201103241009/javax.servlet-3.0.0.v201103241009.jar" sourcepath="/SNAPS_IVY_CACHE/javax.servlet/javax.servlet/3.0.0.v201103241009/javax.servlet-sources-3.0.0.v201103241009.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.mirrored/javax.servlet/3.0.0.v201112011016/javax.servlet-3.0.0.v201112011016.jar" sourcepath="/SNAPS_IVY_CACHE/javax.servlet/javax.servlet/3.0.0.v201103241009/javax.servlet-sources-3.0.0.v201103241009.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.springframework/org.springframework.test/3.0.5.RELEASE/org.springframework.test-3.0.5.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.springframework/org.springframework.test/2.5.6.SEC01/org.springframework.test-sources-2.5.6.SEC01.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.junit/com.springsource.org.junit/4.7.0/com.springsource.org.junit-4.7.0.jar" sourcepath="/SNAPS_IVY_CACHE/org.junit/com.springsource.org.junit/4.7.0/com.springsource.org.junit-sources-4.7.0.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.apache.commons/com.springsource.org.apache.commons.logging/1.1.1/com.springsource.org.apache.commons.logging-1.1.1.jar"/>
@@ -31,7 +31,7 @@
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.util/org.eclipse.virgo.util.osgi.manifest/3.5.0.D-20120628123356/org.eclipse.virgo.util.osgi.manifest-3.5.0.D-20120628123356.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.virgo.util/org.eclipse.virgo.util.osgi.manifest/3.5.0.D-20120628123356/org.eclipse.virgo.util.osgi.manifest-sources-3.5.0.D-20120628123356.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.kernel/org.eclipse.virgo.kernel.osgi/3.5.0.D-20120628132539/org.eclipse.virgo.kernel.osgi-3.5.0.D-20120628132539.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.virgo.kernel/org.eclipse.virgo.kernel.osgi/3.5.0.D-20120628132539/org.eclipse.virgo.kernel.osgi-sources-3.5.0.D-20120628132539.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.gemini/org.eclipse.gemini.web.core/2.1.0.RELEASE/org.eclipse.gemini.web.core-2.1.0.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.gemini/org.eclipse.gemini.web.core/2.1.0.RELEASE/org.eclipse.gemini.web.core-sources-2.1.0.RELEASE.jar"/>
-	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.slf4j/com.springsource.slf4j.api/1.6.1/com.springsource.slf4j.api-1.6.1.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.mirrored/org.slf4j.api/1.6.4.v20120130-2120/org.slf4j.api-1.6.4.v20120130-2120.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.util/org.eclipse.virgo.util.io/3.5.0.D-20120628123356/org.eclipse.virgo.util.io-3.5.0.D-20120628123356.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.gemini/org.eclipse.gemini.web.tomcat/2.1.0.RELEASE/org.eclipse.gemini.web.tomcat-2.1.0.RELEASE.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.gemini/org.eclipse.gemini.web.tomcat/2.1.0.RELEASE/org.eclipse.gemini.web.tomcat-sources-2.1.0.RELEASE.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.util/org.eclipse.virgo.util.common/3.5.0.D-20120628123356/org.eclipse.virgo.util.common-3.5.0.D-20120628123356.jar"/>
@@ -46,6 +46,7 @@
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.medic/org.eclipse.virgo.medic/3.5.0.D-20120628124330/org.eclipse.virgo.medic-3.5.0.D-20120628124330.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.kernel/org.eclipse.virgo.kernel.artifact/3.5.0.D-20120628132539/org.eclipse.virgo.kernel.artifact-3.5.0.D-20120628132539.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.virgo.kernel/org.eclipse.virgo.kernel.artifact/3.5.0.D-20120628132539/org.eclipse.virgo.kernel.artifact-sources-3.5.0.D-20120628132539.jar"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.nano/org.eclipse.virgo.kernel.core/3.5.0.D-20120628125803/org.eclipse.virgo.kernel.core-3.5.0.D-20120628125803.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.virgo.kernel/org.eclipse.virgo.kernel.core/3.5.0.D-20120628125803/org.eclipse.virgo.kernel.core-sources-3.5.0.D-20120628125803.jar"/>
-	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.7.1.R37x_v20110808-1106/org.eclipse.osgi-3.7.1.R37x_v20110808-1106.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.7.1.R37x_v20110808-1106/org.eclipse.osgi-sources-3.7.1.R37x_v20110808-1106.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.mirrored/org.eclipse.osgi/3.8.0.v20120508-2119/org.eclipse.osgi-3.8.0.v20120508-2119.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.7.1.R37x_v20110808-1106/org.eclipse.osgi-sources-3.7.1.R37x_v20110808-1106.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.nano/org.eclipse.virgo.deployer.api/3.5.0.D-20120628125803/org.eclipse.virgo.deployer.api-3.5.0.D-20120628125803.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
