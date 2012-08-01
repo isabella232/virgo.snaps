@@ -106,7 +106,8 @@ public class SnapsTagTests {
         
         expect(bundleContext.getServiceReferences("org.eclipse.virgo.snaps.core.internal.Snap", "(snap.host.id=27)")).andReturn(new ServiceReference[] {serviceReference1, serviceReference2});
         
-        expect(serviceReference1.compareTo(serviceReference2)).andReturn(1);
+        expect(serviceReference1.compareTo(serviceReference2)).andReturn(1).anyTimes();
+        expect(serviceReference2.compareTo(serviceReference1)).andReturn(-1).anyTimes();
         
         replay(servletContext, bundleContext, serviceReference1, serviceReference2, bundle);
         

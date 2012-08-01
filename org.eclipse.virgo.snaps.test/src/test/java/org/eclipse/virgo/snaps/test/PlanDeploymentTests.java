@@ -38,6 +38,11 @@ public class PlanDeploymentTests extends AbstractDeployerTests {
     @Test
     public void scopedPlan() throws Exception {
         DeploymentIdentity deployed = getDeployer().deploy(new File("src/test/resources/scoped.plan").toURI());
+        // Allow snap to be published before proceeding with test
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
         
         try {
             RequestUtils.assertContent("index", "/simple-host", "/index.jsp");
