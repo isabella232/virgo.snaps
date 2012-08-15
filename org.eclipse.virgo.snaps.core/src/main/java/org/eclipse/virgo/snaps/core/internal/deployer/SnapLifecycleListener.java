@@ -25,11 +25,11 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.eclipse.virgo.kernel.deployer.core.DeploymentException;
+import org.eclipse.virgo.nano.deployer.api.core.DeploymentException;
 import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
 import org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
-import org.eclipse.virgo.kernel.shim.scope.Scope;
+import org.eclipse.virgo.nano.shim.scope.Scope;
 import org.eclipse.virgo.medic.eventlog.EventLogger;
 import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
 import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;

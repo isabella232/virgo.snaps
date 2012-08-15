@@ -5,6 +5,7 @@ Bundle-Version: ${version}
 Bundle-Name: Snaps Core
 Import-Template: 
  org.eclipse.virgo.kernel.*;version="${org.eclipse.virgo.kernel:[=.=.=, +1)}",
+ org.eclipse.virgo.nano.*;version="${org.eclipse.virgo.nano:[=.=.=, +1)}",
  org.eclipse.virgo.util.*;version="${org.eclipse.virgo.util:[=.=.=, +1)}",
  org.eclipse.gemini.web.*;version="${org.eclipse.gemini.web:[=.=.=, +1)}",
  org.eclipse.virgo.medic.*;version="${org.eclipse.virgo.medic:[=.=.=, +1)}",
