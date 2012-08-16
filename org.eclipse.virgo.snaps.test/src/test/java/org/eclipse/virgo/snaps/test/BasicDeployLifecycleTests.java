@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import org.eclipse.virgo.kernel.deployer.core.DeploymentIdentity;
+import org.eclipse.virgo.nano.deployer.api.core.DeploymentIdentity;
 
 public class BasicDeployLifecycleTests extends AbstractDeployerTests {
 
