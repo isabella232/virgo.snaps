@@ -80,12 +80,12 @@ public abstract class AbstractDeployerTests {
     @Before
     public void setUp() throws Exception {   
         try {
-            if (!latch.await(30, TimeUnit.SECONDS)) {
-                fail("System artifacts were not deployed within 30 seconds");
+            if (!latch.await(60, TimeUnit.SECONDS)) {
+                fail("System artifacts were not deployed within 60 seconds");
             }
         } catch (InterruptedException e) {
             Thread.interrupted();
-            fail("System artifacts were not deployed within 30 seconds");
+            fail("System artifacts were not deployed within 60 seconds");
         }
         
         this.context = FrameworkUtil.getBundle(getClass()).getBundleContext();
