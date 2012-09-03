@@ -23,6 +23,18 @@
 
 	<target name="precommit" depends="clean, clean-integration, test, findbugs, clover"/>
 
+    <target name="publish-build">
+         <antcall target="publish-package-build">
+            <param name="package.file" value="${package.output.file}"/>
+        </antcall>
+    </target>
+    
+    <target name="publish-download">
+         <antcall target="publish-package-download">
+            <param name="package.file" value="${package.output.file}"/>
+        </antcall>
+    </target>
+    
 	<target name="test" depends="build-test-apps">
 		<ant target="quality-multi-bundle.test" />
 	</target>
