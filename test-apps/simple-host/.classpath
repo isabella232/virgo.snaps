@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/main/webapp"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="var" path="SNAPS_IVY_CACHE/javax.servlet/javax.servlet/3.0.0.v201103241009/javax.servlet-3.0.0.v201103241009.jar"/>
+	<classpathentry kind="var" path="IVY_CACHE/org.eclipse.virgo.mirrored/javax.servlet/3.0.0.v201112011016/javax.servlet-3.0.0.v201112011016.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.virgo.snaps.core"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
