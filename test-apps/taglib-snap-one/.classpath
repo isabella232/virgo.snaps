@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="SNAPS_IVY_CACHE/javax.servlet/javax.servlet/3.0.0.v201103241009/javax.servlet-3.0.0.v201103241009.jar" sourcepath="/SNAPS_IVY_CACHE/javax.servlet/com.springsource.javax.servlet/3.0.0.v201103241009/com.springsource.javax.servlet-sources-3.0.0.v201103241009.jar"/>
-	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.mirrored/org.eclipse.osgi/3.8.1.v20120830-144521/org.eclipse.osgi-3.8.1.v20120830-144521.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.7.1.R37x_v20110808-1106/org.eclipse.osgi-sources-3.7.1.R37x_v20110808-1106.jar"/>
+	<classpathentry kind="var" path="SNAPS_IVY_CACHE/org.eclipse.virgo.mirrored/org.eclipse.osgi/3.8.2.v20130124-134944/org.eclipse.osgi-3.8.2.v20130124-134944.jar" sourcepath="/SNAPS_IVY_CACHE/org.eclipse.osgi/org.eclipse.osgi/3.7.1.R37x_v20110808-1106/org.eclipse.osgi-sources-3.7.1.R37x_v20110808-1106.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.virgo.snaps.core"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
