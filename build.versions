@@ -12,11 +12,11 @@ javax.servlet.jsp=2.2.0.v201112011158
 org.springframework=3.1.0.RELEASE
 org.eclipse.virgo.kernel=3.6.3.RELEASE
 org.eclipse.virgo.util=3.6.3.RELEASE
-org.eclipse.gemini.web=2.2.3.RELEASE
+org.eclipse.gemini.web=2.2.4.RELEASE
 org.eclipse.virgo.test=3.6.3.RELEASE
-org.eclipse.virgo.web=3.6.3.RELEASE
+org.eclipse.virgo.web=3.6.4.D-20140911050254
 org.eclipse.virgo.snaps.samples=1.1.0
-org.apache.catalina=7.0.53.v201406061610
+org.apache.catalina=7.0.55.v201409050650
 org.eclipse.virgo.nano=3.6.3.RELEASE
 
 # Test/Sample
