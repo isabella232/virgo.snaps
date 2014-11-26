@@ -1,0 +1,42 @@
+project(':snaps:org.eclipse.virgo.snaps.api') {
+    dependencies {
+		testCompile group: 'org.easymock', name: 'easymock', version: easymockVersion
+        testCompile group: "org.springframework", name: "org.springframework.core", version: springframeworkVersion, configuration: "compile", ext: "jar"
+        testCompile group: "org.springframework", name: "org.springframework.test", version: springframeworkVersion, configuration: "compile", ext: "jar"
+
+        compile group: "org.eclipse.virgo.mirrored", name: "javax.servlet", version: javaxServletVersion, configuration: "compile", ext: "jar"
+        compile group: "org.eclipse.virgo.mirrored", name: "javax.servlet.jsp", version: javaxServletJspVersion, configuration: "compile", ext: "jar"
+
+        compile group: "org.eclipse.virgo.mirrored", name: "org.eclipse.osgi", version: equinoxVersion, configuration: "compile", ext: "jar"
+
+        compile group: "org.eclipse.gemini", name: "org.eclipse.gemini.web.core", version: geminiWebVersion, configuration: "compile", ext: "jar"
+	}
+}
+
+project(':snaps:org.eclipse.virgo.snaps.core') {
+    dependencies {
+		testCompile group: 'org.easymock', name: 'easymock', version: easymockVersion
+        testCompile group: "org.springframework", name: "org.springframework.test", version: springframeworkVersion, configuration: "compile", ext: "jar"
+		testCompile project(':test:org.eclipse.virgo.test.stubs')
+		testCompile project(':medic:org.eclipse.virgo.medic.test')
+
+        compile group: "org.eclipse.virgo.mirrored", name: "org.slf4j.api", version: slf4jVersion, configuration: "compile", ext: "jar"
+        compile group: "org.eclipse.virgo.mirrored", name: "javax.servlet", version: javaxServletVersion, configuration: "compile", ext: "jar"
+
+        compile group: "org.eclipse.virgo.mirrored", name: "org.eclipse.osgi", version: equinoxVersion, configuration: "compile", ext: "jar"
+
+        compile group: "org.eclipse.gemini", name: "org.eclipse.gemini.web.core", version: geminiWebVersion, configuration: "compile", ext: "jar"
+        compile group: "org.eclipse.virgo.mirrored", name: "org.apache.catalina", version: tomcatVersion, configuration: "compile", ext: "jar"
+        compile group: "org.eclipse.gemini", name: "org.eclipse.gemini.web.tomcat", version: geminiWebVersion, configuration: "compile", ext: "jar"
+
+		compile project(':util:org.eclipse.virgo.util.common')
+		compile project(':util:org.eclipse.virgo.util.io')
+		compile project(':util:org.eclipse.virgo.util.osgi')
+		compile project(':util:org.eclipse.virgo.util.osgi.manifest')
+		compile project(':medic:org.eclipse.virgo.medic')
+		compile project(':nano:org.eclipse.virgo.nano.core')
+		compile project(':nano:org.eclipse.virgo.nano.deployer.api')
+		compile project(':kernel:org.eclipse.virgo.kernel.artifact')
+		compile project(':kernel:org.eclipse.virgo.kernel.deployer')
+	}
+}
