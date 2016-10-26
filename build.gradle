@@ -1,0 +1,195 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        dependencies {
+            classpath "gradle.plugin.org.eclipse.virgo.bundlor:bundlor-plugin:0.2"
+        }
+    }
+}
+
+def timestamp = new Date().format('yyyyMMddHHmmss', TimeZone.getTimeZone('GMT'))
+
+defaultTasks 'clean', 'build', 'javadoc', 'sourcesJar', 'javadocJar'
+
+ext.javaProjects = [
+    project(':org.eclipse.virgo.snaps'),
+    project(':org.eclipse.virgo.snaps.api'),
+    project(':org.eclipse.virgo.snaps.cor:org.eclipse.virgo.snaps.core')
+]
+
+allprojects {
+    apply plugin: 'base'
+    if (System.properties['ci.build'] == 'true') {
+        def buildQualifier = System.properties['ci.build.qualifier']
+        if(buildQualifier) { 
+            version = version + '.' + buildQualifier
+        } else {
+            version = version + '.' + timestamp
+        }
+    } else {
+        version = version + '.SNAPSHOT'
+    }
+}
+
+configure(javaProjects) {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    apply plugin: 'findbugs'
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    compileJava {
+        options.encoding = 'UTF-8'
+        options.fork = true
+        doFirst {
+            options.forkOptions.with {
+                executable = 'java'
+                jvmArgs = [
+                    '-cp',
+                    configurations.ecj.asPath,
+                    'org.eclipse.jdt.internal.compiler.batch.Main']
+            }
+        }
+    }
+    compileTestJava {
+        options.encoding = 'UTF-8'
+        options.fork = true
+        doFirst {
+            options.forkOptions.with {
+                executable = 'java'
+                jvmArgs = [
+                    '-cp',
+                    configurations.ecj.asPath,
+                    'org.eclipse.jdt.internal.compiler.batch.Main']
+            }
+        }
+    }
+    configurations {
+    	ecj {}
+		testBundles {
+			transitive = false
+		}
+	}
+    jar {
+    	// add SUA to archive
+        from "$rootDir/build-bundlor/resources/about/notice.html"
+		duplicatesStrategy 'exclude'
+    }
+    jar.doLast {
+    	// signing the archives
+        if(System.properties['ci.build.signjars'] == 'true') {
+            println '|--> Signing Jar File: ' + archivePath
+            exec {
+                workingDir destinationDir
+                commandLine 'curl',
+                            '-o',
+                            archiveName,
+                            '-F',
+                            "file=@${archiveName}",
+                            '--show-error',
+                            'http://build.eclipse.org:31338/sign'
+            }
+        }
+    }
+    jacoco {
+        toolVersion = "0.7.4.201502262128"
+    }
+    findbugs {
+        sourceSets = [sourceSets.main]
+        ignoreFailures = true
+        effort = "max"
+        reportLevel = "high"
+    }
+    javadoc {
+        failOnError = false
+    }
+    task sourcesJar(type: Jar, dependsOn: classes) {
+    	description 'Assembles a jar archive containing the sources.'
+    	group = 'build'
+	    classifier = 'sources'
+    	from sourceSets.main.allSource
+	}
+	task javadocJar(type: Jar, dependsOn: javadoc) {
+	    description 'Assembles a jar archive containing the javadocs.'
+    	group = 'build'
+	    classifier = 'javadoc'
+	    from javadoc.destinationDir
+	}    	
+}
+
+configure(javaProjects) {
+    apply plugin: 'org.eclipse.virgo.bundlor'
+	
+	task('addProjectVersionToGradlePropertiesTask', type: Copy) {
+		ext.outputDir = new File(buildDir, 'bundlor-properties')
+		inputs.file project.rootProject.file('gradle.properties')
+		outputs.dir ext.outputDir
+		from project.rootProject.file('gradle.properties')
+		into ext.outputDir
+		doLast {
+			def gradleProperties = new Properties()
+			gradleProperties.load(new FileReader("${buildDir}/bundlor-properties/gradle.properties"))
+			gradleProperties.setProperty('bundleName', "${archivesBaseName}")
+			gradleProperties.setProperty('timestamp', "${timestamp}")
+			gradleProperties.setProperty('version', "${version}")
+			def writer = new FileWriter("${buildDir}/bundlor-properties/gradle.properties")
+   			try {
+      			gradleProperties.store(writer, 'modified during build process')
+      			writer.flush()
+   			} finally {
+      			writer.close()
+   			}
+		}
+	}
+	task('mergeClassesAndResources', type: Copy, dependsOn: 'compileJava') {
+		ext.bundlorInputPath = new File(buildDir, 'bundlor-inputPath')
+		inputs.file sourceSets.main.output.classesDir
+		inputs.file sourceSets.main.resources
+		outputs.dir ext.bundlorInputPath
+		from sourceSets.main.output.classesDir
+		from sourceSets.main.resources
+		into ext.bundlorInputPath
+	}
+	project.tasks.'bundlor'.dependsOn('addProjectVersionToGradlePropertiesTask', 'mergeClassesAndResources')
+    bundlor {
+    	ext.bundlorInputPath = new File(buildDir, 'bundlor-inputPath')
+		project.tasks['bundlor'].inputs.file ext.bundlorInputPath
+        manifestTemplatePath = "template.mf"
+        propertiesPath = new File("${project.buildDir}/bundlor-properties/gradle.properties")
+		inputPath = ext.bundlorInputPath
+        failOnWarnings = true
+    }
+}
+
+configure(javaProjects) {
+    apply plugin: 'eclipse'
+
+    eclipse {
+        jdt {
+            sourceCompatibility = 1.8
+            targetCompatibility = 1.8            
+        }
+        project {
+            file.beforeMerged {
+                project.natures.clear()
+            }
+            natures = ['org.eclipse.buildship.core.gradleprojectnature']
+        }
+    }
+    cleanEclipse.doLast {
+        delete '.settings'
+        delete 'bin'
+        delete '.springBeans'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    description 'Creates a local Gradle Wrapper'
+    group = 'Build Setup'
+    gradleVersion = '3.1'
+}
+
