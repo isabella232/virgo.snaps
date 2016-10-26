@@ -8,4 +8,8 @@ spring-build/lib/findbugs
 .DS_Store
 user-ivy.properties
 .gradle
+.classpath
+.project
+.springBeans
+.settings
 
