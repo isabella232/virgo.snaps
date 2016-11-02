@@ -2,4 +2,4 @@ rootProject.name = 'snaps-root'
 include ':org.eclipse.virgo.snaps'
 include ':org.eclipse.virgo.snaps.api'
 include ':org.eclipse.virgo.snaps.core'
-
+include ':org.eclipse.virgo.snaps.test'

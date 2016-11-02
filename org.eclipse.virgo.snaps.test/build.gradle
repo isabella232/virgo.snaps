@@ -1,0 +1,14 @@
+description = 'Virgo Snaps Test Bundle'
+
+dependencies {
+	ecj group: "org.eclipse.jdt.core.compiler", name: "ecj", version: "${ecjVersion}"
+    
+    testCompile project(":org.eclipse.virgo.snaps.api")
+    testCompile project(":org.eclipse.virgo.snaps.core")
+    
+	testCompile "org.eclipse.virgo:org.eclipse.virgo.util.osgi.manifest:${eclipseVirgoVersion}"
+	testCompile "org.eclipse.virgo:org.eclipse.virgo.util.osgi:${eclipseVirgoVersion}"
+	
+	testCompile "junit:junit:${junitVersion}"
+	testCompile "org.eclipse.virgo:org.eclipse.virgo.test.framework:${eclipseVirgoVersion}"	
+}

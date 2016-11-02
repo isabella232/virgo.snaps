@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSessionContext;
 
 import org.eclipse.virgo.snaps.core.internal.webapp.SnapServletContext;
 
-
+@SuppressWarnings("deprecation")
 public final class SnapHttpSession extends HttpSessionWrapper {
 
     private static final String QUALIFIED_NAME_MARKER = "##";
@@ -55,11 +55,10 @@ public final class SnapHttpSession extends HttpSessionWrapper {
         super.setAttribute(qualifyName(name), value);
     }
 
-    @SuppressWarnings("deprecation")
-	@Override
-	public HttpSessionContext getSessionContext() {
-		throw new RuntimeException(new OperationNotSupportedException("getSessionContext is deprecated"));
-	}
+    @Override
+    public HttpSessionContext getSessionContext() {
+        throw new RuntimeException(new OperationNotSupportedException("getSessionContext is deprecated"));
+    }
 
     private String qualifyName(String baseName) {
         return QUALIFIED_NAME_MARKER + this.snapServletContext.getSnapContextPath() + "." + baseName;

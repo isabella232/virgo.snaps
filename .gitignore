@@ -12,4 +12,6 @@ user-ivy.properties
 .project
 .springBeans
 .settings
+bin
+build
 

@@ -1,0 +1,30 @@
+description = 'Virgo Snaps Core Bundle'
+
+dependencies {
+	ecj group: "org.eclipse.jdt.core.compiler", name: "ecj", version: "${ecjVersion}"
+    
+	compile "org.slf4j:slf4j-api:${slf4jVersion}"
+	
+	compile group: "org.eclipse.virgo.mirrored", name: "javax.servlet", version: javaxServletVersion, configuration: "compile"
+	compile group: "org.eclipse.virgo.mirrored", name: "org.eclipse.osgi", version: eclipseOsgiVersion, configuration: "compile"
+	
+	compile group: "org.eclipse.gemini", name: "org.eclipse.gemini.web.core", version: eclipseGeminiWebVersion, configuration: "compile"
+	compile group: "org.eclipse.gemini", name: "org.eclipse.gemini.web.tomcat", version: eclipseGeminiWebVersion, configuration: "compile"
+
+	compile "org.eclipse.virgo:org.eclipse.virgo.util.common:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.util.io:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.util.osgi:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.util.osgi.manifest:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.medic:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.nano.core:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.nano.deployer.api:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.kernel.artifact:${eclipseVirgoVersion}"
+	compile "org.eclipse.virgo:org.eclipse.virgo.kernel.deployer:${eclipseVirgoVersion}"
+
+	testCompile "org.eclipse.virgo:org.eclipse.virgo.test.stubs:${eclipseVirgoVersion}"
+	testCompile "org.eclipse.virgo:org.eclipse.virgo.medic.test:${eclipseVirgoVersion}"
+	
+	testCompile "junit:junit:${junitVersion}"
+	testCompile "org.easymock:easymock:${easymockVersion}"
+	testCompile "org.springframework:spring-test:${springframeworkVersion}"	
+}
