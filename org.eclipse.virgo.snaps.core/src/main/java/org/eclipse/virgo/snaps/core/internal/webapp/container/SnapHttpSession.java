@@ -23,6 +23,9 @@ import org.eclipse.virgo.snaps.core.internal.webapp.SnapServletContext;
 public final class SnapHttpSession extends HttpSessionWrapper {
 
     private static final String QUALIFIED_NAME_MARKER = "##";
+    
+    // This constant should have the same value as within org.springframework.aop.scope.ScopedProxyUtils
+    private static final String TARGET_NAME_PREFIX = "scopedTarget.";
 
     private final SnapServletContext snapServletContext;
 
@@ -48,11 +51,17 @@ public final class SnapHttpSession extends HttpSessionWrapper {
     @Override
     public void removeAttribute(String name) {
         super.removeAttribute(qualifyName(name));
+        if (name.startsWith(TARGET_NAME_PREFIX)) {
+        	super.removeAttribute(name);
+        }
     }
 
     @Override
     public void setAttribute(String name, Object value) {
         super.setAttribute(qualifyName(name), value);
+        if (name.startsWith(TARGET_NAME_PREFIX)) {
+        	super.setAttribute(name, value);
+        }
     }
 
     @Override

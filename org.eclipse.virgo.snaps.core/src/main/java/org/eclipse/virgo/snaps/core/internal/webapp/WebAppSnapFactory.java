@@ -31,6 +31,8 @@ public final class WebAppSnapFactory implements SnapFactory {
 
     private final EventLogger eventLogger;
 
+	private WebAppSnap webAppSnap;
+
     public WebAppSnapFactory(Bundle snapBundle, WebBundleClassLoaderFactory webBundleClassLoaderFactory, EventLogger eventLogger) {
         this.snapBundle = snapBundle;
         this.classLoaderFactory = webBundleClassLoaderFactory;
@@ -39,7 +41,18 @@ public final class WebAppSnapFactory implements SnapFactory {
 
     public Snap createSnap(Host host) {
         logger.info("Creating new snap that binds snap bundle '{}' to host bundle '{}'", this.snapBundle, host.getBundle());
-        return new WebAppSnap(host, this.snapBundle, this.classLoaderFactory, this.eventLogger);
+        webAppSnap = new WebAppSnap(host, this.snapBundle, this.classLoaderFactory, this.eventLogger);
+		return webAppSnap;
     }
+    
+	@Override
+	public boolean hasSnap() {
+		return this.webAppSnap != null;
+	}
+
+	@Override
+	public Snap getSnap() {
+		return webAppSnap;
+	}
 
 }

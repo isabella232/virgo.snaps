@@ -37,8 +37,8 @@ import org.eclipse.virgo.snaps.core.internal.webapp.url.FilterUrlPatternMatcher;
 
 class FilterManager {
     
-    private final SnapServletContext snapServletContext;
-    
+	private final List<SnapServletContext> snapServletContexts = new ArrayList<>();
+	
     private final ClassLoader classLoader;        
     
     private final List<FilterHolder> filters = Collections.synchronizedList(new ArrayList<FilterHolder>());
@@ -47,22 +47,28 @@ class FilterManager {
     
     private final List<ServletNameFilterMapping> servletNameFilterMappings = Collections.synchronizedList(new ArrayList<ServletNameFilterMapping>());
     
+	private WebXml webXml;
+
+	private Map<String, FilterHolder> filtersMap;
+    
     public FilterManager(WebXml webXml, SnapServletContext snapServletContext, ClassLoader classLoader) {
-        this.snapServletContext = snapServletContext;
+    	this.webXml = webXml;
+		this.snapServletContexts.add(snapServletContext);
         this.classLoader = classLoader;
 
-        reifyWebXml(webXml);
+        this.filtersMap = processFilters();
+        reifyWebXml(snapServletContext);
     }
     
-    private void reifyWebXml(WebXml webXml) {
-        Map<String, FilterHolder> filters = processFilters(webXml);
-        processFilterMappings(webXml, filters);
-    }            
+    private void reifyWebXml(SnapServletContext snapServletContext) {
+        processUrlPatternFilterMappings(snapServletContext);
+        processServletNameFilterMappings();
+    }           
     
-    private Map<String, FilterHolder> processFilters(WebXml webXml) throws SnapException {
+    private Map<String, FilterHolder> processFilters() throws SnapException {
         Map<String, FilterHolder> filtersMap = new HashMap<String, FilterHolder>();
         
-        for (FilterDefinition filterDefinition : webXml.getFilterDefinitions()) {
+        for (FilterDefinition filterDefinition : this.webXml.getFilterDefinitions()) {
             try {
                 Class<?> filterClass = ManagerUtils.loadComponentClass(filterDefinition.getFilterClassName(), this.classLoader);
                 if (Filter.class.isAssignableFrom(filterClass)) {
@@ -86,24 +92,26 @@ class FilterManager {
         return filtersMap;
     }
     
-    private void processFilterMappings(WebXml webXml, Map<String, FilterHolder> filters) throws SnapException {
-        for (UrlPatternFilterMappingDefinition definition : webXml.getUrlPatternFilterMappingDefinitions()) {
-            Filter filter = filters.get(definition.getFilterName()).getInstance();
-            this.urlPatternFilterMappings.add(new UrlPatternFilterMapping(filter, ManagerUtils.expandMapping(definition.getUrlPattern(), this.snapServletContext), definition.getFilterDispatcherTypes()));
-        }
-        
-        for (ServletNameFilterMappingDefinition definition : webXml.getServletNameFilterMappingDefinitions()) {
-            Filter filter = filters.get(definition.getFilterName()).getInstance();
-            this.servletNameFilterMappings.add(new ServletNameFilterMapping(filter, definition.getServletName(), definition.getFilterDispatcherTypes()));            
+    private void processUrlPatternFilterMappings(SnapServletContext snapServletContext) throws SnapException {
+        for (UrlPatternFilterMappingDefinition definition : this.webXml.getUrlPatternFilterMappingDefinitions()) {
+            Filter filter = this.filtersMap.get(definition.getFilterName()).getInstance();
+            this.urlPatternFilterMappings.add(new UrlPatternFilterMapping(filter, ManagerUtils.expandMapping(definition.getUrlPattern(), snapServletContext), definition.getFilterDispatcherTypes()));
         }
     }
+
+	private void processServletNameFilterMappings() {
+		for (ServletNameFilterMappingDefinition definition : this.webXml.getServletNameFilterMappingDefinitions()) {
+            Filter filter = this.filtersMap.get(definition.getFilterName()).getInstance();
+            this.servletNameFilterMappings.add(new ServletNameFilterMapping(filter, definition.getServletName(), definition.getFilterDispatcherTypes()));            
+        }
+	}
     
     void init() throws ServletException {
         try {
             ManagerUtils.doWithThreadContextClassLoader(this.classLoader, new ClassLoaderCallback<Void>() {
                 public Void doWithClassLoader() throws ServletException {
                     for (FilterHolder filterHolder : filters) {                        
-                        FilterConfig config = new ImmutableFilterConfig(filterHolder.getDefinition(), snapServletContext);
+                        FilterConfig config = new ImmutableFilterConfig(filterHolder.getDefinition(), snapServletContexts.get(0));
                         try {
                             filterHolder.getInstance().init(config);
                         } catch (ServletException se) {
@@ -187,4 +195,9 @@ class FilterManager {
             return this.dispatcherTypes.contains(dispatcherType) && this.servletName.equals(servletName);
         }
     }
+    
+	public void addSnapServletContext(SnapServletContext snapServletContext) {
+		this.snapServletContexts.add(snapServletContext);
+		processUrlPatternFilterMappings(snapServletContext);
+	}
 }

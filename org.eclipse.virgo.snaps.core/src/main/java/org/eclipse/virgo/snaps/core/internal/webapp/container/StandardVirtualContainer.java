@@ -93,4 +93,10 @@ final class StandardVirtualContainer implements VirtualContainer {
     public SnapServletContext getSnapServletContext() {
         return this.snapServletContext;
     }
+    
+	@Override
+	public void addHost(SnapServletContext servletContext) {
+		this.servletManager.addSnapServletContext(servletContext);
+		this.filterManager.addSnapServletContext(servletContext);
+	}
 }

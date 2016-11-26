@@ -11,32 +11,52 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
-import org.junit.Test;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.virgo.util.osgi.manifest.VersionRange;
+import org.junit.Test;
 
 
 public class SnapHostDefinitionTests {
 
     @Test
     public void testStandard() {
-        SnapHostDefinition def = SnapHostDefinition.parse("travel;version=\"[1.2, 1.3)\"");
-        assertEquals("travel", def.getSymbolicName());
-        assertEquals(new VersionRange("[1.2, 1.3)"), def.getVersionRange());
+    	Set<SnapHostDefinition> definitions = SnapHostDefinition.parse("travel;version=\"[1.2, 1.3)\"");
+		assertEquals(1, definitions.size());
+
+		SnapHostDefinition definition = definitions.iterator().next();
+		assertEquals("travel", definition.getSymbolicName());
+		assertEquals(new VersionRange("[1.2, 1.3)"), definition.getVersionRange());
     }
     
-    @Test
-    public void testWithoutRange() {
-        SnapHostDefinition def = SnapHostDefinition.parse("travel");
-        assertEquals("travel", def.getSymbolicName());
-        assertEquals(VersionRange.NATURAL_NUMBER_RANGE, def.getVersionRange());
-    }
+	@Test
+	public void testWithoutRange() {
+		Set<SnapHostDefinition> definitions = SnapHostDefinition.parse("travel");
+		assertEquals(1, definitions.size());
+
+		SnapHostDefinition definition = definitions.iterator().next();
+		assertEquals("travel", definition.getSymbolicName());
+		assertEquals(VersionRange.NATURAL_NUMBER_RANGE, definition.getVersionRange());
+	}
     
-    @Test(expected=IllegalArgumentException.class)
-    public void testInvalid() {
-        SnapHostDefinition.parse("travel,hotels");
-    }
+	@Test
+	public void testMultiple() throws Exception {
+		Set<SnapHostDefinition> definitions = SnapHostDefinition.parse("travel,ski;version=\"[1.4, 2)\"");
+
+		Map<String, VersionRange> expected = new HashMap<>();
+		expected.put("travel", VersionRange.NATURAL_NUMBER_RANGE);
+		expected.put("ski", new VersionRange("[1.4, 2)"));
+		assertEquals(expected.size(), definitions.size());
+
+		for (SnapHostDefinition host : definitions) {
+			VersionRange expectedRange = expected.get(host.getSymbolicName());
+			
+			assertNotNull("Could not find a header for " + host.getSymbolicName(), expectedRange);
+			assertEquals(expectedRange, host.getVersionRange());
+		}
+	}
 }

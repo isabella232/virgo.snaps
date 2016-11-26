@@ -162,26 +162,32 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer<SnapFactory, 
                 
                 Bundle hostBundle = hostReference.getBundle();
 
-                SnapLifecycleState newState = SnapLifecycleState.INIT_FAILED;
-
-                Snap snap = this.factory.createSnap(new Host(hostBundle, servletContext, new RequestRouter(this.snapRegistry, servletContext)));
-                try {
-                    logger.info("Initializing snap '{}'", snap.getContextPath());
-                    snap.init();
-                    
-                    newState = SnapLifecycleState.INIT_SUCCEEDED;
-                    
-                    logger.info("Publishing snap '{}'", snap.getContextPath());
-                    publishSnapService(snap, hostBundle);
-                    
-                } catch (ServletException e) {
-                    this.eventLogger.log(SnapsLogEvents.SNAP_INIT_FAILURE, SnapUtils.boundContextPath(servletContext.getContextPath(), snap.getContextPath()));
-                } finally {
-                	synchronized (this.snapStateMonitor) {                		
-						if (newState == SnapLifecycleState.INIT_SUCCEEDED) {
-							this.snap = snap;
-						}
-                	}                	
+                Host host = new Host(hostBundle, servletContext, new RequestRouter(this.snapRegistry, servletContext));
+                
+                synchronized (this.snapStateMonitor) {
+                	if (this.factory.hasSnap()) {
+                		Snap snap = this.factory.getSnap();
+                		snap.addHost(host);
+                		publishSnapService(snap, hostBundle);
+                	} else {
+                		SnapLifecycleState newState = SnapLifecycleState.INIT_FAILED;
+                		Snap snap = this.factory.createSnap(host);
+                		try {
+                			logger.info("Initializing snap '{}'", snap.getContextPath());
+                			snap.init();
+                			
+                			newState = SnapLifecycleState.INIT_SUCCEEDED;
+                			
+                			logger.info("Publishing snap '{}'", snap.getContextPath());
+                			publishSnapService(snap, hostBundle);
+                		} catch (ServletException e) {
+                			this.eventLogger.log(SnapsLogEvents.SNAP_INIT_FAILURE, SnapUtils.boundContextPath(servletContext.getContextPath(), snap.getContextPath()));
+                		} finally {
+                			if (newState == SnapLifecycleState.INIT_SUCCEEDED) {
+                				this.snap = snap;
+                			}
+                		}
+					}
                 }
             }
         }
@@ -217,7 +223,11 @@ final class SnapFactoryMonitor implements ServiceTrackerCustomizer<SnapFactory, 
 
         private void unregisterHostListener() {
             logger.info("No longer listening for hosts to be registered.");
-            this.context.removeServiceListener(this);
+            try {
+				this.context.removeServiceListener(this);
+			} catch (IllegalStateException e) {
+				logger.warn("Could not remove host listener. Reason: " + e.getMessage());
+			}
         }
 
 		public void serviceChanged(ServiceEvent event) {

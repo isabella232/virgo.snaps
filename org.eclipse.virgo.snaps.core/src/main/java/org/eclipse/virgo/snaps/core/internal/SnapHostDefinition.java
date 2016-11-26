@@ -11,19 +11,20 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
-import org.osgi.framework.Constants;
-import org.osgi.framework.ServiceReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.eclipse.virgo.util.osgi.manifest.VersionRange;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderDeclaration;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParser;
 import org.eclipse.virgo.util.osgi.manifest.parse.HeaderParserFactory;
 import org.eclipse.virgo.util.osgi.manifest.parse.ParserLogger;
+import org.osgi.framework.Constants;
+import org.osgi.framework.ServiceReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class SnapHostDefinition {
 
@@ -46,18 +47,22 @@ public final class SnapHostDefinition {
         return this.versionRange;
     }
 
-    public static SnapHostDefinition parse(String descriptor) {
+    public static Set<SnapHostDefinition> parse(String descriptor) {
         HeaderParser parser = createHeaderParser();
         List<HeaderDeclaration> header = parser.parseHeader(descriptor);
-        if (header == null || header.size() != 1) {
+        if (header == null) {
             logger.error("Invalid Snap-Host header '{}'", descriptor);
             throw new IllegalArgumentException("Invalid Snap-Host header '" + descriptor + "'");
         }
-        HeaderDeclaration declaration = header.get(0);
-        String factoryName = declaration.getNames().get(0);
 
-        String rangeString = declaration.getAttributes().get(Constants.VERSION_ATTRIBUTE);
-        return createSnapHostDefinition(factoryName, rangeString);
+        Set<SnapHostDefinition> hostDefinitions = new HashSet<SnapHostDefinition>();
+        for (HeaderDeclaration declaration:header) {
+        	String factoryName = declaration.getNames().get(0);
+        	String rangeString = declaration.getAttributes().get(Constants.VERSION_ATTRIBUTE);
+        	hostDefinitions.add(createSnapHostDefinition(factoryName, rangeString));
+        }
+        
+        return hostDefinitions;
     }
 
     public static SnapHostDefinition fromServiceReference(ServiceReference<SnapFactory> snapFactoryReference) {

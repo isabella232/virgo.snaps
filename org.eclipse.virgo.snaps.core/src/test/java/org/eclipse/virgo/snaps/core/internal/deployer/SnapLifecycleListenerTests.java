@@ -18,20 +18,17 @@ import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
 
-import org.eclipse.virgo.snaps.core.internal.deployer.SnapFactory;
-import org.eclipse.virgo.snaps.core.internal.deployer.SnapLifecycleListener;
-import org.junit.Test;
-import org.osgi.framework.Version;
-
-import org.eclipse.virgo.nano.deployer.api.core.DeploymentException;
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
 import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
 import org.eclipse.virgo.medic.test.eventlog.MockEventLogger;
+import org.eclipse.virgo.nano.deployer.api.core.DeploymentException;
 import org.eclipse.virgo.test.stubs.framework.OSGiAssert;
 import org.eclipse.virgo.test.stubs.framework.StubBundle;
 import org.eclipse.virgo.test.stubs.framework.StubBundleContext;
-import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 import org.eclipse.virgo.util.osgi.manifest.internal.StandardBundleManifest;
+import org.junit.Test;
+import org.osgi.framework.Version;
 
 public class SnapLifecycleListenerTests {
 
@@ -65,4 +62,5 @@ public class SnapLifecycleListenerTests {
 
         verify(installArtifact, classLoaderFactory);
     }
+
 }

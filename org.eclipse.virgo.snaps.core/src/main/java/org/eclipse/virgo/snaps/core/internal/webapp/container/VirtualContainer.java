@@ -36,4 +36,6 @@ public interface VirtualContainer {
     VirtualContainerRequestDispatcher createDispatcher();
     
     SnapServletContext getSnapServletContext();
+    
+	void addHost(SnapServletContext servletContext);
 }

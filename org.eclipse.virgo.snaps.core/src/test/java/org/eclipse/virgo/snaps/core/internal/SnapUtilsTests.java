@@ -23,14 +23,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Set;
 
-import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
-import org.eclipse.virgo.snaps.core.internal.SnapUtils;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 import org.springframework.mock.web.MockHttpServletRequest;
-
-import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 
 public class SnapUtilsTests {
 
@@ -84,9 +82,11 @@ public class SnapUtilsTests {
         expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn("travel;version=\"[1.2, 1.3)\"");
         
         replay(manifest);
-        SnapHostDefinition header = SnapUtils.getSnapHostHeader(manifest);
+        Set<SnapHostDefinition> header = SnapUtils.getSnapHostHeader(manifest);
+        assertEquals(1, header.size());
+        
         assertNotNull(header);
-        assertEquals("travel", header.getSymbolicName());
+        assertEquals("travel", header.iterator().next().getSymbolicName());
         verify(manifest);
     }
     
@@ -96,7 +96,7 @@ public class SnapUtilsTests {
         expect(manifest.getHeader(SnapUtils.HEADER_SNAP_HOST)).andReturn(null);
         
         replay(manifest);
-        SnapHostDefinition header = SnapUtils.getSnapHostHeader(manifest);
+        Set<SnapHostDefinition> header = SnapUtils.getSnapHostHeader(manifest);
         assertNull(header);
         verify(manifest);
     }

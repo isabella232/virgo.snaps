@@ -12,6 +12,8 @@
 package org.eclipse.virgo.snaps.core.internal.webapp.container;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -45,19 +47,22 @@ final class ServletManager {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final SnapServletContext snapServletContext;
+    private final List<SnapServletContext> snapServletContexts = new ArrayList<>();
 
     private final ClassLoader classLoader;
 
     private final UrlPatternMatcher patternMatcher = new UrlPatternMatcher();
 
     private final Map<String, ServletHolder> servlets = new ConcurrentHashMap<String, ServletHolder>();
+    
+	private WebXml webXml;
 
     ServletManager(WebXml webXml, SnapServletContext snapServletContext, ClassLoader classLoader) {
-        this.snapServletContext = snapServletContext;
+    	this.webXml = webXml;
+		this.snapServletContexts.add(snapServletContext);
         this.classLoader = classLoader;
 
-        reifyWebXml(webXml);
+        reifyWebXml(snapServletContext);
     }
 
     void init() throws ServletException {
@@ -67,7 +72,7 @@ final class ServletManager {
                 public Void doWithClassLoader() throws ServletException {
                     for (Map.Entry<String, ServletHolder> entry : servlets.entrySet()) {
                         ServletHolder holder = entry.getValue();
-                        ServletConfig config = new ImmutableServletConfig(holder.getDefinition(), snapServletContext);
+                        ServletConfig config = new ImmutableServletConfig(holder.getDefinition(),  snapServletContexts.get(0));
                         holder.getInstance().init(config);
                         // TODO Log which servlet failed, and re-throw
                     }
@@ -98,13 +103,13 @@ final class ServletManager {
         }
     }
 
-    private void reifyWebXml(WebXml webXml) {
-        processServlets(webXml);
-        processServletMappingDefinitions(webXml);
+    private void reifyWebXml(SnapServletContext snapServletContext) {
+        processServlets();
+        processServletMappingDefinitions(snapServletContext);
     }
 
-    private void processServlets(WebXml webXml) throws SnapException {
-        for (ServletDefinition servletDefinition : webXml.getServletDefinitions()) {
+    private void processServlets( ) throws SnapException {
+        for (ServletDefinition servletDefinition : this.webXml.getServletDefinitions()) {
             try {
                 Class<?> servletClass = ManagerUtils.loadComponentClass(servletDefinition.getServletClassName(), this.classLoader);
                 Servlet servlet = (Servlet) servletClass.newInstance();
@@ -126,10 +131,10 @@ final class ServletManager {
         }
     }
 
-    private void processServletMappingDefinitions(WebXml webXml) {
-        for (ServletMappingDefinition mappingDefinition : webXml.getServletMappingDefinitions()) {
+    private void processServletMappingDefinitions(SnapServletContext snapServletContext) {
+        for (ServletMappingDefinition mappingDefinition : this.webXml.getServletMappingDefinitions()) {
             this.patternMatcher.addMapping(mappingDefinition.getServletName(), ManagerUtils.expandMapping(mappingDefinition.getUrlPattern(),
-                this.snapServletContext));
+                snapServletContext));
             // TODO Validate, probably in WebXml, the referenced servlets exist, etc.
         }
     }
@@ -159,4 +164,9 @@ final class ServletManager {
             return mapping;
         }
     }
+    
+	public void addSnapServletContext(SnapServletContext snapServletContext) {
+		this.snapServletContexts.add(snapServletContext);
+		processServletMappingDefinitions(snapServletContext);
+	}
 }

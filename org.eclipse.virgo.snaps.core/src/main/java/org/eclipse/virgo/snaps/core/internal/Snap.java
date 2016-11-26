@@ -30,4 +30,6 @@ public interface Snap {
     String getContextPath();
     
     Properties getSnapProperties();
+    
+	void addHost(Host host);
 }

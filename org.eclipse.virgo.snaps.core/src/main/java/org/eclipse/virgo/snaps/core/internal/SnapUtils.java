@@ -11,11 +11,12 @@
 
 package org.eclipse.virgo.snaps.core.internal;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.framework.Bundle;
-
 import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
+import org.osgi.framework.Bundle;
 
 public final class SnapUtils {
 
@@ -48,7 +49,7 @@ public final class SnapUtils {
         return manifest.getHeader(HEADER_SNAP_HOST) != null;
     }
 
-    public static SnapHostDefinition getSnapHostHeader(BundleManifest manifest) {
+    public static Set<SnapHostDefinition> getSnapHostHeader(BundleManifest manifest) {
         String header = manifest.getHeader(HEADER_SNAP_HOST);
         return (header == null ? null : SnapHostDefinition.parse(header));
     }
@@ -62,7 +63,7 @@ public final class SnapUtils {
     }
 
     /**
-     * Catenate the host and snap context paths, <i>unless</i> host context path ends with a path separator.<br/>
+     * Concatenate the host and snap context paths, <i>unless</i> host context path ends with a path separator.<br/>
      * <code>null</code> {@link String}s are converted to the empty string <code>""</code>.
      * @param hostContextPath the host context path
      * @param snapContextPath the snap context path

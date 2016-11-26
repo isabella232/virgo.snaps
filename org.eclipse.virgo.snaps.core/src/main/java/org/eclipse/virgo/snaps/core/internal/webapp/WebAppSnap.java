@@ -85,7 +85,7 @@ class WebAppSnap implements Snap {
      * 
      * @throws ServletException
      */
-    public final void init() throws ServletException {
+    public synchronized final void init() throws ServletException {
         logger.info("Initializing snap '{}'", this.contextPath);
         WebXml webXml = BundleWebXmlLoader.loadWebXml(this.snapBundle);
         SnapServletContext servletContext = new SnapServletContext(this.host.getServletContext(), this.snapBundle, this.contextPath);
@@ -179,4 +179,15 @@ class WebAppSnap implements Snap {
         }
         return properties;
     }
+    
+	@Override
+	public synchronized void addHost(Host host) {
+		logger.info("Adding host '{}' to snap '{}'", host.getBundle(), this.contextPath);
+        SnapServletContext servletContext = new SnapServletContext(host.getServletContext(), this.snapBundle, this.contextPath);
+	    servletContext.setAttribute(WebContainer.ATTRIBUTE_BUNDLE_CONTEXT, this.snapBundle.getBundleContext());
+
+	    this.virtualContainer.addHost(servletContext);
+
+	    this.eventLogger.log(SnapsLogEvents.SNAP_BOUND, SnapUtils.boundContextPath(host.getServletContext().getContextPath(), this.contextPath));
+	}
 }

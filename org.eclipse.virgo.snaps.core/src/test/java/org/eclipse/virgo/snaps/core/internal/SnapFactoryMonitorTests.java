@@ -69,13 +69,13 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
         SnapFactory factory = createMock(SnapFactory.class);
         expect(factory.createSnap(isA(Host.class))).andReturn(snap);
+        expect(factory.hasSnap()).andReturn(Boolean.FALSE);
 
         replay(factory, snap);
         publishFactory(factory, "travel", "[1.0, 2.0)");
 
         assertSnapPublished("/hotels", host);
         verify(factory, snap);
-
     }
 
     @Test
@@ -90,6 +90,7 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
         SnapFactory factory = createMock(SnapFactory.class);
         expect(factory.createSnap(isA(Host.class))).andReturn(snap);
+        expect(factory.hasSnap()).andReturn(Boolean.FALSE);
         publishFactory(factory, "travel", "[1.0, 2.0)");
 
         replay(factory, snap);
@@ -129,6 +130,7 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
         SnapFactory factory = createMock(SnapFactory.class);
         expect(factory.createSnap(isA(Host.class))).andReturn(snap);
+        expect(factory.hasSnap()).andReturn(Boolean.FALSE);
         replay(factory, snap);
 
         publishFactory(factory, "travel", "[1.0, 3.0)");
@@ -149,6 +151,7 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
         SnapFactory factory = createMock(SnapFactory.class);
         expect(factory.createSnap(isA(Host.class))).andReturn(snap);
+        expect(factory.hasSnap()).andReturn(Boolean.FALSE);
         publishFactory(factory, "travel", "[1.0, 2.0)");
 
         replay(factory, snap);
@@ -222,6 +225,7 @@ public class SnapFactoryMonitorTests extends AbstractEquinoxLaunchingTests {
 
         final SnapFactory factory = createMock(SnapFactory.class);
         expect(factory.createSnap(isA(Host.class))).andReturn(slice);
+        expect(factory.hasSnap()).andReturn(Boolean.FALSE);
         replay(factory, slice);
 
         // public snap factory bound to "clinic" host

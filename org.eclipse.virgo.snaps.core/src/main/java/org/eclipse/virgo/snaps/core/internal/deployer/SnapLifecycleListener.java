@@ -13,27 +13,28 @@ package org.eclipse.virgo.snaps.core.internal.deployer;
 
 import java.io.IOException;
 import java.util.Dictionary;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
+import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
+import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
+import org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
+import org.eclipse.virgo.medic.eventlog.EventLogger;
+import org.eclipse.virgo.nano.deployer.api.core.DeploymentException;
+import org.eclipse.virgo.nano.shim.scope.Scope;
 import org.eclipse.virgo.snaps.core.internal.SnapHostDefinition;
 import org.eclipse.virgo.snaps.core.internal.SnapUtils;
 import org.eclipse.virgo.snaps.core.internal.webapp.WebAppSnapFactory;
+import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
+import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.eclipse.virgo.nano.deployer.api.core.DeploymentException;
-import org.eclipse.virgo.kernel.install.artifact.BundleInstallArtifact;
-import org.eclipse.virgo.kernel.install.artifact.InstallArtifact;
-import org.eclipse.virgo.kernel.install.artifact.InstallArtifactLifecycleListenerSupport;
-import org.eclipse.virgo.nano.shim.scope.Scope;
-import org.eclipse.virgo.medic.eventlog.EventLogger;
-import org.eclipse.gemini.web.tomcat.spi.WebBundleClassLoaderFactory;
-import org.eclipse.virgo.util.osgi.ServiceRegistrationTracker;
-import org.eclipse.virgo.util.osgi.manifest.BundleManifest;
 
 /**
  * <strong>Concurrent Semantics</strong><br />
@@ -64,28 +65,36 @@ final class SnapLifecycleListener extends InstallArtifactLifecycleListenerSuppor
             Bundle bundle = ((BundleInstallArtifact) installArtifact).getBundle();
             BundleManifest bundleManifest = getBundleManifest((BundleInstallArtifact) installArtifact);
 
-            ServiceRegistration<SnapFactory> registration = createAndRegisterSnapFactoryService(bundle, bundleManifest);
+            Set<ServiceRegistration<SnapFactory>> registrations = createAndRegisterSnapFactoryService(bundle, bundleManifest);
 
-            ServiceRegistrationTracker registrationTracker = new ServiceRegistrationTracker();
-            registrationTracker.track(registration);
+            for (ServiceRegistration<SnapFactory> registration:registrations) {
+            	ServiceRegistrationTracker registrationTracker = new ServiceRegistrationTracker();
+            	registrationTracker.track(registration);
 
-            this.registrationTrackers.put(installArtifact, registrationTracker);
+            	this.registrationTrackers.put(installArtifact, registrationTracker);
+            }
         }
     }
 
-    ServiceRegistration<SnapFactory> createAndRegisterSnapFactoryService(Bundle bundle, BundleManifest bundleManifest) {
+    Set<ServiceRegistration<SnapFactory>> createAndRegisterSnapFactoryService(Bundle bundle, BundleManifest bundleManifest) {
         logger.info("Creating a SnapFactory for bundle '{}'", bundle);
         SnapFactory snapFactory = new WebAppSnapFactory(bundle, this.classLoaderFactory, this.eventLogger);
 
-        SnapHostDefinition hostDefinition = SnapUtils.getSnapHostHeader(bundleManifest);
+        Set<SnapHostDefinition> hostDefinitions = SnapUtils.getSnapHostHeader(bundleManifest);
 
-        Dictionary<String, String> serviceProperties= new Hashtable<String, String>();
-        serviceProperties.put(Scope.PROPERTY_SERVICE_SCOPE, Scope.SCOPE_ID_GLOBAL); // expose service outside any containing scope
-        serviceProperties.put(SnapFactory.FACTORY_NAME_PROPERTY, hostDefinition.getSymbolicName());
-        serviceProperties.put(SnapFactory.FACTORY_RANGE_PROPERTY, hostDefinition.getVersionRange().toParseString());
+        Set<ServiceRegistration<SnapFactory>> registrations = new HashSet<ServiceRegistration<SnapFactory>>();
+        
+        for (SnapHostDefinition hostDefinition : hostDefinitions) {
+        	Dictionary<String, String> serviceProperties= new Hashtable<String, String>();
+        	serviceProperties.put(Scope.PROPERTY_SERVICE_SCOPE, Scope.SCOPE_ID_GLOBAL); // expose service outside any containing scope
+        	serviceProperties.put(SnapFactory.FACTORY_NAME_PROPERTY, hostDefinition.getSymbolicName());
+        	serviceProperties.put(SnapFactory.FACTORY_RANGE_PROPERTY, hostDefinition.getVersionRange().toParseString());
 
-        ServiceRegistration<SnapFactory> registration = bundle.getBundleContext().registerService(SnapFactory.class, snapFactory, serviceProperties);
-        return registration;
+        	ServiceRegistration<SnapFactory> registration = bundle.getBundleContext().registerService(SnapFactory.class, snapFactory, serviceProperties);
+        	registrations.add(registration);
+        }
+        
+        return registrations;
     }
 
     static BundleManifest getBundleManifest(BundleInstallArtifact bundleInstallArtifact) throws DeploymentException {

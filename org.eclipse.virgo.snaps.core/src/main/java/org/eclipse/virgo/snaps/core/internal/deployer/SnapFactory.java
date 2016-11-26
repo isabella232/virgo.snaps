@@ -16,9 +16,13 @@ import org.eclipse.virgo.snaps.core.internal.Host;
 
 public interface SnapFactory {
     
-    static final String FACTORY_NAME_PROPERTY = "snap.factory.host.name";
+   String FACTORY_NAME_PROPERTY = "snap.factory.host.name";
 
-    static final String FACTORY_RANGE_PROPERTY = "snap.factory.host.range";
+   String FACTORY_RANGE_PROPERTY = "snap.factory.host.range";
 
     Snap createSnap(Host host);
+    
+    boolean hasSnap();
+    
+    Snap getSnap();
 }
