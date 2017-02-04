@@ -2,13 +2,12 @@
 Daniel Marthaler
 2017-02-04
 :nofooter:
-:appversion: 3.7.0.RC01
 
 [%hardbreaks]
 Christopher Frost
 Daniel Marthaler
 
-*Virgo Snaps {appversion}* image:images/virgo-logo-large.png[Eclipse Virgo,300,float="right"]
+*Virgo Snaps {project-version}* image:images/virgo-logo-large.png[Eclipse Virgo,300,float="right"]
 
 [%hardbreaks]
 VMware Inc. - initial contribution

@@ -1,9 +1,9 @@
-<plan name="org.eclipse.virgo.snaps" version="3.7.0.RC01" scoped="false" atomic="true"
-                xmlns="http://www.eclipse.org/virgo/schema/plan"
-				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				xsi:schemaLocation="http://www.eclipse.org/virgo/schema/plan 
-				        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+<plan name="org.eclipse.virgo.snaps" version="${version}" scoped="false"
+	atomic="true" xmlns="http://www.eclipse.org/virgo/schema/plan"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.eclipse.org/virgo/schema/plan 
+		http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
 
-        <artifact type="bundle" name="org.eclipse.virgo.snaps.api" version="[3, 4)"/>
-        <artifact type="bundle" name="org.eclipse.virgo.snaps.core" version="[3, 4)"/>
+	<artifact type="bundle" name="org.eclipse.virgo.snaps.api" version="${version}" />
+	<artifact type="bundle" name="org.eclipse.virgo.snaps.core" version="${version}" />
 </plan>

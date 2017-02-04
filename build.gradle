@@ -42,8 +42,8 @@ configure(bundleProjects + planProjects) {
     apply plugin: 'jacoco'
     apply plugin: 'findbugs'
 
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = '1.7'
+    targetCompatibility = '1.7'
 
     compileJava {
         options.encoding = 'UTF-8'
@@ -141,7 +141,10 @@ configure(bundleProjects + planProjects) {
     	group = 'build'
 	    classifier = 'javadoc'
 	    from javadoc.destinationDir
-	}    	
+	}
+	artifacts {
+		archives sourcesJar, javadocJar
+	}	
 }
 
 configure(bundleProjects) {
@@ -193,8 +196,8 @@ configure(bundleProjects + planProjects) {
 
     eclipse {
         jdt {
-            sourceCompatibility = 1.8
-            targetCompatibility = 1.8            
+            sourceCompatibility = 1.7
+            targetCompatibility = 1.7            
         }
         project {
             file.beforeMerged {
@@ -210,7 +213,7 @@ configure(bundleProjects + planProjects) {
     }
 }
 
-configure(bundleProjects) {
+configure(bundleProjects) {	
 	apply plugin: 'maven-publish'
     publishing {
     	repositories {
@@ -223,20 +226,35 @@ configure(bundleProjects) {
             snaps(MavenPublication) {
                 groupId 'org.eclipse.virgo.snaps'
                 from components.java
+				artifact sourcesJar {
+					classifier "sources"
+				}   
             }
         }
     }
 }
 
-task snapsDist(type: Zip) {
+task snapsDist(type: Zip, dependsOn: ':snaps-guide:asciidoctor') {
     description 'Build Snaps distribution Zip file'
     group = 'distribution'
     
 	archiveName "snaps-${version}.zip"
     duplicatesStrategy 'exclude'
     into("snaps-${version}/dist") {
-        from 'org.eclipse.virgo.snaps/src/main/resources/'
+        from planProjects.processResources
         from bundleProjects.jar
+    }
+    into("snaps-${version}/docs/javadoc") {       	 
+    	from bundleProjects.javadocJar
+    }
+    into("snaps-${version}/docs/javadoc-api") {       	 
+    	from './org.eclipse.virgo.snaps.api/build/docs/javadoc'
+    }
+    into("snaps-${version}/docs/html") {       	 
+    	from './snaps-guide/build/asciidoc/html5'
+    }
+    into("snaps-${version}/src") {
+    	from bundleProjects.sourcesJar
     }
     into("snaps-${version}") {
     	from "build-snaps/resources"        

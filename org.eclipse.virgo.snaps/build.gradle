@@ -1,1 +1,5 @@
 description = 'Virgo Snaps Plan deployment unit'
+
+processResources {
+    expand (version: version)
+}
