@@ -503,84 +503,108 @@ class HttpServletRequestWrapper implements HttpServletRequest {
     /**
      * {@inheritDoc}
      */
-	public ServletContext getServletContext() {
-		return this.delegate.getServletContext();
-	}
+    public ServletContext getServletContext() {
+        return this.delegate.getServletContext();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public AsyncContext startAsync() throws IllegalStateException {
-		return this.delegate.startAsync();
-	}
+    public AsyncContext startAsync() throws IllegalStateException {
+        return this.delegate.startAsync();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
-		return this.delegate.startAsync(servletRequest, servletResponse);
-	}
+    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+        return this.delegate.startAsync(servletRequest, servletResponse);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public boolean isAsyncStarted() {
-		return this.delegate.isAsyncStarted();
-	}
+    public boolean isAsyncStarted() {
+        return this.delegate.isAsyncStarted();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public boolean isAsyncSupported() {
-		return this.delegate.isAsyncSupported();
-	}
+    public boolean isAsyncSupported() {
+        return this.delegate.isAsyncSupported();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public AsyncContext getAsyncContext() {
-		return this.delegate.getAsyncContext();
-	}
+    public AsyncContext getAsyncContext() {
+        return this.delegate.getAsyncContext();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public DispatcherType getDispatcherType() {
-		return this.delegate.getDispatcherType();
-	}
+    public DispatcherType getDispatcherType() {
+        return this.delegate.getDispatcherType();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
-		return this.delegate.authenticate(response);
-	}
+    public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
+        return this.delegate.authenticate(response);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void login(String username, String password) throws ServletException {
-		this.delegate.login(username, password);
-	}
+    public void login(String username, String password) throws ServletException {
+        this.delegate.login(username, password);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void logout() throws ServletException {
-		this.delegate.logout();
-	}
+    public void logout() throws ServletException {
+        this.delegate.logout();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public Collection<Part> getParts() throws IOException, ServletException {
-		return this.delegate.getParts();
-	}
+    public Collection<Part> getParts() throws IOException, ServletException {
+        return this.delegate.getParts();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public Part getPart(String name) throws IOException, ServletException {
-		return this.delegate.getPart(name);
-	}
+    public Part getPart(String name) throws IOException, ServletException {
+        return this.delegate.getPart(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long getContentLengthLong() {
+        return this.delegate.getContentLengthLong();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String changeSessionId() {
+        return this.delegate.changeSessionId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <T extends HttpUpgradeHandler> T upgrade(Class<T> arg0) throws IOException, ServletException {
+        return this.delegate.upgrade(arg0);
+    }
 }

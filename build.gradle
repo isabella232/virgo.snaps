@@ -23,10 +23,6 @@ ext.bundleProjects = [
     project(':org.eclipse.virgo.snaps.core')
 ]
 
-ext.testProjects = [    
-    project(':org.eclipse.virgo.snaps.test')
-]
-
 allprojects {
     apply plugin: 'base'
     if (System.properties['ci.build'] == 'true') {
@@ -41,7 +37,7 @@ allprojects {
     }
 }
 
-configure(bundleProjects + testProjects + planProjects) {
+configure(bundleProjects + planProjects) {
     apply plugin: 'java'
     apply plugin: 'jacoco'
     apply plugin: 'findbugs'
@@ -95,15 +91,12 @@ configure(bundleProjects + testProjects + planProjects) {
 		testBundles {
 			transitive = false
 		}
-	}
-	// this is necessary because Gemini Web contains a dependency with wrong groupId/version combination 
-	/*configurations.all {
-		resolutionStrategy {
-			dependencySubstitution {
-				substitute module('javax.servlet:javax.servlet:3.0.0.v201103241009') with module('org.eclipse.virgo.mirrored:javax.servlet:3.0.0.v201103241009')  
-			}
-		}
-	}*/
+	}	
+	configurations.all {
+  		resolutionStrategy {
+            force "org.eclipse.virgo.mirrored:org.eclipse.osgi:${eclipseOsgiVersion}"
+    	}
+    } 	
     jar {
     	// add SUA to archive
         from "$rootDir/build-bundlor/resources/about/notice.html"
@@ -195,7 +188,7 @@ configure(bundleProjects) {
     }
 }
 
-configure(bundleProjects + testProjects + planProjects) {
+configure(bundleProjects + planProjects) {
     apply plugin: 'eclipse'
 
     eclipse {

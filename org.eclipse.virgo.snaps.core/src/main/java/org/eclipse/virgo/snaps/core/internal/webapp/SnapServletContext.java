@@ -481,4 +481,9 @@ public class SnapServletContext implements ServletContext {
     public void declareRoles(String... roleNames) {
         this.delegate.declareRoles(roleNames);
     }
+
+    @Override
+    public String getVirtualServerName() {
+        return this.delegate.getVirtualServerName();
+    }
 }

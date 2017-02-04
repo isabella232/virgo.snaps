@@ -12,7 +12,7 @@ Import-Template:
  javax.servlet.jsp*;version="${javaxServletJspVersion:[=.=.=, +1)}",
  javax.servlet.*;version="${javaxServletVersion:[-1.6.=, +1)}",
  javax.naming.*;version="0",
- org.apache.catalina.*;version="${apacheCatalina:[=.=.=,+1)}",
+ org.apache.catalina.*;version="${apacheCatalinaVersion:[=.=.=,+1)}",
  org.slf4j.*;version="${slf4jVersion:[=.=.=,=.+1.=)]}",
  javax.xml.parsers.*;version="0",
  org.osgi.*;version="0",

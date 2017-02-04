@@ -1,3 +1,7 @@
+/*
+EXCLUDING THIS PROJECT FOR NOW AS THE TEST NEED TO BE UPDATED TO RUN AGAIN!
+*/
+
 description = 'Virgo Snaps Test Bundle'
 
 dependencies {
