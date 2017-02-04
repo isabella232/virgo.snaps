@@ -1,0 +1,17 @@
+[[further-reading]]
+== Further Reading
+
+The User and Programmer Guides provide a lot of information about using
+and developing applications for the Virgo Server.
+
+http://www.eclipse.org/virgo/documentation/[Virgo Documentation
+page]
+
+link:../../virgo-programmer-guide/html/index.html[Virgo Server for Apache Tomcat
+Programmer Guide]
+
+link:../../virgo-user-guide/html/index.html[Virgo Server for Apache Tomcat User
+Guide]
+
+http://www.slideshare.net/cgfrost/eclipsecon2011-virgo-snaps[Slides from
+a presentation at EclipseCon 2011 about Virgo Snaps.]

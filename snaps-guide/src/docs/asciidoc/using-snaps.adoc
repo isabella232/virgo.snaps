@@ -1,0 +1,108 @@
+[[using-snaps]]
+== Using Virgo Snaps in your application
+
+Every snap or host should also be a regular WAB (Web Application
+Bundle), all you have to do is add some additional configuration to
+benefit from VS.
+
+[[using-snaps-configuring-the-host]]
+=== Configuring the Host
+
+In the WAB that is to act as a host to Snaps bundles, all that needs to
+be added is a filter in the hosts ' `web.xml`'. This filter can be
+mapped to any sub path that you want forwarded to registered snaps. It
+is important to note the extra `dispatcher` declarations in the
+`filter-mapping`. Without these internal lookups, resources like JSPs
+won't get passed to the appropriate snap when needed.
+
+....
+<filter>
+    <filter-name>host-filter-name</filter-name>
+    <filter-class>org.eclipse.virgo.snaps.core.SnapHostFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>host-filter-name</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+</filter-mapping>
+        
+....
+
+[[using-snaps-configuring-a-snap]]
+=== Configuring a Snap
+
+A snap is a normal WAB with the addition of two extra manifest headers.
+The first `Snap-Host` is used to resolve the WAB you want to act as a
+host for this snap. The second `Snap-ContextPath` gives the path the
+snap will answer to. In order to reach the snap a request must be made
+for the host's context path, plus any path in the host's Snaps filter
+followed by the path given with the `Snap-ContextPath` header.
+
+....
+Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="${version:[=.=.=, =.+1)}"
+Snap-ContextPath: /dog
+        
+....
+
+[[using-snaps-taglibs]]
+=== Using the Snaps taglibs
+
+There is a tag library available that makes information about the Snaps
+environment available to the host from within a JSP page. The prefix and
+URI to declare are
+`<%@ taglib prefix="snaps" uri="http://www.eclipse.org/virgo/snaps" 
+            %>`. You can now access an array of all the Snaps currently
+registered with the host. Each snap in the array has two values, the
+first is the context path the Snap is registered with, as given in the
+snaps manifest header. The second is an array of properties, if any,
+given in a property file in the snap. The file must be in the `META-INF
+            ` directory and have a name of `snap.properties`. The
+following code snippet shows all of these in use to produce links to
+each of the installed snaps.
+
+....
+<snaps:snaps var="snaps">
+    <c:forEach var="snap" items="${snaps}">
+        <a href="<c:url value="${snap.contextPath}${snap.properties['link.path']}"/>">
+                     ${snap.properties['link.text']}</a>
+    </c:forEach>
+</snaps:snaps>
+        
+....
+
+The first line uses the Snaps tag library to place the array of snaps
+into the `snaps` variable. Then a `forEach` loop goes through each snap.
+The content of the `forEach` loop is the really interesting bit. The
+first variable `${snap.contextPath}` returns the context path of the
+snap. The two lookups are for properties
+`${snap.properties['something']}`. They rely on the snap having the
+properties file in place with `link.path` and `link.text` defined in it.
+This shows the flexibility you have for defining your own contract
+between the host and its snaps. In this case each snap can contribute
+extra information about how links in a menu should be constructed.
+
+[[using-snaps-host-prefix]]
+=== Referencing Resources
+
+If the snap needs to lookup any resources, this can be done in the
+normal way and if the resource cannot be found in the snap, then the
+host will be checked. Remember that a host and all its snaps use a
+single `ServletContext`. As the snap is always checked first it can hide
+resources at the same path in its host. So if you want to look up a
+resource in the snaps host that exists in the snap simply prefix the
+path with `host:`. This will then cause the Snaps system to bypass the
+snap and look only in its host for the requested resource. If it is not
+found in its host the snap will NOT be checked, the lookup will return
+with nothing.
+
+....
+request.getServletContext().getResource("host:/WEB-INF/sample.properties");
+            
+....
+
+This line of Java code gets the ServletContext from the HttpRequest
+object and then tries to get a resource from the host, bypassing the
+snap.

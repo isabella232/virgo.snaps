@@ -36,9 +36,8 @@ import javax.servlet.SessionTrackingMode;
 import javax.servlet.descriptor.JspConfigDescriptor;
 
 import org.eclipse.virgo.snaps.core.internal.SnapException;
-import org.osgi.framework.Bundle;
-
 import org.eclipse.virgo.util.common.IterableEnumeration;
+import org.osgi.framework.Bundle;
 
 /**
  * TODO Document SnapServletContext
@@ -52,13 +51,13 @@ import org.eclipse.virgo.util.common.IterableEnumeration;
 public class SnapServletContext implements ServletContext {
 
     private static final String HOST_PATH_PREFIX = "host:";
-    
+
     private final ServletContext delegate;
-    
+
     private final Bundle snapBundle;
-    
+
     private final String snapContextPath;
-    
+
     private final Map<String, Object> attributes = new ConcurrentHashMap<String, Object>();
 
     public SnapServletContext(ServletContext delegate, Bundle snapBundle, String snapContextPath) {
@@ -66,7 +65,7 @@ public class SnapServletContext implements ServletContext {
         this.snapBundle = snapBundle;
         this.snapContextPath = snapContextPath;
     }
-    
+
     public String getSnapContextPath() {
         return this.snapContextPath;
     }
@@ -81,7 +80,7 @@ public class SnapServletContext implements ServletContext {
         if (attribute == null) {
             attribute = delegate.getAttribute(name);
         }
-        return attribute; 
+        return attribute;
     }
 
     /**
@@ -90,7 +89,7 @@ public class SnapServletContext implements ServletContext {
      */
     public Enumeration<String> getAttributeNames() {
         Set<String> attributeNamesSet = new HashSet<String>(this.attributes.keySet());
-        IterableEnumeration<String> delegateAttributeNames = new IterableEnumeration<String>((Enumeration<String>)delegate.getAttributeNames());        
+        IterableEnumeration<String> delegateAttributeNames = new IterableEnumeration<String>((Enumeration<String>) delegate.getAttributeNames());
         for (String delegateAttributeName : delegateAttributeNames) {
             attributeNamesSet.add(delegateAttributeName);
         }
@@ -194,18 +193,18 @@ public class SnapServletContext implements ServletContext {
      * @see javax.servlet.ServletContext#getResource(java.lang.String)
      */
     public URL getResource(String path) throws MalformedURLException {
-    	boolean hostOnly = false;
+        boolean hostOnly = false;
         if (path.startsWith(HOST_PATH_PREFIX)) {
             path = path.substring(HOST_PATH_PREFIX.length());
             hostOnly = true;
         }
-		if (path == null || !path.startsWith("/")) {
-			throw new MalformedURLException(String.format("'%s' is not a valid resource path", path));
-		}
-        if(hostOnly){
-        	return delegate.getResource(path);
+        if (path == null || !path.startsWith("/")) {
+            throw new MalformedURLException(String.format("'%s' is not a valid resource path", path));
+        }
+        if (hostOnly) {
+            return delegate.getResource(path);
         } else {
-        	URL resource = getLocalResource(path);
+            URL resource = getLocalResource(path);
             if (resource == null) {
                 resource = delegate.getResource(path);
             }
@@ -230,14 +229,14 @@ public class SnapServletContext implements ServletContext {
         if (path.startsWith(HOST_PATH_PREFIX)) {
             path = path.substring(HOST_PATH_PREFIX.length());
         } else {
-	        URL resource = getLocalResource(path);
-	        if (resource != null) {
-	            try {
-	                return resource.openStream();
-	            } catch (IOException e) {
-	                throw new SnapException("Failed to open stream for resource " + resource + " in bundle " + this.snapBundle, e);
-	            }
-	        }
+            URL resource = getLocalResource(path);
+            if (resource != null) {
+                try {
+                    return resource.openStream();
+                } catch (IOException e) {
+                    throw new SnapException("Failed to open stream for resource " + resource + " in bundle " + this.snapBundle, e);
+                }
+            }
         }
         return delegate.getResourceAsStream(path);
     }
@@ -247,21 +246,21 @@ public class SnapServletContext implements ServletContext {
      * @return
      * @see javax.servlet.ServletContext#getResourcePaths(java.lang.String)
      */
-    public Set<String> getResourcePaths(String path) {       
+    public Set<String> getResourcePaths(String path) {
         Enumeration<?> entryPaths = this.snapBundle.getEntryPaths(path);
         if (entryPaths == null) {
             return null;
         } else {
             Set<String> resourcePaths = new HashSet<String>();
             while (entryPaths.hasMoreElements()) {
-                String entryPath = (String)entryPaths.nextElement();
+                String entryPath = (String) entryPaths.nextElement();
                 if (path.startsWith("/") && !entryPath.startsWith("/")) {
                     entryPath = "/" + entryPath;
                 }
-                resourcePaths.add((String)entryPath);
+                resourcePaths.add((String) entryPath);
             }
             return resourcePaths;
-        }                
+        }
     }
 
     /**
@@ -353,133 +352,133 @@ public class SnapServletContext implements ServletContext {
         this.attributes.put(name, object);
     }
 
-	@Override
-	public int getEffectiveMajorVersion() {
-		return this.delegate.getEffectiveMajorVersion();
-	}
+    @Override
+    public int getEffectiveMajorVersion() {
+        return this.delegate.getEffectiveMajorVersion();
+    }
 
-	@Override
-	public int getEffectiveMinorVersion() {
-		return this.delegate.getEffectiveMinorVersion();
-	}
+    @Override
+    public int getEffectiveMinorVersion() {
+        return this.delegate.getEffectiveMinorVersion();
+    }
 
-	@Override
-	public boolean setInitParameter(String name, String value) {
-		return this.delegate.setInitParameter(name, value);
-	}
+    @Override
+    public boolean setInitParameter(String name, String value) {
+        return this.delegate.setInitParameter(name, value);
+    }
 
-	@Override
-	public Dynamic addServlet(String servletName, String className) {
-		return this.delegate.addServlet(servletName, className);
-	}
+    @Override
+    public Dynamic addServlet(String servletName, String className) {
+        return this.delegate.addServlet(servletName, className);
+    }
 
-	@Override
-	public Dynamic addServlet(String servletName, Servlet servlet) {
-		return this.delegate.addServlet(servletName, servlet);
-	}
+    @Override
+    public Dynamic addServlet(String servletName, Servlet servlet) {
+        return this.delegate.addServlet(servletName, servlet);
+    }
 
-	@Override
-	public Dynamic addServlet(String servletName, Class<? extends Servlet> servletClass) {
-		return this.delegate.addServlet(servletName, servletClass);
-	}
+    @Override
+    public Dynamic addServlet(String servletName, Class<? extends Servlet> servletClass) {
+        return this.delegate.addServlet(servletName, servletClass);
+    }
 
-	@Override
-	public <T extends Servlet> T createServlet(Class<T> clazz) throws ServletException {
-		return this.delegate.createServlet(clazz);
-	}
+    @Override
+    public <T extends Servlet> T createServlet(Class<T> clazz) throws ServletException {
+        return this.delegate.createServlet(clazz);
+    }
 
-	@Override
-	public ServletRegistration getServletRegistration(String servletName) {
-		return this.delegate.getServletRegistration(servletName);
-	}
+    @Override
+    public ServletRegistration getServletRegistration(String servletName) {
+        return this.delegate.getServletRegistration(servletName);
+    }
 
-	@Override
-	public Map<String, ? extends ServletRegistration> getServletRegistrations() {
-		return this.delegate.getServletRegistrations();
-	}
+    @Override
+    public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+        return this.delegate.getServletRegistrations();
+    }
 
-	@Override
-	public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, String className) {
-		return this.delegate.addFilter(filterName, className);
-	}
+    @Override
+    public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, String className) {
+        return this.delegate.addFilter(filterName, className);
+    }
 
-	@Override
-	public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, Filter filter) {
-		return this.delegate.addFilter(filterName, filter);
-	}
+    @Override
+    public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, Filter filter) {
+        return this.delegate.addFilter(filterName, filter);
+    }
 
-	@Override
-	public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, Class<? extends Filter> filterClass) {
-		return this.delegate.addFilter(filterName, filterClass);
-	}
+    @Override
+    public javax.servlet.FilterRegistration.Dynamic addFilter(String filterName, Class<? extends Filter> filterClass) {
+        return this.delegate.addFilter(filterName, filterClass);
+    }
 
-	@Override
-	public <T extends Filter> T createFilter(Class<T> clazz) throws ServletException {
-		return this.delegate.createFilter(clazz);
-	}
+    @Override
+    public <T extends Filter> T createFilter(Class<T> clazz) throws ServletException {
+        return this.delegate.createFilter(clazz);
+    }
 
-	@Override
-	public FilterRegistration getFilterRegistration(String filterName) {
-		return this.delegate.getFilterRegistration(filterName);
-	}
+    @Override
+    public FilterRegistration getFilterRegistration(String filterName) {
+        return this.delegate.getFilterRegistration(filterName);
+    }
 
-	@Override
-	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
-		return this.delegate.getFilterRegistrations();
-	}
+    @Override
+    public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+        return this.delegate.getFilterRegistrations();
+    }
 
-	@Override
-	public SessionCookieConfig getSessionCookieConfig() {
-		return this.delegate.getSessionCookieConfig();
-	}
+    @Override
+    public SessionCookieConfig getSessionCookieConfig() {
+        return this.delegate.getSessionCookieConfig();
+    }
 
-	@Override
-	public void setSessionTrackingModes(Set<SessionTrackingMode> sessionTrackingModes) {
-		this.delegate.setSessionTrackingModes(sessionTrackingModes);
-	}
+    @Override
+    public void setSessionTrackingModes(Set<SessionTrackingMode> sessionTrackingModes) {
+        this.delegate.setSessionTrackingModes(sessionTrackingModes);
+    }
 
-	@Override
-	public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
-		return this.delegate.getDefaultSessionTrackingModes();
-	}
+    @Override
+    public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+        return this.delegate.getDefaultSessionTrackingModes();
+    }
 
-	@Override
-	public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
-		return this.delegate.getEffectiveSessionTrackingModes();
-	}
+    @Override
+    public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+        return this.delegate.getEffectiveSessionTrackingModes();
+    }
 
-	@Override
-	public void addListener(String className) {
-		this.delegate.addListener(className);
-	}
+    @Override
+    public void addListener(String className) {
+        this.delegate.addListener(className);
+    }
 
-	@Override
-	public <T extends EventListener> void addListener(T t) {
-		this.delegate.addListener(t);
-	}
+    @Override
+    public <T extends EventListener> void addListener(T t) {
+        this.delegate.addListener(t);
+    }
 
-	@Override
-	public void addListener(Class<? extends EventListener> listenerClass) {
-		this.delegate.addListener(listenerClass);
-	}
+    @Override
+    public void addListener(Class<? extends EventListener> listenerClass) {
+        this.delegate.addListener(listenerClass);
+    }
 
-	@Override
-	public <T extends EventListener> T createListener(Class<T> clazz) throws ServletException {
-		return this.delegate.createListener(clazz);
-	}
+    @Override
+    public <T extends EventListener> T createListener(Class<T> clazz) throws ServletException {
+        return this.delegate.createListener(clazz);
+    }
 
-	@Override
-	public JspConfigDescriptor getJspConfigDescriptor() {
-		return this.delegate.getJspConfigDescriptor();
-	}
+    @Override
+    public JspConfigDescriptor getJspConfigDescriptor() {
+        return this.delegate.getJspConfigDescriptor();
+    }
 
-	@Override
-	public ClassLoader getClassLoader() {
-		return this.delegate.getClassLoader();
-	}
+    @Override
+    public ClassLoader getClassLoader() {
+        return this.delegate.getClassLoader();
+    }
 
-	@Override
-	public void declareRoles(String... roleNames) {
-		this.delegate.declareRoles(roleNames);
-	}
+    @Override
+    public void declareRoles(String... roleNames) {
+        this.delegate.declareRoles(roleNames);
+    }
 }

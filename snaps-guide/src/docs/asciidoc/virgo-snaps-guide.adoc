@@ -1,0 +1,27 @@
+= Virgo Snaps User Guide
+Daniel Marthaler
+2017-02-04
+:nofooter:
+:appversion: 3.7.0.RC01
+
+[%hardbreaks]
+Christopher Frost
+Daniel Marthaler
+
+*Virgo Snaps {appversion}* image:images/virgo-logo-large.png[Eclipse Virgo,300,float="right"]
+
+[%hardbreaks]
+VMware Inc. - initial contribution
+Copyright (C) 2009, 2011 VMware Inc. and others
+
+'''
+
+:toc:
+
+:numbered:
+include::introduction.adoc[]
+include::installing.adoc[]
+include::using-snaps.adoc[]
+include::sample-application.adoc[]
+include::further-reading.adoc[]
+include::known-issues.adoc[]

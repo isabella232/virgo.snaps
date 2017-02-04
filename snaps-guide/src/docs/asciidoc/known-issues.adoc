@@ -1,0 +1,11 @@
+[[known-issues]]
+== Known Issues
+
+This section describes known issues that you might run into, along with
+corresponding workarounds.
+
+[[known-issues-jetty-restriction]]
+=== Virgo Jetty Server Restriction
+
+Virgo Snaps is not supported on the Virgo Jetty Server,
+please use with the Virgo Server for Apache Tomcat.

@@ -32,6 +32,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpUpgradeHandler;
 import javax.servlet.http.Part;
 
 /**
@@ -582,5 +583,4 @@ class HttpServletRequestWrapper implements HttpServletRequest {
 	public Part getPart(String name) throws IOException, ServletException {
 		return this.delegate.getPart(name);
 	}
-
 }

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="simple-host">
-
-	<property file="${basedir}/../build.properties"/>
-	<property file="${basedir}/../../build.versions"/>
-	<property name="wab.output.dir" value="${basedir}/../../org.eclipse.virgo.snaps.test/target/test-apps"/>
-	<import file="${basedir}/../../virgo-build/wab/default.xml"/>
-
-</project>

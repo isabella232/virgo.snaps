@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        mavenLocal()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        mavenCentral()
+        maven { url 'http://build.eclipse.org/rt/virgo/gradle/bundles/' }
+        maven { url 'https://plugins.gradle.org/m2/' }
         dependencies {
-            classpath "gradle.plugin.org.eclipse.virgo.bundlor:bundlor-plugin:0.2"
+            classpath "org.eclipse.virgo.bundlor:org.eclipse.virgo.bundlor.gradle.plugin:${bundlorVersion}"
+            classpath "org.asciidoctor:asciidoctor-gradle-plugin:${asciidoctorVersion}"
         }
     }
 }
@@ -80,10 +80,15 @@ configure(bundleProjects + testProjects + planProjects) {
 		ivy {
 			url "http://build.eclipse.org/rt/virgo/ivy/bundles/release/"
 			layout "pattern", { artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" }
-		}        
+		}
+        ivy {
+            url "http://build.eclipse.org/rt/virgo/ivy/bundles/milestone"
+            layout "pattern", { artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" }
+        }
         maven{
             url "http://build.eclipse.org/rt/virgo/gradle/bundles/"
         }
+
 	}
     configurations {
     	ecj {}
@@ -92,13 +97,13 @@ configure(bundleProjects + testProjects + planProjects) {
 		}
 	}
 	// this is necessary because Gemini Web contains a dependency with wrong groupId/version combination 
-	configurations.all {
+	/*configurations.all {
 		resolutionStrategy {
 			dependencySubstitution {
 				substitute module('javax.servlet:javax.servlet:3.0.0.v201103241009') with module('org.eclipse.virgo.mirrored:javax.servlet:3.0.0.v201103241009')  
 			}
 		}
-	}
+	}*/
     jar {
     	// add SUA to archive
         from "$rootDir/build-bundlor/resources/about/notice.html"
