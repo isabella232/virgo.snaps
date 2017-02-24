@@ -14,7 +14,7 @@ composed of four bundles, a host with three Snaps.
 
 image::images/sampleApp.png[]
 
-The host and three snaps show their `Snap-ContextPath`s. The Cat and Dog
+The host and three snaps show their `Snap-ContextPaths`. The Cat and Dog
 snaps both contribute content while the final snap just contributes
 styling information in the form of `css` files. The following sections
 look at each of these in detail.

@@ -9,7 +9,7 @@ benefit from VS.
 === Configuring the Host
 
 In the WAB that is to act as a host to Snaps bundles, all that needs to
-be added is a filter in the hosts ' `web.xml`'. This filter can be
+be added is a filter in the host's `web.xml`. This filter can be
 mapped to any sub path that you want forwarded to registered snaps. It
 is important to note the extra `dispatcher` declarations in the
 `filter-mapping`. Without these internal lookups, resources like JSPs
@@ -35,8 +35,8 @@ won't get passed to the appropriate snap when needed.
 === Configuring a Snap
 
 A snap is a normal WAB with the addition of two extra manifest headers.
-The first `Snap-Host` is used to resolve the WAB you want to act as a
-host for this snap. The second `Snap-ContextPath` gives the path the
+The `Snap-Host` is used to resolve the WAB you want to act as a
+host for this snap. The `Snap-ContextPath` gives the path the
 snap will answer to. In order to reach the snap a request must be made
 for the host's context path, plus any path in the host's Snaps filter
 followed by the path given with the `Snap-ContextPath` header.
@@ -44,8 +44,23 @@ followed by the path given with the `Snap-ContextPath` header.
 ....
 Snap-Host: org.eclipse.virgo.snaps.sample.animal;version="${version:[=.=.=, =.+1)}"
 Snap-ContextPath: /dog
-        
 ....
+
+For attaching a snap to multiple hosts, the `Snap-Host` allows the specification of
+multiple host bundles. Given the example above, the Dog snap could be additionally
+attached to the `Snap-Host` `org.eclipse.virgo.snaps.sample.zoo` as follows:
+
+....
+Snap-Host: org.eclipse.virgo.snaps.sample.animal,org.eclipse.virgo.snaps.sample.zoo
+Snap-ContextPath: /dog
+....
+
+Even though a snap can be attached to multiple hosts, the `Snap-ContextPath` will
+remain the same, which means that regardless of the `Snap-Host`, the snap
+will be located under the same path. Multiple `Snap-Host` definitions might
+be useful for snaps that hold resources required in multiple applications (for instance
+third party libraries or functionality that can be reused across applications).
+
 
 [[using-snaps-taglibs]]
 === Using the Snaps taglibs
@@ -58,10 +73,9 @@ URI to declare are
 registered with the host. Each snap in the array has two values, the
 first is the context path the Snap is registered with, as given in the
 snaps manifest header. The second is an array of properties, if any,
-given in a property file in the snap. The file must be in the `META-INF
-            ` directory and have a name of `snap.properties`. The
-following code snippet shows all of these in use to produce links to
-each of the installed snaps.
+given in a property file in the snap. The file must be in the `META-INF`
+directory and have a name of `snap.properties`. The following code snippet
+shows all of these in use to produce links to each of the installed snaps.
 
 ....
 <snaps:snaps var="snaps">
