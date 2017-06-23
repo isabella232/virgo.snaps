@@ -264,5 +264,5 @@ task snapsDist(type: Zip, dependsOn: ':snaps-guide:asciidoctor') {
 task wrapper(type: Wrapper) {
     description 'Creates a local Gradle Wrapper'
     group = 'Build Setup'
-    gradleVersion = '3.1'
+    gradleVersion = '3.5' // CQ 13634
 }
